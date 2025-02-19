@@ -1,6 +1,6 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
-[![CI Status](https://app.codecov.io/gh/AY2425S2-CS2103T-W09-3/tp/config/badge)](https://app.codecov.io/gh/AY2425S2-CS2103T-W09-3/tp/config/badge)
+[![codecov](https://codecov.io/gh/AY2425S2-CS2103T-W09-3/tp/graph/badge.svg?token=SJYF88JS3M)](https://codecov.io/gh/AY2425S2-CS2103T-W09-3/tp)
 
 <!-- ![Ui](docs/images/Ui.png) -->
 
