@@ -20,3 +20,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines
+
+### Deng Tianle
+<img src="images/dengtianle.png" width="200px">
+
+[[github](https://github.com/DengTianle)]
+[[portfolio](team/tianle.md)]
+
+* Role: Developer
+* Responsibilities: Integration
