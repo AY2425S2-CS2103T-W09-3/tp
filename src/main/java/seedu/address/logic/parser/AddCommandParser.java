@@ -49,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person = new Person(name, phone, email, address, tagList, remark);
 
-        return new AddCommand(person);
+        return new AddCommand(person); // dummy change
     }
 
     /**
