@@ -20,3 +20,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines
+
+### Isaac
+
+<img src="images/Leeisateam.png" width="200px">
+[[github](https://github.com/Leeisateam)]
+
+* Role: TBD
+* Responsibilities: TBD
