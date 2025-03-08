@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# MedLogger Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -274,71 +274,112 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Doctors or clinic assistants managing patient visit records in small private clinics
+* Prefer fast, lightweight tools over complex, slow hospital systems
+* Comfortable using command-line interfaces
+* Need quick access to patient records during consultations
+* Prefer keyboard-based workflows to minimize disruptions during work
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:  
+A command-line tool for efficiently logging and retrieving patient visit records, symptoms, and treatments, enabling faster access to patient histories and smoother clinic operations compared to traditional GUI-based systems.
 
+---
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​           | I want to …​                                               | So that I can…​                                           |
+|----------|-------------------|-------------------------------------------------------------|-----------------------------------------------------------|
+| `* * *` | doctor            | create a patient visit entry                                | log patient visits quickly                                |
+| `* * *` | doctor            | record visit date and time                                 | track when each visit happened                            |
+| `* * *` | doctor            | record symptoms and treatments for a visit                 | document medical details accurately                       |
+| `* * *` | doctor            | delete patient visit records                               | correct mistakes                                          |
+| `* * *` | doctor            | view all patient visit information                         | review patient history                                    |
+| `* *`   | doctor            | retrieve a patient’s visit history                         | make informed treatment decisions                         |
+| `* *`   | doctor            | retrieve today’s patients                                  | check which patients I haven't seen                      |
+| `* *`   | doctor            | filter records based on severity                           | focus on critical cases                                   |
+| `* *`   | doctor            | filter patient records by symptoms                         | identify patterns in medical history                      |
+| `* *`   | doctor            | sort patient records by date                               | find recent visits easily                                 |
+| `* *`   | doctor            | track patients who received specific medication            | ensure proper follow-up care                              |
+| `* *`   | clinic assistant  | edit patient records                                       | keep information accurate                                 |
+| `* *`   | clinic assistant  | generate a summary of a patient’s visit history            | prepare reports for doctors                               |
+| `* *`   | clinic assistant  | search for patients by partial name matches                | find records quickly                                      |
+| `* *`   | clinic assistant  | export patient visit records to CSV                        | share reports with external healthcare providers          |
+| `* *`   | clinic manager    | view all patients seen by a specific doctor                | evaluate doctor performance                               |
+| `*`     | clinic assistant  | sort visit dates                                           | schedule follow-ups easily                                |
+| `*`     | doctor            | track recurring symptoms                                   | detect chronic conditions                                 |
+| `*`     | clinic assistant  | create backup copies of records                            | protect against data loss                                 |
+| `*`     | clinic assistant  | update patient contact information                         | maintain communication accuracy                           |
+| `*`     | clinic assistant  | view multiple patient records simultaneously               | compare patient statuses                                  |
+| `*`     | clinic assistant  | log patient complaints about visits                        | help the clinic improve service                           |
+| `*`     | doctor            | set reminders for follow-up visits                         | ensure patients return as needed                          |
+| `*`     | doctor            | undo the previously executed command                       | correct recent actions easily                             |
 
-*{More to be added}*
+---
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MedLogger` and the **Actor** is the user unless specified otherwise)
 
-**Use case: Delete a person**
+---
 
-**MSS**
+**Use case: Add a symptom to a patient's visit**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+**MSS (Main Success Scenario)**  
+1. User requests to list visit records  
+2. MedLogger displays a list of visit records  
+3. User selects a visit by index and inputs the symptom  
+4. MedLogger adds the symptom to the visit record  
 
-    Use case ends.
+Use case ends.
 
-**Extensions**
+**Extensions**  
+* 2a. The visit list is empty.  
+  - Use case ends.  
+* 3a. The selected index is invalid.  
+  - 3a1. MedLogger shows an error message.  
+  - Use case resumes at step 2.
 
-* 2a. The list is empty.
+---
 
-  Use case ends.
+**Use case: Generate a summary of a patient’s visit history**
 
-* 3a. The given index is invalid.
+**MSS (Main Success Scenario)**  
+1. User searches for a patient by name  
+2. MedLogger shows a list of matching patient records  
+3. User selects the correct patient  
+4. MedLogger generates and displays a summary of visit history  
 
-    * 3a1. AddressBook shows an error message.
+Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**  
+* 1a. No matching patients found.  
+  - Use case ends.
 
-*{More to be added}*
+---
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any mainstream OS with Java 17 or higher installed.
+2. Should handle up to 1000 patient records without noticeable performance degradation.
+3. Typing commands should be faster than using a mouse for users with average typing speed.
+4. Every modification to patient records should be logged with a timestamp, user ID, and action performed.
+5. System response time should be under 1 second for all typical operations.
+6. Should handle simultaneous access by multiple users without data corruption (future consideration).
 
-*{More to be added}*
+---
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Visit record**: A log entry containing details of a patient's consultation, symptoms, and treatments
+* **Symptom**: A medical complaint or issue reported by the patient
+* **Medication**: Any prescribed drug or treatment recorded in the system
+* **CSV**: Comma-Separated Values, a file format used for exporting data
+* **CLI**: Command-Line Interface, a text-based way to interact with the software
+* **Partial name match**: A search that returns results even if only part of a patient’s name is entered
+
 
 --------------------------------------------------------------------------------------------------------------------
 
