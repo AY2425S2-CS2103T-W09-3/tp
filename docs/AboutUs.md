@@ -20,3 +20,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines
+
+###  Phong
+
+- Role: Backend Developer
+- Responsibilities: Improve and maintain app's backend.
+
+[[GitHub](https://github.com/nhocmt227)]
