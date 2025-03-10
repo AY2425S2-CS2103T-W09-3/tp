@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lekang
 
-<img src="images/liulekang.png" width="200px">
+<img src="images/taoseeker.png" width="200px">
 
 [[github](https://github.com/Taoseeker)]
 [[portfolio](team/lekang.md)]
