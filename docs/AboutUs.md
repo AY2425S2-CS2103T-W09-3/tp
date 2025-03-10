@@ -21,6 +21,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Deliverables and deadlines
 
+### Lekang
+
+<img src="images/taoseeker.png" width="200px">
+
+[[github](https://github.com/Taoseeker)]
+[[portfolio](team/lekang.md)]
+
+* Role: Developer
+* Responsibilities: Testing and review code quality
+
 
 ### Deng Tianle
 <img src="images/dengtianle.png" width="200px">
