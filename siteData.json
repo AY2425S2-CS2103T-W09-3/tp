@@ -8,6 +8,7 @@
         "about-us": "About Us",
         "project-team": "Project team",
         "qiming": "Qiming",
+        "deng-tianle": "Deng Tianle",
         "isaac": "Isaac",
         "phong": "Phong",
         "isaac-2": "Isaac"
@@ -146,6 +147,13 @@
       "src": "team/qiming.md",
       "headings": {
         "qiming": "Qiming"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/tianle.md",
+      "headings": {
+        "deng-tianle": "Deng Tianle"
       },
       "headingKeywords": {}
     }
