@@ -8,6 +8,7 @@
         "about-us": "About Us",
         "project-team": "Project team",
         "qiming": "Qiming",
+        "lekang": "Lekang",
         "deng-tianle": "Deng Tianle",
         "isaac": "Isaac",
         "phong": "Phong",
@@ -140,6 +141,13 @@
       "title": "John Doe's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/lekang.md",
+      "headings": {
+        "lekang": "Lekang"
       },
       "headingKeywords": {}
     },
