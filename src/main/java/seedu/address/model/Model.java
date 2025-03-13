@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Med Logger file path.
      */
-    Path getAddressBookFilePath();
+    Path getMedLoggerFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Med Logger file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setMedLoggerFilePath(Path medLoggerFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Med Logger data with the data in {@code medLogger}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setMedLogger(ReadOnlyMedLogger medLogger);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the MedLogger */
+    ReadOnlyMedLogger getMedLogger();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the Med Logger.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the Med Logger.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the Med Logger.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the Med Logger.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the Med Logger.
      */
     void setPerson(Person target, Person editedPerson);
 
