@@ -11,51 +11,58 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Qiming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ceilingfan456.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/ceilingfan456)]
+[[portfolio](team/qiming.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Deliverables and deadlines
 
-### Jean Doe
+### Lekang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/taoseeker.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Taoseeker)]
+[[portfolio](team/lekang.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing and review code quality
+
+
+### Deng Tianle
+<img src="images/dengtianle.png" width="200px">
+
+[[github](https://github.com/DengTianle)]
+[[portfolio](team/tianle.md)]
+
+* Role: Developer
+* Responsibilities: Integration
+
+### Isaac
+
+<img src="images/leeisateam.png" width="200px">
+
+[[github](https://github.com/Leeisateam)]
+* Role: TBD
+* Responsibilities: TBD
+
+
+###  Phong
+
+- Role: Backend Developer
+- Responsibilities: Improve and maintain app's backend.
+
+<img src="images/nhocmt227.png" width="200px"> 
+
+[[GitHub](https://github.com/nhocmt227)]
+
+### Isaac
+
+<img src="images/leeisateam.png" width="200px">
+
+[[github](https://github.com/Leeisateam)]
+* Role: TBD
+* Responsibilities: TBD
