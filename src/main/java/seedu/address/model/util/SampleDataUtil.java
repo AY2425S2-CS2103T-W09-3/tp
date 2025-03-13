@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.MedLogger;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMedLogger;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -14,7 +14,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code MedLogger} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -40,7 +40,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyMedLogger getSampleMedLogger() {
         MedLogger sampleAb = new MedLogger();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

@@ -13,7 +13,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class MedLogger implements ReadOnlyAddressBook {
+public class MedLogger implements ReadOnlyMedLogger {
 
     private final UniquePersonList persons;
 
@@ -31,9 +31,9 @@ public class MedLogger implements ReadOnlyAddressBook {
     public MedLogger() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an MedLogger using the Persons in the {@code toBeCopied}
      */
-    public MedLogger(ReadOnlyAddressBook toBeCopied) {
+    public MedLogger(ReadOnlyMedLogger toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,9 +49,9 @@ public class MedLogger implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code MedLogger} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyMedLogger newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
@@ -87,7 +87,7 @@ public class MedLogger implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code MedLogger}.
      * {@code key} must exist in the Med Logger.
      */
     public void removePerson(Person key) {

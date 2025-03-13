@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.MedLogger;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMedLogger;
 
 /**
  * Represents a storage for {@link MedLogger}.
@@ -16,31 +16,31 @@ public interface MedLoggerStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getMedLoggerFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns MedLogger data as a {@link ReadOnlyMedLogger}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyMedLogger> readMedLogger() throws DataLoadingException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getMedLoggerFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyMedLogger> readMedLogger(Path filePath) throws DataLoadingException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
+     * Saves the given {@link ReadOnlyMedLogger} to the storage.
+     * @param medLogger cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveMedLogger(ReadOnlyMedLogger medLogger) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #saveMedLogger(ReadOnlyMedLogger)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void saveMedLogger(ReadOnlyMedLogger medLogger, Path filePath) throws IOException;
 
 }

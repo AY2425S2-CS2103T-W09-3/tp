@@ -18,7 +18,7 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.MedLogger;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMedLogger;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing MedLogger ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,7 +57,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        MedLoggerStorage medLoggerStorage = new JsonMedLoggerStorage(userPrefs.getAddressBookFilePath());
+        MedLoggerStorage medLoggerStorage = new JsonMedLoggerStorage(userPrefs.getMedLoggerFilePath());
         storage = new StorageManager(medLoggerStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -73,20 +73,20 @@ public class MainApp extends Application {
      * or an empty Med Logger will be used instead if errors occur when reading {@code storage}'s Med Logger.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getMedLoggerFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyMedLogger> medLoggerOptional;
+        ReadOnlyMedLogger initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            medLoggerOptional = storage.readMedLogger();
+            if (!medLoggerOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getMedLoggerFilePath()
+                        + " populated with a sample MedLogger.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = medLoggerOptional.orElseGet(SampleDataUtil::getSampleMedLogger);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+            logger.warning("Data file at " + storage.getMedLoggerFilePath() + " could not be loaded."
+                    + " Will be starting with an empty MedLogger.");
             initialData = new MedLogger();
         }
 
@@ -170,13 +170,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting MedLogger " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping MedLogger ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

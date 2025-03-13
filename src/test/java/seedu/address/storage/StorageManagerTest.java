@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalMedLogger;
 
 import java.nio.file.Path;
 
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.MedLogger;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMedLogger;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonMedLoggerStorage addressBookStorage = new JsonMedLoggerStorage(getTempFilePath("ab"));
+        JsonMedLoggerStorage medLoggerStorage = new JsonMedLoggerStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(medLoggerStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +48,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void medLoggerReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonMedLoggerStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonMedLoggerStorageTest} class.
          */
-        MedLogger original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        MedLogger original = getTypicalMedLogger();
+        storageManager.saveMedLogger(original);
+        ReadOnlyMedLogger retrieved = storageManager.readMedLogger().get();
         assertEquals(original, new MedLogger(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getMedLoggerFilePath() {
+        assertNotNull(storageManager.getMedLoggerFilePath());
     }
 
 }

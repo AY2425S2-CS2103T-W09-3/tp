@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.MedLogger;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyMedLogger;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,7 +24,7 @@ class JsonSerializableMedLogger {
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableMedLogger} with the given persons.
      */
     @JsonCreator
     public JsonSerializableMedLogger(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
@@ -32,16 +32,16 @@ class JsonSerializableMedLogger {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyMedLogger} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableMedLogger}.
      */
-    public JsonSerializableMedLogger(ReadOnlyAddressBook source) {
+    public JsonSerializableMedLogger(ReadOnlyMedLogger source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Med Logger into the model's {@code AddressBook} object.
+     * Converts this Med Logger into the model's {@code MedLogger} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

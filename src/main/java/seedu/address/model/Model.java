@@ -37,20 +37,20 @@ public interface Model {
     /**
      * Returns the user prefs' Med Logger file path.
      */
-    Path getAddressBookFilePath();
+    Path getMedLoggerFilePath();
 
     /**
      * Sets the user prefs' Med Logger file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setMedLoggerFilePath(Path medLoggerFilePath);
 
     /**
-     * Replaces Med Logger data with the data in {@code addressBook}.
+     * Replaces Med Logger data with the data in {@code medLogger}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setMedLogger(ReadOnlyMedLogger medLogger);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the MedLogger */
+    ReadOnlyMedLogger getMedLogger();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the Med Logger.

@@ -60,9 +60,9 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code MedLogger} with all the typical persons.
      */
-    public static MedLogger getTypicalAddressBook() {
+    public static MedLogger getTypicalMedLogger() {
         MedLogger ab = new MedLogger();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

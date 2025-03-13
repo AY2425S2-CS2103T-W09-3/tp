@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalMedLogger;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,8 +37,8 @@ public class MedLoggerTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        MedLogger newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyMedLogger_replacesData() {
+        MedLogger newData = getTypicalMedLogger();
         medLogger.resetData(newData);
         assertEquals(newData, medLogger);
     }
@@ -49,7 +49,7 @@ public class MedLoggerTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        MedLoggerStub newData = new MedLoggerStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> medLogger.resetData(newData));
     }
@@ -60,18 +60,18 @@ public class MedLoggerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInMedLogger_returnsFalse() {
         assertFalse(medLogger.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInMedLogger_returnsTrue() {
         medLogger.addPerson(ALICE);
         assertTrue(medLogger.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInMedLogger_returnsTrue() {
         medLogger.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -90,12 +90,12 @@ public class MedLoggerTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyMedLogger whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class MedLoggerStub implements ReadOnlyMedLogger {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        MedLoggerStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 
