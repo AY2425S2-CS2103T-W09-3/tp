@@ -39,6 +39,12 @@ public class RemarkCommand extends Command {
     private final Index index;
     private final Remark remark;
 
+    /**
+     * Creates a RemarkCommand to add or update a remark for a specific person.
+     *
+     * @param index  The index of the person in the displayed person list.
+     * @param remark The remark to be added or updated.
+     */
     public RemarkCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
         this.index = index;
