@@ -59,7 +59,7 @@ public class Date {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof java.util.Date)) {
+        if (!(other instanceof Date)) {
             return false;
         }
 
