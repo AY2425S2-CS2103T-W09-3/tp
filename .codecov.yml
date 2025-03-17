@@ -6,7 +6,7 @@ coverage:
         threshold: 5%
     patch:
       default:
-        enabled: 70%
+        target: 70%
         threshold: 5%
 ignore:
   - "src/main/java/seedu/address/ui/
