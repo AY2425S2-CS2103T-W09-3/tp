@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+import javax.annotation.processing.Generated;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -47,6 +48,7 @@ public class MainApp extends Application {
     protected Config config;
 
     @Override
+    @Generated("Logger Initialization")
     public void init() throws Exception {
         logger.info("=============================[ Initializing MedLogger ]===========================");
         super.init();
@@ -72,6 +74,7 @@ public class MainApp extends Application {
      * The data from the sample Med Logger will be used instead if {@code storage}'s Med Logger is not found,
      * or an empty Med Logger will be used instead if errors occur when reading {@code storage}'s Med Logger.
      */
+    @Generated("Model Initialization")
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getMedLoggerFilePath());
 
@@ -93,6 +96,7 @@ public class MainApp extends Application {
         return new ModelManager(initialData, userPrefs);
     }
 
+    @Generated("Logging Initialization")
     private void initLogging(Config config) {
         LogsCenter.init(config);
     }
@@ -102,6 +106,7 @@ public class MainApp extends Application {
      * The default file path {@code Config#DEFAULT_CONFIG_FILE} will be used instead
      * if {@code configFilePath} is null.
      */
+    @Generated("Config Initialization")
     protected Config initConfig(Path configFilePath) {
         Config initializedConfig;
         Path configFilePathUsed;
@@ -141,6 +146,7 @@ public class MainApp extends Application {
      * or a new {@code UserPrefs} with default configuration if errors occur when
      * reading from the file.
      */
+    @Generated("Prefs Initialization")
     protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using preference file : " + prefsFilePath);
@@ -169,12 +175,14 @@ public class MainApp extends Application {
     }
 
     @Override
+    @Generated("Start")
     public void start(Stage primaryStage) {
         logger.info("Starting MedLogger " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
+    @Generated("Stop")
     public void stop() {
         logger.info("============================ [ Stopping MedLogger ] =============================");
         try {
