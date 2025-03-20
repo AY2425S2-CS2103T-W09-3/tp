@@ -1,25 +1,9 @@
----
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
----
-
-# MedLogger User Guide
-
-MedLogger is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MedLogger can get your contact management tasks done faster than traditional GUI apps.
-
-<!-- * Table of Contents -->
-<page-nav-print />
-
---------------------------------------------------------------------------------------------------------------------
-
----
 layout: default.md
 title: "User Guide"
 pageNav: 3
 ---
 
-# 🏥 MedLogger User Guide
+# MedLogger User Guide 🏥
 
 MedLogger is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete contact management tasks **faster** than traditional GUI apps.
 
@@ -28,16 +12,14 @@ MedLogger is a **desktop app for managing contacts, optimized for use via a Comm
 
 ---
 
-## 🚀 Quick Start
+## Quick Start 🚀
 
-### 📌 Before You Begin
-✅ Ensure you have **Java 17** or above installed on your computer.  
-💻 **Mac users:** Follow the exact JDK installation steps mentioned [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+- Ensure you have **Java 17** or above installed on your computer.  
+- **Mac users:** Follow the exact JDK installation steps mentioned [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-### 🔽 Installation & Setup
-1. 📥 **Download** the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-2. 📂 **Move** the file to the folder you want as the _home folder_ for MedLogger.
-3. 🖥 **Run MedLogger**:
+1. **Download** the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. **Move** the file to the folder you want as the _home folder_ for MedLogger.
+3. **Run MedLogger**:
     - Open a **command terminal**.
     - Navigate (`cd`) to the folder where the `.jar` file is located.
     - Run the following command:
