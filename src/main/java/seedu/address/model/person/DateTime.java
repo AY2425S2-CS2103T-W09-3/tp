@@ -8,13 +8,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Date in the system.
+ * Represents a DateTime in the system.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format yyyy-mm-dd";
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format yyyy-mm-dd HH:mm";
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /*
      * The first character of the address must not be a whitespace,
@@ -25,18 +25,18 @@ public class Date {
     public final String value;
 
     /**
-     * Constructs a {@code Date}.
+     * Constructs a {@code DateTime}.
      *
-     * @param date A valid date in yyyy-mm-dd format.
+     * @param date A valid date in yyyy-mm-dd HH:mm format.
      */
-    public Date(String date) {
+    public DateTime(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date;
     }
 
     /**
-     * Returns true if a given string is a valid date in yyyy-mm-dd format.
+     * Returns true if a given string is a valid date in yyyy-mm-dd HH:mm format.
      */
     public static boolean isValidDate(String date) {
         try {
@@ -59,12 +59,12 @@ public class Date {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Date)) {
+        if (!(other instanceof DateTime)) {
             return false;
         }
 
-        Date otherDate = (Date) other;
-        return value.equals(otherDate.value);
+        DateTime otherDateTime = (DateTime) other;
+        return value.equals(otherDateTime.value);
     }
 
     @Override

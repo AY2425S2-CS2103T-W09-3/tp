@@ -22,7 +22,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -102,12 +102,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Date updatedDate = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
+        DateTime updatedDateTime = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedDate, updatedRemark, updatedTags);
+                updatedDateTime, updatedRemark, updatedTags);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Date date;
+        private DateTime dateTime;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -156,7 +156,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setDate(toCopy.date);
+            setDate(toCopy.dateTime);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -192,12 +192,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setDate(Date date) {
-            this.date = date;
+        public void setDate(DateTime dateTime) {
+            this.dateTime = dateTime;
         }
 
-        public Optional<Date> getDate() {
-            return Optional.ofNullable(date);
+        public Optional<DateTime> getDate() {
+            return Optional.ofNullable(dateTime);
         }
 
         public void setAddress(Address address) {
@@ -241,7 +241,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(date, otherEditPersonDescriptor.date)
+                    && Objects.equals(dateTime, otherEditPersonDescriptor.dateTime)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -252,7 +252,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("date", date)
+                    .add("dateTime", dateTime)
                     .add("tags", tags)
                     .toString();
         }

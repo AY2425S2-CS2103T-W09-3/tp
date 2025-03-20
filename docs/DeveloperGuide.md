@@ -292,7 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​           | I want to …​                                               | So that I can…​                                           |
 |----------|-------------------|-------------------------------------------------------------|-----------------------------------------------------------|
 | `* * *` | doctor            | create a patient visit entry                                | log patient visits quickly                                |
-| `* * *` | doctor            | record visit date and time                                 | track when each visit happened                            |
+| `* * *` | doctor            | record visit dateTime and time                                 | track when each visit happened                            |
 | `* * *` | doctor            | record symptoms and treatments for a visit                 | document medical details accurately                       |
 | `* * *` | doctor            | delete patient visit records                               | correct mistakes                                          |
 | `* * *` | doctor            | view all patient visit information                         | review patient history                                    |
@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | doctor            | retrieve today’s patients                                  | check which patients I haven't seen                      |
 | `* *`   | doctor            | filter records based on severity                           | focus on critical cases                                   |
 | `* *`   | doctor            | filter patient records by symptoms                         | identify patterns in medical history                      |
-| `* *`   | doctor            | sort patient records by date                               | find recent visits easily                                 |
+| `* *`   | doctor            | sort patient records by dateTime                               | find recent visits easily                                 |
 | `* *`   | doctor            | track patients who received specific medication            | ensure proper follow-up care                              |
 | `* *`   | clinic assistant  | edit patient records                                       | keep information accurate                                 |
 | `* *`   | clinic assistant  | generate a summary of a patient’s visit history            | prepare reports for doctors                               |
