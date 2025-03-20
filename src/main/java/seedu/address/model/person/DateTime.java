@@ -3,9 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a DateTime in the system.
@@ -13,8 +14,10 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format yyyy-mm-dd HH:mm";
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format yyyy-mm-dd HH:mm and valid";
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter
+            .ofPattern("uuuu-MM-dd HH:mm").withResolverStyle(ResolverStyle.STRICT);
+    //uuuu must be used with strict style which is needed to detect all invalid dates
 
     /*
      * The first character of the address must not be a whitespace,
@@ -40,9 +43,10 @@ public class DateTime {
      */
     public static boolean isValidDate(String date) {
         try {
-            LocalDate.parse(date, FORMATTER);
+            LocalDateTime.parse(date, FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
