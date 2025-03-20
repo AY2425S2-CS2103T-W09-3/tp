@@ -13,20 +13,42 @@ MedLogger is a **desktop app for managing contacts, optimized for use via a  Lin
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+---
+layout: default.md
+title: "User Guide"
+pageNav: 3
+---
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+# 🏥 MedLogger User Guide
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+MedLogger is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete contact management tasks **faster** than traditional GUI apps.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your MedLogger.
+<!-- * Table of Contents -->
+<page-nav-print />
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar medlogger.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+---
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+## 🚀 Quick Start
+
+### 📌 Before You Begin
+✅ Ensure you have **Java 17** or above installed on your computer.  
+💻 **Mac users:** Follow the exact JDK installation steps mentioned [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+
+### 🔽 Installation & Setup
+1. 📥 **Download** the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. 📂 **Move** the file to the folder you want as the _home folder_ for MedLogger.
+3. 🖥 **Run MedLogger**:
+    - Open a **command terminal**.
+    - Navigate (`cd`) to the folder where the `.jar` file is located.
+    - Run the following command:
+      ```sh
+      java -jar medlogger.jar
+      ```
+    - A GUI similar to the image below should appear in a few seconds:  
+      ![UI](images/Ui.png)
+    - The app will load with **sample data**.
+
+4. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -177,7 +199,7 @@ MedLogger data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-MedLogger data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MedLogger data are saved automatically as a JSON file `[JAR file location]/data/medlogger.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -210,10 +232,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/2024-12-31 t/friend t/colleague`
+**Remark**   | `remark INDEX r/REMARK`<br> e.g., `remark 1 r/important`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
