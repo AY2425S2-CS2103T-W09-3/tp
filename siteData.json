@@ -106,13 +106,10 @@
     },
     {
       "src": "UserGuide.md",
-      "title": "User Guide",
       "headings": {
-        "medlogger-user-guide": "MedLogger User Guide",
-        "medlogger-user-guide-2": "🏥 MedLogger User Guide",
-        "quick-start": "🚀 Quick Start",
-        "before-you-begin": "📌 Before You Begin",
-        "installation-and-amp-setup": "🔽 Installation &amp; Setup",
+        "layout-default-md-title-and-quot-user-guide-and-quot-pagenav-3": "layout: default.md\ntitle: &quot;User Guide&quot;\npageNav: 3",
+        "medlogger-user-guide": "MedLogger User Guide 🏥",
+        "quick-start": "Quick Start 🚀",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
         "adding-a-person-add": "Adding a person: add",
