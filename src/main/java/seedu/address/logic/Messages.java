@@ -43,7 +43,7 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Date: ")
+                .append("; DateTime: ")
                 .append(person.getDate())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
