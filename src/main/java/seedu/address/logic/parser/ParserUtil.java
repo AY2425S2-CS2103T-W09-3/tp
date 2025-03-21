@@ -10,7 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -82,18 +82,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String date} into an {@code DateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code DateTime} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static DateTime parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        if (!DateTime.isValidDate(trimmedDate)) {
+            throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+        return new DateTime(trimmedDate);
     }
 
     /**

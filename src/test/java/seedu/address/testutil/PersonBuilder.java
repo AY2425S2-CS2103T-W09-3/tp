@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Date;
+import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -22,14 +22,14 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_DATE = "2024-12-31";
+    public static final String DEFAULT_DATE = "2024-12-31 11:11";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Date date;
+    private DateTime dateTime;
     private Remark remark;
     private Set<Tag> tags;
 
@@ -41,7 +41,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        date = new Date(DEFAULT_DATE);
+        dateTime = new DateTime(DEFAULT_DATE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
@@ -54,7 +54,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        date = personToCopy.getDate();
+        dateTime = personToCopy.getDate();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -84,10 +84,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code Person} that we are building.
+     * Sets the {@code DateTime} of the {@code Person} that we are building.
      */
     public PersonBuilder withDate(String date) {
-        this.date = new Date(date);
+        this.dateTime = new DateTime(date);
         return this;
     }
 
@@ -116,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, date, remark, tags);
+        return new Person(name, phone, email, address, dateTime, remark, tags);
     }
 
 }
