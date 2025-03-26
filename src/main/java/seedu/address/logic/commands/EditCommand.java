@@ -25,8 +25,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.NRIC;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -45,7 +45,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_NRIC + "NRIC] "
+            + "[" + PREFIX_NRIC + "Nric] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -103,14 +103,14 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        NRIC updatedNRIC = editPersonDescriptor.getNRIC().orElse(personToEdit.getNRIC());
+        Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedNRIC, updatedPhone, updatedEmail, updatedAddress,
+        return new Person(updatedName, updatedNric, updatedPhone, updatedEmail, updatedAddress,
                 updatedRemark, updatedTags);
     }
 
@@ -144,7 +144,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private NRIC nric;
+        private Nric nric;
         private Phone phone;
         private Email email;
         private Address address;
@@ -158,7 +158,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setNRIC(toCopy.nric);
+            setNric(toCopy.nric);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -180,11 +180,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setNRIC(NRIC nric) {
+        public void setNric(Nric nric) {
             this.nric = nric;
         }
 
-        public Optional<NRIC> getNRIC() {
+        public Optional<Nric> getNric() {
             return Optional.ofNullable(nric);
         }
 
@@ -253,7 +253,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("NRIC", nric)
+                    .add("Nric", nric)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)

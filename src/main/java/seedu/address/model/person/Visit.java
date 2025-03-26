@@ -1,10 +1,13 @@
 package seedu.address.model.person;
-import seedu.address.commons.util.ToStringBuilder;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Represents a Person in the Med Logger.
+ */
 public class Visit {
-    public final Person person ;
+    public final Person person;
     public final DateTime dateTime;
     public final Remark remark;
 

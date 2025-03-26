@@ -12,8 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.NRIC;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -58,7 +58,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        nric = source.getNRIC().value;
+        nric = source.getNric().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -88,12 +88,12 @@ class JsonAdaptedPerson {
         final Name modelName = new Name(name);
 
         if (nric == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, NRIC.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
-        if (!NRIC.isValidNRIC(nric)) {
-            throw new IllegalValueException(NRIC.MESSAGE_CONSTRAINTS);
+        if (!Nric.isValidNric(nric)) {
+            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
         }
-        final NRIC modelNRIC = new NRIC(nric);
+        final Nric modelNric = new Nric(nric);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -125,7 +125,7 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelNRIC, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        return new Person(modelName, modelNric, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
     }
 
 }

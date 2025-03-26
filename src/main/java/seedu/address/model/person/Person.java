@@ -18,7 +18,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final NRIC nric;
+    private final Nric nric;
     private final Phone phone;
     private final Email email;
 
@@ -30,7 +30,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, NRIC nric, Phone phone, Email email, Address address,
+    public Person(Name name, Nric nric, Phone phone, Email email, Address address,
                   Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, nric, phone, email, address, remark, tags);
         this.name = name;
@@ -46,7 +46,7 @@ public class Person {
         return name;
     }
 
-    public NRIC getNRIC() {
+    public Nric getNric() {
         return nric;
     }
 
@@ -84,7 +84,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getNRIC().equals(getNRIC());
+                && otherPerson.getNric().equals(getNric());
     }
 
     /**
