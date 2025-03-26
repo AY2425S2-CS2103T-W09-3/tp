@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.NRIC;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -49,6 +50,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String NRIC} into a {@code NRIC}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code NRIC} is invalid.
+     */
+    public static NRIC parseNRIC(String nric) throws ParseException {
+        requireNonNull(nric);
+        String trimmedName = nric.trim();
+        if (!NRIC.isValidNRIC(trimmedName)) {
+            throw new ParseException(NRIC.MESSAGE_CONSTRAINTS);
+        }
+        return new NRIC(trimmedName);
     }
 
     /**
