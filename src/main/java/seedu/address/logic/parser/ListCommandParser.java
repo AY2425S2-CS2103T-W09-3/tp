@@ -1,19 +1,23 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Remark;
 
+/**
+ * Parses input arguments and creates a new {@code ListCommand} object.
+ */
 public class ListCommandParser {
 
+    /**
+     * Parses the given {@code String} of arguments and returns a {@code ListCommand}.
+     *
+     * @param args Input string after command word.
+     * @return A {@code ListCommand} based on the parsed input.
+     * @throws ParseException If the input does not conform to the expected format.
+     */
     public ListCommand parse(String args) throws ParseException {
 
         if (args.trim().isEmpty()) {

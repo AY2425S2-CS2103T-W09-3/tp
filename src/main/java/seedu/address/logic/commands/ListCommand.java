@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 
 /**
@@ -29,13 +28,13 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-
         if (this.limit == null) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
             model.updateSubFilteredPersonList(this.limit);
-            return new CommandResult("Listed " + this.limit + " persons");
+            int numOfPersons = this.limit > model.size() ? model.size() : this.limit;
+            return new CommandResult("Listed " + numOfPersons + " persons");
         }
 
     }

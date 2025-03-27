@@ -130,6 +130,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    @Override
     public void updateSubFilteredPersonList(int n) {
         List<Person> limitedList = filteredPersons.getSource().stream()
                 .filter(PREDICATE_SHOW_ALL_PERSONS)
@@ -156,4 +157,8 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public int size() {
+        return filteredPersons.size();
+    }
 }

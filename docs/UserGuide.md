@@ -111,7 +111,8 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the Med Logger.
+* `list`: Shows a list of all persons in the Med Logger.
+* `list l/LIMIT`: Show a list of n `LIMIT` persons in the Med Loggers. 
 
 Format: `list`
 
@@ -221,5 +222,5 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**List**   | `list` or `list l/LIMIT`
 **Help**   | `help`
