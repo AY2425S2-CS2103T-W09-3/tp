@@ -253,7 +253,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("Nric", nric)
+                    .add("NRIC", nric)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
