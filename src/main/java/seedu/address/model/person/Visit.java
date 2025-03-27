@@ -34,6 +34,10 @@ public class Visit {
         return this.remark;
     }
 
+    public DateTime getDateTime() {
+        return this.dateTime;
+    }
+
     /**
      * Returns true if and only if the other object is an instance of Visit
      * and the other visit has same visit details.

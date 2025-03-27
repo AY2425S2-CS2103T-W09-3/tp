@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Visit;
 
 /**
  * The API of the Model component.
@@ -57,6 +58,12 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    /**
+     * Returns true if a vist with the same details as {@code vist} exists in the Med Logger.
+     */
+    boolean hasVisit(Visit visit);
+
+    void addVisit(Visit visit);
     /**
      * Deletes the given person.
      * The person must exist in the Med Logger.
