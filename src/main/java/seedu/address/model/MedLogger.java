@@ -61,12 +61,19 @@ public class MedLogger implements ReadOnlyMedLogger {
         setPersons(newData.getPersonList());
     }
 
+    /**
+     * Returns true if  {@code visit} already exists in the list of visits.
+     */
     public boolean hasVisit(Visit visit) {
         requireNonNull(visit);
 
         return this.visits.contains(visit);
     }
 
+    /**
+     * Adds a visit to the list of visits.
+     * The visit must not already exist in the list.
+     */
     public void addVisit(Visit visit) {
         requireNonNull(visit);
         this.visits.add(visit);

@@ -1,16 +1,19 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Visit;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Visit;
+
+/**
+ * Adds a visit to the Med Logger.
+ */
 public class AddVisitCommand extends Command {
     public static final String COMMAND_WORD = "visit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Add a visit to MedLogger. "
@@ -28,7 +31,9 @@ public class AddVisitCommand extends Command {
     public static final String MESSAGE_DUPLICATE_VISIT = "This visit already exists in the MedLogger";
 
     private final Visit visit;
-
+    /**
+     * Creates an AddVisitCommand to add the specified {@code Visit}
+     */
     public AddVisitCommand(Visit visit) {
         requireNonNull(visit);
         this.visit = visit;
