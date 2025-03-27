@@ -14,11 +14,28 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
+    public static final String MESSAGE_USAGE = "list l/LIMIT";
+
+    private Integer limit;
+
+    public ListCommand() {};
+
+    public ListCommand(int limit) {
+        this.limit = limit;
+    }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        if (this.limit == null) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            model.updateSubFilteredPersonList(this.limit);
+            int numOfPersons = this.limit > model.size() ? model.size() : this.limit;
+            return new CommandResult("Listed " + numOfPersons + " persons");
+        }
+
     }
 }

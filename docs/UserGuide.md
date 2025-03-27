@@ -1,4 +1,5 @@
-layout: default.md
+---
+layout: page
 title: "User Guide"
 pageNav: 3
 ---
@@ -7,12 +8,12 @@ pageNav: 3
 
 MedLogger is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete contact management tasks **faster** than traditional GUI apps.
 
-<!-- * Table of Contents -->
-<page-nav-print />
+Table of Contents
+{:toc}
 
----
+--------------------------------------------------------------------------------------------------------------------
 
-## Quick Start 🚀
+## Quick Start
 
 - Ensure you have **Java 17** or above installed on your computer.  
 - **Mac users:** Follow the exact JDK installation steps mentioned [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
@@ -49,7 +50,7 @@ MedLogger is a **desktop app for managing contacts, optimized for use via a Comm
 
 ## Features
 
-<box type="info" seamless>
+<box type="info" seamless></box>
 
 **Notes about the command format:**<br>
 
@@ -86,7 +87,7 @@ Adds a person to the Med Logger.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE [t/TAG]…​`
 
-<box type="tip" seamless>
+<box type="tip" seamless></box>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
@@ -110,7 +111,8 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the Med Logger.
+* `list`: Shows a list of all persons in the Med Logger.
+* `list l/LIMIT`: Show a list of n `LIMIT` persons in the Med Loggers. 
 
 Format: `list`
 
@@ -183,7 +185,7 @@ MedLogger data are saved in the hard disk automatically after any command that c
 
 MedLogger data are saved automatically as a JSON file `[JAR file location]/data/medlogger.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" seamless></box>
 
 **Caution:**
 If your changes to the data file makes its format invalid, MedLogger will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -220,5 +222,5 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**List**   | `list` or `list l/LIMIT`
 **Help**   | `help`

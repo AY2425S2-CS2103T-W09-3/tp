@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -129,6 +131,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateSubFilteredPersonList(int n) {
+        List<Person> limitedList = filteredPersons.getSource().stream()
+                .filter(PREDICATE_SHOW_ALL_PERSONS)
+                .limit(n)
+                .collect(Collectors.toList());
+
+        filteredPersons.setPredicate(limitedList::contains);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -145,4 +157,8 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    @Override
+    public int size() {
+        return filteredPersons.size();
+    }
 }
