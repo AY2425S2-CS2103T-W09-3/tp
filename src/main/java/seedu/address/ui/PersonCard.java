@@ -31,13 +31,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label nric;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
     private Label address;
-    @FXML
-    private Label date;
     @FXML
     private Label email;
     @FXML
@@ -53,9 +53,9 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        nric.setText("NRIC: " + person.getNric().value);
         phone.setText("Phone number: " + person.getPhone().value);
         email.setText("Email: " + person.getEmail().value);
-        date.setText("Visit date: " + person.getDate().value);
         address.setText("Address: " + person.getAddress().value);
         // Add symptoms and treatments here
         String remarkStr = person.getRemark().value;

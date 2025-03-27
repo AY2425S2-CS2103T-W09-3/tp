@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyMedLogger;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Visit;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -124,6 +125,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addVisit(Visit visit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
         public void setMedLogger(ReadOnlyMedLogger newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -135,6 +142,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasVisit(Visit visit) {
             throw new AssertionError("This method should not be called.");
         }
 

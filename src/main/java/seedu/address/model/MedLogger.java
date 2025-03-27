@@ -2,12 +2,14 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.Visit;
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class MedLogger implements ReadOnlyMedLogger {
 
     private final UniquePersonList persons;
+    private final ArrayList<Visit> visits;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class MedLogger implements ReadOnlyMedLogger {
      */
     {
         persons = new UniquePersonList();
+        visits = new ArrayList<>();
     }
 
     public MedLogger() {}
@@ -55,6 +59,24 @@ public class MedLogger implements ReadOnlyMedLogger {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+    }
+
+    /**
+     * Returns true if  {@code visit} already exists in the list of visits.
+     */
+    public boolean hasVisit(Visit visit) {
+        requireNonNull(visit);
+
+        return this.visits.contains(visit);
+    }
+
+    /**
+     * Adds a visit to the list of visits.
+     * The visit must not already exist in the list.
+     */
+    public void addVisit(Visit visit) {
+        requireNonNull(visit);
+        this.visits.add(visit);
     }
 
     //// person-level operations

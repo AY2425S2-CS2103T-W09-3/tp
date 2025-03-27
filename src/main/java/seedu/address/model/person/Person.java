@@ -18,32 +18,36 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Nric nric;
     private final Phone phone;
     private final Email email;
 
     // Data fields
     private final Address address;
-    private final DateTime dateTime;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  DateTime dateTime, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, dateTime, remark, tags);
+    public Person(Name name, Nric nric, Phone phone, Email email, Address address,
+                  Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, nric, phone, email, address, remark, tags);
         this.name = name;
+        this.nric = nric;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.dateTime = dateTime;
         this.remark = remark;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Nric getNric() {
+        return nric;
     }
 
     public Phone getPhone() {
@@ -56,10 +60,6 @@ public class Person {
 
     public Address getAddress() {
         return address;
-    }
-
-    public DateTime getDate() {
-        return dateTime;
     }
 
     public Remark getRemark() {
@@ -84,7 +84,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getNric().equals(getNric());
     }
 
     /**
@@ -104,27 +104,27 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
+                && nric.equals(otherPerson.nric)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && dateTime.equals(otherPerson.dateTime)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, dateTime, remark, tags);
+        return Objects.hash(name, nric, phone, email, address, remark, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
+                .add("NRIC", nric)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("dateTime", dateTime)
                 .add("tags", tags)
                 .toString();
     }
