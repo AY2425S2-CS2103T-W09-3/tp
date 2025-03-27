@@ -4,13 +4,21 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a Person in the Med Logger.
+ * Represents a Visit of a particular Person.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Visit {
+    // Visit details: who, when, why
     public final Person person;
     public final DateTime dateTime;
     public final Remark remark;
 
+    /**
+     * Every parameter must present and be non-null.
+     * @param person
+     * @param dateTime
+     * @param remark
+     */
     Visit(Person person, DateTime dateTime, Remark remark) {
         requireAllNonNull(person, dateTime, remark);
         this.person = person;
@@ -26,6 +34,10 @@ public class Visit {
         return this.remark;
     }
 
+    /**
+     * Returns true if and only if the other object is an instance of Visit
+     * and the other visit has same visit details.
+     */
     @Override
     public boolean equals(Object object) {
         if (object == this) {
