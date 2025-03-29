@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 
@@ -25,6 +27,7 @@ public class ModelManager implements Model {
     private final MedLogger medLogger;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
 
     /**
      * Initializes a ModelManager with the given medLogger and userPrefs.
@@ -103,7 +106,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addVisit(Visit visit) {
+    public void addVisit(Visit visit) throws CommandException {
         requireNonNull(visit);
         medLogger.addVisit(visit);
     }

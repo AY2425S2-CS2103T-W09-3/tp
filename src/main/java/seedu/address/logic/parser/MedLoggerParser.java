@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.AddVisitCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -55,7 +56,7 @@ public class MedLoggerParser {
         switch (commandWord) {
 
         case AddPersonCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddPersonCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -80,6 +81,9 @@ public class MedLoggerParser {
 
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
+
+        case AddVisitCommand.COMMAND_WORD:
+            return new AddVisitCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
