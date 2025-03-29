@@ -19,11 +19,12 @@ import seedu.address.model.person.Visit;
  */
 public class MedLogger implements ReadOnlyMedLogger {
 
+    private static final String MESSAGE_NO_PERSON_FOR_VISIT = "There is no person who have a matching profile to "
+            + "this visit in the person list";
     private final UniquePersonList persons;
     private final ArrayList<Visit> visits;
     private final HashMap<String, Person> personHashMap;
-    private final String MESSAGE_NO_PERSON_FOR_VISIT = "There is no person who have a matching profile to this visit" +
-            "in the person list";
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
