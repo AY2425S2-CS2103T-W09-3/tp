@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,14 +99,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into an {@code DateTime}.
+     * Parses a {@code String dateTime} into an {@code DateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code DateTime} is invalid.
      */
-    public static DateTime parseDate(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
+    public static DateTime parseDate(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDate = dateTime.trim();
         if (!DateTime.isValidDate(trimmedDate)) {
             throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
@@ -125,6 +126,16 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Remark parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(remark);
     }
 
     /**
