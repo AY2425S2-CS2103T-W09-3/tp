@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default.md
 title: "User Guide"
 pageNav: 3
 ---
@@ -176,6 +176,14 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Exporting the data : `export`
+
+Export the visits and persons data into either csv or json format. A save dialog will be prompted.
+
+Format:
+* `export csv`
+* `export json`
 
 ### Saving the data
 
