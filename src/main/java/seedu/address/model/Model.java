@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 
@@ -58,6 +60,13 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the Med Logger.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Retrieves a {@code Person} with the specified NRIC.
+     * If a {@code Person} is found, it is returned wrapped in an
+     * {@code Optional}; otherwise, an empty {@code Optional} is returned.
+     */
+    Optional<Person> getPersonByNric(Nric nric);
 
     /**
      * Returns true if a vist with the same details as {@code vist} exists in the Med Logger.

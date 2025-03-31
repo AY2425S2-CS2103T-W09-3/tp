@@ -6,9 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
+import java.util.Optional;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 
 /**
@@ -25,12 +28,13 @@ public class AddVisitCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_NRIC + "S1234567A "
-            + PREFIX_DATE + "2024-12-31 "
+            + PREFIX_DATE + "2024-12-31 11:11 "
             + PREFIX_REMARK + "Headache";
     public static final String MESSAGE_SUCCESS = "New visit recorded: %1$s";
     public static final String MESSAGE_DUPLICATE_VISIT = "This visit already exists in the MedLogger";
+    public static final String MESSAGE_NO_PERSON_FOR_VISIT = "The person in this visit does not exist in the MedLogger";
 
-    private final Visit visit;
+    private Visit visit;
     /**
      * Creates an AddVisitCommand to add the specified {@code Visit}
      */
@@ -42,9 +46,19 @@ public class AddVisitCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Optional<Person> optionalPerson = model.getPersonByNric(visit.getNric());
+
+        if (optionalPerson.isPresent()) {
+            Person person = optionalPerson.get();
+            this.visit = new Visit(person, visit.getDateTime(), visit.getRemark());
+        } else {
+            throw new CommandException(MESSAGE_NO_PERSON_FOR_VISIT);
+        }
+
         if (model.hasVisit(visit)) {
             throw new CommandException(MESSAGE_DUPLICATE_VISIT);
         }
+
         model.addVisit(visit);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(visit)));
     }
