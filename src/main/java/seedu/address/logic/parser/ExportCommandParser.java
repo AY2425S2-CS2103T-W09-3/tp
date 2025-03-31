@@ -6,6 +6,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new {@link ExportCommand}.
+ */
 public class ExportCommandParser implements Parser<ExportCommand> {
 
     @Override

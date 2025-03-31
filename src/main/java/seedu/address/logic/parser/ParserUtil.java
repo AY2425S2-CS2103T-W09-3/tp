@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -159,11 +158,18 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Splits the given string into words using whitespace as the delimiter.
+     */
     public static String[] parseAll(String s) {
         s = s.trim();
         return s.isEmpty() ? new String[0] : s.split("\\s+");
     }
 
+    /**
+     * Parses the file type from the given argument string.
+     * Expects exactly one word (e.g., "csv" or "json").
+     */
     public static String parseFileType(String args) throws ParseException {
         String[] words = parseAll(args);
         if (words.length != 1) {

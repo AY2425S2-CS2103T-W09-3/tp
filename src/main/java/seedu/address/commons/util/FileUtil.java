@@ -1,7 +1,5 @@
 package seedu.address.commons.util;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,17 +10,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.stage.FileChooser;
-import seedu.address.logic.commands.ExportCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Writes and reads files
@@ -36,7 +30,8 @@ public class FileUtil {
     }
 
     /**
-     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
+     * Returns true if {@code path} can be converted into a {@code Path} via
+     * {@link java.nio.file.Paths#get(String, String...)},
      * otherwise returns false.
      * @param path A string representing the file path. Cannot be null.
      */
@@ -98,6 +93,16 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Opens a file save dialog. After user specify the saved location from the dialog,
+     * exports a file from sourcePath as either JSON or CSV.
+     *
+     * @param sourcePath the path to the source JSON file containing the data to export
+     * @param fileType the type of file to export ("json" or "csv")
+     * @param defaultName the default file name to suggest in the save dialog
+     * @throws IOException if the user cancels the save dialog, the file type is invalid,
+     *                     data parsing fails, or writing to the selected file fails
+     */
     public static void saveWithDialog(Path sourcePath, String fileType, String defaultName) throws IOException {
         File selectedFile = FileUtil.promptSaveDialog(fileType, defaultName);
         if (selectedFile == null) {
@@ -144,24 +149,16 @@ public class FileUtil {
 
     }
 
-    private static File promptSaveDialog(String fileType, String defaultName) {
-        // Use JavaFX FileChooser to prompt the user for save location
-        FileChooser fileChooser = new FileChooser();
-
-        // Set the appropriate file extension filter
-        String s1 = fileType.toUpperCase() + " Files";
-        String s2 = "*." + fileType;
-
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(s1, s2));
-        fileChooser.setTitle("Save " + fileType.toUpperCase() + " File");
-
-        // Suggest default file name
-        fileChooser.setInitialFileName(defaultName);
-
-        return fileChooser.showSaveDialog(null);
-    }
-
-    private static List<Map<String, String>> extractJsonObjects(String json, String arrayKey) throws Exception {
+    /**
+     * Extracts a list of JSON objects from the given JSON string, based on a specified array key.
+     * Each object is converted to a map of string key-value pairs.
+     *
+     * @param json the JSON string containing an array of objects
+     * @param arrayKey the key that points to the array within the root JSON object
+     * @return a list of maps representing the JSON objects in the array; empty if the key is missing or not an array
+     * @throws Exception if JSON parsing fails
+     */
+    public static List<Map<String, String>> extractJsonObjects(String json, String arrayKey) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(json);
         JsonNode arrayNode = root.get(arrayKey);
@@ -188,10 +185,35 @@ public class FileUtil {
         return result;
     }
 
-    private static String quote(String value) {
+    /**
+     * Encloses the given value in double quotes if it contains special characters such as commas or quotes,
+     * and escapes any internal quotes by doubling them (for valid CSV formatting).
+     *
+     * @param value the string value to quote if necessary
+     * @return the quoted string, or the original string if no quoting is needed
+     */
+    public static String quote(String value) {
         if (value.contains(",") || value.contains("\"")) {
             return "\"" + value.replace("\"", "\"\"") + "\"";
         }
         return value;
     }
+
+    private static File promptSaveDialog(String fileType, String defaultName) {
+        // Use JavaFX FileChooser to prompt the user for save location
+        FileChooser fileChooser = new FileChooser();
+
+        // Set the appropriate file extension filter
+        String s1 = fileType.toUpperCase() + " Files";
+        String s2 = "*." + fileType;
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(s1, s2));
+        fileChooser.setTitle("Save " + fileType.toUpperCase() + " File");
+
+        // Suggest default file name
+        fileChooser.setInitialFileName(defaultName);
+
+        return fileChooser.showSaveDialog(null);
+    }
+
 }

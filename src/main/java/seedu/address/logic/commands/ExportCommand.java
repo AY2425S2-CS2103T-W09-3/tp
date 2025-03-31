@@ -9,6 +9,9 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Exports data to a file in CSV or JSON format.
+ */
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
@@ -32,10 +35,12 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
+        // Validate filetype: Either csv or json
         if (!fileType.equals(CSV_TYPE) && !fileType.equals(JSON_TYPE)) {
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
 
+        // Initialize variables
         Path sourcePath = model.getMedLoggerFilePath();
         String defaultName = "exported_data." + fileType.toLowerCase();
 
@@ -46,6 +51,19 @@ public class ExportCommand extends Command {
             throw new CommandException(String.format(e.getMessage()));
         }
 
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ExportCommand e)) {
+            return false;
+        }
+
+        return fileType.equals(e.fileType);
     }
 
 }

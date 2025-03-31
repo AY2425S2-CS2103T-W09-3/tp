@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -192,5 +193,51 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseAll_emptyString_returnsEmptyArray() {
+        String[] result = ParserUtil.parseAll("");
+        assertEquals(0, result.length);
+    }
+
+    @Test
+    public void parseAll_spacesOnly_returnsEmptyArray() {
+        String[] result = ParserUtil.parseAll("     ");
+        assertEquals(0, result.length);
+    }
+
+    @Test
+    public void parseAll_singleWord_returnsArrayWithOneElement() {
+        String[] result = ParserUtil.parseAll("json");
+        assertArrayEquals(new String[]{"json"}, result);
+    }
+
+    @Test
+    public void parseAll_multipleWords_returnsSplitArray() {
+        String[] result = ParserUtil.parseAll("  csv json xml  ");
+        assertArrayEquals(new String[]{"csv", "json", "xml"}, result);
+    }
+
+    @Test
+    public void parseFileType_validSingleWord_returnsWord() throws ParseException {
+        String result = ParserUtil.parseFileType("csv");
+        assertEquals("csv", result);
+    }
+
+    @Test
+    public void parseFileType_validWordWithSpaces_returnsWord() throws ParseException {
+        String result = ParserUtil.parseFileType("  json   ");
+        assertEquals("json", result);
+    }
+
+    @Test
+    public void parseFileType_twoWord_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFileType("json csv"));
+    }
+
+    @Test
+    public void parseFileType_emptyWord_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFileType(""));
     }
 }
