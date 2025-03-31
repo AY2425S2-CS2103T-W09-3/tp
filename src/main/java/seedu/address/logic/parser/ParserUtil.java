@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -23,6 +24,10 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    public static final String MESSAGE_INVALID_PATH = "Path is not a valid path";
+
+    public static final String MESSAGE_INVALID_FILE_TYPE = "The file type is not valid, choose either csv or json";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -153,4 +158,18 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static String[] parseAll(String s) {
+        s = s.trim();
+        return s.isEmpty() ? new String[0] : s.split("\\s+");
+    }
+
+    public static String parseFileType(String args) throws ParseException {
+        String[] words = parseAll(args);
+        if (words.length != 1) {
+            throw new ParseException(MESSAGE_INVALID_FILE_TYPE);
+        }
+        return words[0];
+    }
+
 }
