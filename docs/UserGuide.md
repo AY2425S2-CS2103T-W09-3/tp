@@ -8,9 +8,6 @@ pageNav: 3
 
 MedLogger is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete contact management tasks **faster** than traditional GUI apps.
 
-Table of Contents
-{:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
