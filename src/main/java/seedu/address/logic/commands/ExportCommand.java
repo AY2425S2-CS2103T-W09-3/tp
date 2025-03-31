@@ -22,6 +22,8 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_USAGE = "export csv/json";
 
+    public static final String DEFAULT_PREFIX = "exported_data.";
+
     public static final String CSV_TYPE = "csv";
 
     public static final String JSON_TYPE = "json";
@@ -42,7 +44,7 @@ public class ExportCommand extends Command {
 
         // Initialize variables
         Path sourcePath = model.getMedLoggerFilePath();
-        String defaultName = "exported_data." + fileType.toLowerCase();
+        String defaultName = DEFAULT_PREFIX + fileType.toLowerCase();
 
         try {
             FileUtil.saveWithDialog(sourcePath, this.fileType, defaultName);

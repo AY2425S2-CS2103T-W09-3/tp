@@ -125,24 +125,9 @@ public class FileUtil {
                 throw new IOException("No data to export.");
             }
 
-            // Get keys from first object (assumes all rows have same structure)
-            List<String> headers = new ArrayList<>(rows.get(0).keySet());
-            StringBuilder csvBuilder = new StringBuilder();
-
-            // Write header
-            csvBuilder.append(String.join(",", headers)).append("\n");
-
-            // Write rows
-            for (Map<String, String> row : rows) {
-                List<String> cells = new ArrayList<>();
-                for (String key : headers) {
-                    String value = row.getOrDefault(key, "");
-                    cells.add(quote(value));
-                }
-                csvBuilder.append(String.join(",", cells)).append("\n");
-            }
-
+            StringBuilder csvBuilder = buildCsvString(rows);
             FileUtil.writeToFile(selectedFile.toPath(), csvBuilder.toString());
+
         } else {
             throw new IOException("Invalid fileType");
         }
@@ -199,6 +184,13 @@ public class FileUtil {
         return value;
     }
 
+    /**
+     * Opens a JavaFX save file dialog with the specified file type and default name.
+     *
+     * @param fileType    The file extension type (e.g. "csv" or "json").
+     * @param defaultName The default file name to suggest.
+     * @return The file selected by the user, or {@code null} if the dialog was cancelled.
+     */
     private static File promptSaveDialog(String fileType, String defaultName) {
         // Use JavaFX FileChooser to prompt the user for save location
         FileChooser fileChooser = new FileChooser();
@@ -216,4 +208,30 @@ public class FileUtil {
         return fileChooser.showSaveDialog(null);
     }
 
+    /**
+     * Builds a CSV-formatted string from a list of row maps.
+     * Assumes all rows share the same set of keys.
+     *
+     * @param rows The list of rows to include in the CSV.
+     * @return A StringBuilder containing the CSV data.
+     */
+    private static StringBuilder buildCsvString(List<Map<String, String>> rows) {
+        // Get keys from first object (assumes all rows have same structure)
+        List<String> headers = new ArrayList<>(rows.get(0).keySet());
+        StringBuilder csvBuilder = new StringBuilder();
+
+        // Write header
+        csvBuilder.append(String.join(",", headers)).append("\n");
+
+        // Write rows
+        for (Map<String, String> row : rows) {
+            List<String> cells = new ArrayList<>();
+            for (String key : headers) {
+                String value = row.getOrDefault(key, "");
+                cells.add(quote(value));
+            }
+            csvBuilder.append(String.join(",", cells)).append("\n");
+        }
+        return csvBuilder;
+    }
 }
