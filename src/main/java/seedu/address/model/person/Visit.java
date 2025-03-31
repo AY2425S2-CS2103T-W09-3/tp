@@ -19,7 +19,7 @@ public class Visit {
      * @param dateTime
      * @param remark
      */
-    Visit(Person person, DateTime dateTime, Remark remark) {
+    public Visit(Person person, DateTime dateTime, Remark remark) {
         requireAllNonNull(person, dateTime, remark);
         this.person = person;
         this.dateTime = dateTime;

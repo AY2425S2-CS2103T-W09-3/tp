@@ -42,11 +42,9 @@ public class AddVisitCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (model.hasVisit(visit)) {
             throw new CommandException(MESSAGE_DUPLICATE_VISIT);
         }
-
         model.addVisit(visit);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(visit)));
     }
