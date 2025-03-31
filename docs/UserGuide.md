@@ -177,6 +177,14 @@ Exits the program.
 
 Format: `exit`
 
+### Exporting the data : `export`
+
+Export the visits and persons data into either csv or json format. A save dialog will be prompted.
+
+Format:
+* `export csv`
+* `export json`
+
 ### Saving the data
 
 MedLogger data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
