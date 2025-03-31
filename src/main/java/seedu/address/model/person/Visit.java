@@ -30,6 +30,10 @@ public class Visit {
         return this.person;
     }
 
+    public Nric getNric() {
+        return this.person.getNric();
+    }
+
     public Remark getRemark() {
         return this.remark;
     }

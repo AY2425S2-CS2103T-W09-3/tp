@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Visit;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -85,7 +86,8 @@ public class MedLoggerTest {
 
     @Test
     public void toStringMethod() {
-        String expected = MedLogger.class.getCanonicalName() + "{persons=" + medLogger.getPersonList() + "}";
+        String expected = MedLogger.class.getCanonicalName() + "{persons=" + medLogger.getPersonList()
+                + ", visits=" + medLogger.getVisitList() + "}";
         assertEquals(expected, medLogger.toString());
     }
 
@@ -94,6 +96,7 @@ public class MedLoggerTest {
      */
     private static class MedLoggerStub implements ReadOnlyMedLogger {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Visit> visits = FXCollections.observableArrayList();
 
         MedLoggerStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -102,6 +105,11 @@ public class MedLoggerTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Visit> getVisitList() {
+            return visits;
         }
     }
 

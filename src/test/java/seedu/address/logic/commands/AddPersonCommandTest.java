@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import seedu.address.model.MedLogger;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyMedLogger;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 import seedu.address.testutil.PersonBuilder;
@@ -143,6 +145,11 @@ public class AddPersonCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Person> getPersonByNric(Nric nric) {
             throw new AssertionError("This method should not be called.");
         }
 

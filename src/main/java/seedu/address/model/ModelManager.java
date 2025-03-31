@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 
@@ -102,6 +104,11 @@ public class ModelManager implements Model {
     public boolean hasVisit(Visit visit) {
         requireNonNull(visit);
         return medLogger.hasVisit(visit);
+    }
+
+    @Override
+    public Optional<Person> getPersonByNric(Nric nric) {
+        return medLogger.getPersonByNric(nric);
     }
 
     @Override

@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +29,7 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private final HashMap<String, Person> personMap = new HashMap<>();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -46,6 +49,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        personMap.put(toAdd.getNric().toString(), toAdd);
     }
 
     /**
@@ -66,6 +70,8 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        personMap.remove(target.getNric().toString());
+        personMap.put(editedPerson.getNric().toString(), editedPerson);
     }
 
     /**
@@ -77,11 +83,13 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        personMap.remove(toRemove.getNric().toString());
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        personMap.putAll(replacement.personMap);
     }
 
     /**
@@ -93,8 +101,10 @@ public class UniquePersonList implements Iterable<Person> {
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
-
         internalList.setAll(persons);
+        for (Person person : persons) {
+            personMap.put(person.getNric().value, person);
+        }
     }
 
     /**
@@ -146,5 +156,15 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Retrieves a {@code Person} with the specified NRIC.
+     * If a {@code Person} is found, it is returned wrapped in an
+     * {@code Optional}; otherwise, an empty {@code Optional} is returned.
+     */
+    public Optional<Person> getPersonByNric(Nric nric) {
+        requireNonNull(nric);
+        return Optional.ofNullable(personMap.get(nric.toString()));
     }
 }

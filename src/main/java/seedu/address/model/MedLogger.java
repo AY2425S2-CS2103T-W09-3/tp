@@ -2,15 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniqueVisitList;
 import seedu.address.model.person.Visit;
 
 /**
@@ -22,9 +22,7 @@ public class MedLogger implements ReadOnlyMedLogger {
     private static final String MESSAGE_NO_PERSON_FOR_VISIT = "There is no person who have a matching profile to "
             + "this visit in the person list";
     private final UniquePersonList persons;
-    private final ArrayList<Visit> visits;
-    private final HashMap<String, Person> personHashMap;
-
+    private final UniqueVisitList visits;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -35,8 +33,7 @@ public class MedLogger implements ReadOnlyMedLogger {
      */
     {
         persons = new UniquePersonList();
-        visits = new ArrayList<>();
-        personHashMap = new HashMap<>();
+        visits = new UniqueVisitList();
     }
 
     public MedLogger() {}
@@ -60,12 +57,20 @@ public class MedLogger implements ReadOnlyMedLogger {
     }
 
     /**
+     * Replaces the contents of the visit list with {@code visits}.
+     * {@code visits} must not contain duplicate persons.
+     */
+    public void setVisits(List<Visit> visits) {
+        this.visits.setVisits(visits);
+    }
+
+    /**
      * Resets the existing data of this {@code MedLogger} with {@code newData}.
      */
     public void resetData(ReadOnlyMedLogger newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
+        setVisits(newData.getVisitList());
     }
 
     /**
@@ -80,18 +85,11 @@ public class MedLogger implements ReadOnlyMedLogger {
      * Adds a visit to the list of visits.
      * The visit must not already exist in the list.
      */
-    public void addVisit(Visit visit) throws CommandException {
+    public void addVisit(Visit visit) {
         requireNonNull(visit);
-        String key = visit.getPerson().getNric().toString();
-        if (personHashMap.containsKey(key)) {
-            Person person = personHashMap.get(key);
-            Visit modified = new Visit(person, visit.getDateTime(), visit.getRemark());
-            this.visits.add(modified);
-            person.addVisit(modified);
-            person.showVisits();
-        } else {
-            throw new CommandException(MESSAGE_NO_PERSON_FOR_VISIT);
-        }
+        this.visits.add(visit);
+        visit.person.addVisit(visit);
+        visit.person.showVisits();
     }
 
     //// person-level operations
@@ -110,7 +108,6 @@ public class MedLogger implements ReadOnlyMedLogger {
      */
     public void addPerson(Person p) {
         persons.add(p);
-        personHashMap.put(p.getNric().toString(), p);
     }
 
     /**
@@ -120,8 +117,6 @@ public class MedLogger implements ReadOnlyMedLogger {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-        personHashMap.remove(target.getNric().toString());
-        personHashMap.put(editedPerson.getNric().toString(), editedPerson);
         persons.setPerson(target, editedPerson);
     }
 
@@ -131,7 +126,6 @@ public class MedLogger implements ReadOnlyMedLogger {
      */
     public void removePerson(Person key) {
         persons.remove(key);
-        personHashMap.remove(key.getNric().toString());
     }
 
     //// util methods
@@ -140,12 +134,18 @@ public class MedLogger implements ReadOnlyMedLogger {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("visits", visits)
                 .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Visit> getVisitList() {
+        return visits.asUnmodifiableObservableList();
     }
 
     @Override
@@ -166,5 +166,14 @@ public class MedLogger implements ReadOnlyMedLogger {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    /**
+     * Retrieves a {@code Person} with the specified NRIC.
+     * If a {@code Person} is found, it is returned wrapped in an
+     * {@code Optional}; otherwise, an empty {@code Optional} is returned.
+     */
+    public Optional<Person> getPersonByNric(Nric nric) {
+        return persons.getPersonByNric(nric);
     }
 }
