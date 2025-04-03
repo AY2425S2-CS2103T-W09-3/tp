@@ -96,10 +96,10 @@ class JsonAdaptedVisit {
         final Remark modelRemark = new Remark(remark);
 
         // Handle optional fields with fallback
-        final Symptom modelSymptom = new Symptom(symptom != null ? symptom : "N/A");
-        final Diagnosis modelDiagnosis = new Diagnosis(diagnosis != null ? diagnosis : "N/A");
-        final Medication modelMedication = new Medication(medication != null ? medication : "N/A");
-        final FollowUp modelFollowUp = new FollowUp(followUp != null ? followUp : "N/A");
+        final Symptom modelSymptom = new Symptom(symptom != null ? symptom : "");
+        final Diagnosis modelDiagnosis = new Diagnosis(diagnosis != null ? diagnosis : "");
+        final Medication modelMedication = new Medication(medication != null ? medication : "");
+        final FollowUp modelFollowUp = new FollowUp(followUp != null ? followUp : "");
 
         return new Visit(person, modelDateTime, modelRemark,
                 modelSymptom, modelDiagnosis, modelMedication, modelFollowUp);
