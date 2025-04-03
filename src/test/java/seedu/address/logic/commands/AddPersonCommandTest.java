@@ -219,6 +219,11 @@ public class AddPersonCommandTest {
         public void sortFilteredVisitList(Comparator<Visit> comparator) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Visit> getSortedVisitList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
