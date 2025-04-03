@@ -132,6 +132,11 @@ public class AddPersonCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void deleteVisit(Visit visit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
         @Override
         public void setMedLogger(ReadOnlyMedLogger newData) {

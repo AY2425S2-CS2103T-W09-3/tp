@@ -114,6 +114,15 @@ public class MedLogger implements ReadOnlyMedLogger {
         //todo
     }
 
+    /**
+     * Removes {@code visit} from this {@code MedLogger}.
+     * {@code key} must exist in the Med Logger.
+     */
+    public void removeVisit(Visit target) {
+        visits.remove(target);
+        dictionary.removeVisit(target);
+    }
+
     //// person-level operations
 
     /**

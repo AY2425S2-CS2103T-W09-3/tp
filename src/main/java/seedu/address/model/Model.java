@@ -74,6 +74,13 @@ public interface Model {
     boolean hasVisit(Visit visit);
 
     void addVisit(Visit visit) throws CommandException;
+
+    /**
+     * Deletes the given visit.
+     * The visit must exist in the Medlogger
+     */
+    void deleteVisit(Visit target);
+
     /**
      * Deletes the given person.
      * The person must exist in the Med Logger.
