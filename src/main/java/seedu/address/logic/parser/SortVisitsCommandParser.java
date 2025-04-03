@@ -8,10 +8,21 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class SortVisitsCommandParser implements Parser<SortVisitsCommand> {
 
+    private static final String ASC = "";
+    private static final String DESC = "desc";
+
     @Override
     public SortVisitsCommand parse(String args) throws ParseException {
         String trimmed = args.trim().toLowerCase();
-        boolean isDescending = trimmed.equals("desc");
-        return new SortVisitsCommand(isDescending);
+
+        if (trimmed.equals(ASC)) {
+            return new SortVisitsCommand(false); // Ascending
+        } else if (trimmed.equals(DESC)) {
+            return new SortVisitsCommand(true); // Descending
+        } else {
+            throw new ParseException("Invalid sort direction. Use either:\n"
+                + "  sortvisits        (ascending)\n"
+                + "  sortvisits desc   (descending)");
+        }
     }
 }
