@@ -89,7 +89,7 @@ public class MedLoggerParser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
-    
+
         case ClearVisitsCommand.COMMAND_WORD:
             return new ClearVisitsCommand();
 
