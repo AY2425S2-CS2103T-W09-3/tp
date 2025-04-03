@@ -2,8 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FOLLOWUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SYMPTOM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -38,12 +42,20 @@ public class EditVisitCommand extends Command {
             + "by the index number used in the displayed visit list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NRIC + "Nric] "
+            + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_SYMPTOM + "SYMPTOM] "
+            + "[" + PREFIX_DIAGNOSIS + "DIAGNOSIS] "
+            + "[" + PREFIX_MEDICATION + "MEDICATION] "
+            + "[" + PREFIX_FOLLOWUP + "FOLLOWUP] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NRIC + "S1234567A "
-            + PREFIX_DATE + "2011-11-11 11:11";
+            + PREFIX_DATE + "2025-04-04 15:00 "
+            + PREFIX_REMARK + "Improved "
+            + PREFIX_SYMPTOM + "Fever "
+            + PREFIX_DIAGNOSIS + "Flu "
+            + PREFIX_MEDICATION + "Paracetamol "
+            + PREFIX_FOLLOWUP + "1 week";
 
     public static final String MESSAGE_EDIT_VISIT_SUCCESS = "Edited Visit: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
