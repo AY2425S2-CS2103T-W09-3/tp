@@ -30,8 +30,8 @@ public class SortVisitsCommand extends Command {
 
         ObservableList<Visit> currentList = FXCollections.observableArrayList(model.getFilteredVisitList());
 
-        Comparator<Visit> comparator = (v1, v2) ->
-            v1.getDateTime().toString().compareTo(v2.getDateTime().toString());
+        Comparator<Visit> comparator = Comparator.comparing((Visit v) -> v.getDateTime().toLocalDateTime());
+        
         if (isDescending) {
             comparator = comparator.reversed();
         }

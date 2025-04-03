@@ -51,6 +51,14 @@ public class DateTime {
         }
     }
 
+    /**
+     * Returns true if a given string is a valid date in yyyy-mm-dd HH:mm format.
+     */
+    public LocalDateTime toLocalDateTime() {
+        return LocalDateTime.parse(value, FORMATTER);
+    }
+
+
     @Override
     public String toString() {
         return value;
