@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.person.Visit;
 
@@ -28,16 +26,12 @@ public class SortVisitsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        ObservableList<Visit> currentList = FXCollections.observableArrayList(model.getFilteredVisitList());
-
         Comparator<Visit> comparator = Comparator.comparing((Visit v) -> v.getDateTime().toLocalDateTime());
-        
         if (isDescending) {
             comparator = comparator.reversed();
         }
 
-        currentList.sort(comparator);
-        model.updateFilteredVisitList(currentList::contains);
+        model.sortFilteredVisitList(comparator);
 
         return new CommandResult(isDescending ? MESSAGE_SUCCESS_DESC : MESSAGE_SUCCESS_ASC);
     }

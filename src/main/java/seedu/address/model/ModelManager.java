@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -174,6 +176,20 @@ public class ModelManager implements Model {
 
         filteredPersons.setPredicate(limitedList::contains);
     }
+
+    /**
+     * Sorts the filtered visit list based on the provided comparator.
+     * To force the filtered list to update, we create a new list and set the predicate to
+     *
+     * @param comparator The comparator to sort the visits.
+     */
+    @Override
+    public void sortFilteredVisitList(Comparator<Visit> comparator) {
+        List<Visit> sortedList = new ArrayList<>(filteredVisits);
+        sortedList.sort(comparator);
+        filteredVisits.setPredicate(sortedList::contains); // triggers update
+    }
+
 
     @Override
     public boolean equals(Object other) {

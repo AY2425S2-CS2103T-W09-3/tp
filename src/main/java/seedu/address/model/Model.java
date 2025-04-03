@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -112,6 +113,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredVisitList(Predicate<Visit> predicate);
+
+    void sortFilteredVisitList(Comparator<Visit> comparator);
 
     void updateSubFilteredPersonList(int n);
     int size();
