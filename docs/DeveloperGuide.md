@@ -158,6 +158,15 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### AddVisit feature
+![AddVisitCommand Sequence Diagram.png](images/AddVisitCommand%20Sequence%20Diagram.png)
+#### Implementation
+
+The current implementation of AddVisitCommand works as following: it will pass the visit to the model, and the model will then call
+the addVisit command of Medlogger, which check if that visit belongs to someone already exists in Medlogger. The check is done using the NRIC of the person of visit,
+if NRIC exists as key of hashmap, then the person already exists in Medlogger and NRIC is used to retrieve the person, then
+add the visit to Medlogger. Otherwise a CommandException is throw, and reject adding the visit. 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
