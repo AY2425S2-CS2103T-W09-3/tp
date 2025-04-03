@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
@@ -45,8 +44,8 @@ public class EditVisitCommandParser implements Parser<EditVisitCommand> {
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editVisitDescriptor.setDateTime(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editVisitDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_EMAIL).get()));
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            editVisitDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
 
         if (!editVisitDescriptor.isAnyFieldEdited()) {
