@@ -11,8 +11,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.AddVisitCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearVisitsCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteVisitCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.EditVisitCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -20,6 +22,7 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListVisitsCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -66,6 +69,9 @@ public class MedLoggerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DeleteVisitCommand.COMMAND_WORD:
+            return new DeleteVisitCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -92,6 +98,12 @@ public class MedLoggerParser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
+
+        case ListVisitsCommand.COMMAND_WORD:
+            return new ListVisitsCommandParser().parse(arguments);
+
+        case ClearVisitsCommand.COMMAND_WORD:
+            return new ClearVisitsCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

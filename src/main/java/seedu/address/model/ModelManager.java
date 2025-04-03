@@ -130,6 +130,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteVisit(Visit target) {
+        medLogger.removeVisit(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         medLogger.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -178,6 +183,15 @@ public class ModelManager implements Model {
                 .collect(Collectors.toList());
 
         filteredPersons.setPredicate(limitedList::contains);
+    }
+
+    @Override
+    public void updateSubFilteredVisitList(int n) {
+        List<Visit> limitedList = filteredVisits.getSource().stream()
+                .limit(n)
+                .collect(Collectors.toList());
+
+        filteredVisits.setPredicate(limitedList::contains);
     }
 
     @Override
