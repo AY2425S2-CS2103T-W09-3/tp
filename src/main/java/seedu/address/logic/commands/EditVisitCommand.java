@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYMPTOM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VISITS;
 
 import java.util.List;
 import java.util.Objects;
@@ -106,6 +107,7 @@ public class EditVisitCommand extends Command {
 
         model.setVisit(visitToEdit, editedVisit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredVisitList(PREDICATE_SHOW_ALL_VISITS);
         return new CommandResult(String.format(MESSAGE_EDIT_VISIT_SUCCESS, Messages.format(editedVisit)));
     }
 
@@ -174,6 +176,10 @@ public class EditVisitCommand extends Command {
             setNric(toCopy.nric);
             setDateTime(toCopy.dateTime);
             setRemark(toCopy.remark);
+            setSymptom(toCopy.symptom);
+            setDiagnosis(toCopy.diagnosis);
+            setMedication(toCopy.medication);
+            setFollowUp(toCopy.followUp);
         }
 
         /**
