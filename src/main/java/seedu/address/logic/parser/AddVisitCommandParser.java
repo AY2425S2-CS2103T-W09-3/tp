@@ -10,21 +10,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYMPTOM;
 
-import java.util.HashSet;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddVisitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Diagnosis;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.FollowUp;
 import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Symptom;
 import seedu.address.model.person.Visit;
@@ -75,8 +71,7 @@ public class AddVisitCommandParser implements Parser<AddVisitCommand> {
         Medication medication = new Medication(argMultimap.getValue(PREFIX_MEDICATION).orElse("N/A"));
         FollowUp followUp = new FollowUp(argMultimap.getValue(PREFIX_FOLLOWUP).orElse("N/A"));
 
-        Person dummyPerson = new Person(name, nric, Phone.DUMMY_PHONE, Email.DUMMY_EMAIL,
-                Address.DUMMY_ADDRESS, new Remark(""), new HashSet<>());
+        Person dummyPerson = Person.createDummyPerson(name, nric);
 
         Visit visit = new Visit(dummyPerson, dateTime, remark, symptom, diagnosis, medication, followUp);
         return new AddVisitCommand(visit);
