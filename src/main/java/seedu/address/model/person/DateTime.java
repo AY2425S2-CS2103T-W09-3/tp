@@ -58,6 +58,14 @@ public class DateTime {
         return LocalDateTime.parse(value, FORMATTER);
     }
 
+    /**
+     * Returns the current date and time in the format yyyy-mm-dd HH:mm.
+     * @return The current date and time
+     */
+    public static DateTime now() {
+        return new DateTime(LocalDateTime.now().format(FORMATTER));
+    }
+
 
     @Override
     public String toString() {
