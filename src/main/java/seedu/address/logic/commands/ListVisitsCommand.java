@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.Nric;
 
 /**
  * Lists all visits in the Med Logger to the user.
@@ -10,16 +11,31 @@ import seedu.address.model.Model;
 public class ListVisitsCommand extends Command {
 
     public static final String COMMAND_WORD = "listvisits";
-
     public static final String MESSAGE_SUCCESS = "Listed all visits";
+    public static final String MESSAGE_USAGE = "listvisits [i/NRIC] [l/LIMIT]";
 
-    public static final String MESSAGE_USAGE = "listvisits l/LIMIT";
+    private final Nric nric;
+    private final Integer limit;
 
-    private Integer limit;
+    /**
+     * Creates a ListVisitsCommand to list all visits.
+     * thus no NRIC or limit is provided.
+     */
+    public ListVisitsCommand() {
+        this.nric = null;
+        this.limit = null;
+    }
 
-    public ListVisitsCommand() {}
-
-    public ListVisitsCommand(int limit) {
+    /**
+     * Creates a ListVisitsCommand to list only visits
+     * with the specified NRIC and limit.
+     * Both parameters are optional.
+     *
+     * @param nric the NRIC of the person whose visits to list
+     * @param limit the maximum number of visits to list
+     */
+    public ListVisitsCommand(Nric nric, Integer limit) {
+        this.nric = nric;
         this.limit = limit;
     }
 
@@ -27,14 +43,19 @@ public class ListVisitsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        if (this.limit == null) {
-            model.updateFilteredVisitList(visit -> true); // Show all
-            return new CommandResult(MESSAGE_SUCCESS);
+        // Apply NRIC filter if provided
+        if (nric != null) {
+            model.updateFilteredVisitList(visit -> visit.getNric().equals(nric));
         } else {
-            model.updateSubFilteredVisitList(this.limit);
-            int numOfVisits = Math.min(this.limit, model.getFilteredVisitList().size());
-            return new CommandResult("Listed " + numOfVisits + " visits");
+            model.updateFilteredVisitList(v -> true);
         }
+
+        // Apply limit if provided
+        if (limit != null) {
+            model.updateSubFilteredVisitList(limit); // assumes sub-listing is after main filtering
+            return new CommandResult("Listed " + Math.min(limit, model.getFilteredVisitList().size()) + " visits");
+        }
+
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
-
