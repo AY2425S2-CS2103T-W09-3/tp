@@ -125,6 +125,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteVisit(Visit target) {
+        medLogger.removeVisit(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         medLogger.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

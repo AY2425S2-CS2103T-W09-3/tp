@@ -114,6 +114,11 @@ public class MedLogger implements ReadOnlyMedLogger {
         //todo
     }
 
+    public void removeVisit(Visit target) {
+        visits.remove(target);
+        dictionary.removeVisit(target);
+    }
+
     //// person-level operations
 
     /**
