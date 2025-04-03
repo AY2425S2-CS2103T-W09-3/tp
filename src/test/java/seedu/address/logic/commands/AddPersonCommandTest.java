@@ -194,6 +194,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public void updateSubFilteredVisitList(int n) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int size() {
             throw new AssertionError("This method should not be called.");
         }

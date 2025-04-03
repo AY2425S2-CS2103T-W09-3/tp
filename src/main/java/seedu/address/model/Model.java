@@ -124,6 +124,6 @@ public interface Model {
      * @param n number of entries to show
      */
     void updateSubFilteredVisitList(int n);
-    
+
     int size();
 }
