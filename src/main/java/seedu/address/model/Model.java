@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
@@ -74,7 +73,16 @@ public interface Model {
      */
     boolean hasVisit(Visit visit);
 
-    void addVisit(Visit visit) throws CommandException;
+    void addVisit(Visit visit);
+
+    /**
+     * Deletes the given visit.
+     * The visit must exist in the Medlogger
+     */
+    void deleteVisit(Visit target);
+
+    void setVisit(Visit target, Visit editedVisit);
+
     /**
      * Deletes the given person.
      * The person must exist in the Med Logger.
@@ -116,6 +124,17 @@ public interface Model {
 
     void sortFilteredVisitList(Comparator<Visit> comparator);
 
+    /**
+     * Updates the filter of the filtered person list up to the first n entries.
+     * @param n number of entries to show
+     */
     void updateSubFilteredPersonList(int n);
+
+    /**
+     * Updates the filter of the filtered visit list up to the first n entries.
+     * @param n number of entries to show
+     */
+    void updateSubFilteredVisitList(int n);
+
     int size();
 }

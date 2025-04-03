@@ -59,6 +59,20 @@ public class PersonVisitDictionary {
 
     public void setVisit(Visit target, Visit editedVisit) {
         requireAllNonNull(target, editedVisit);
+        if (target.getPerson().equals(editedVisit.getPerson())) {
+            if (!personToVisits.containsKey(target.getPerson())) {
+                throw new PersonNotFoundException();
+            }
+            personToVisits.get(target.getPerson()).add(editedVisit);
+            personToVisits.get(target.getPerson()).remove(target);
+        } else {
+            if (!personToVisits.containsKey(target.getPerson())
+                    || !personToVisits.containsKey(editedVisit.getPerson())) {
+                throw new PersonNotFoundException();
+            }
+            personToVisits.get(target.getPerson()).remove(target);
+            personToVisits.get(editedVisit.getPerson()).add(editedVisit);
+        }
     }
 
     /**
