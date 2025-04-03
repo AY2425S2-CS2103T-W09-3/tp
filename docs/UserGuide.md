@@ -85,18 +85,20 @@ Format: `help`
 
 Adds a person to the Med Logger.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE [t/TAG]…​`
+Format: `add n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless></box>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** 
+* A person can have any number of tags (including 0)
+* The NRIC, phone number, email must adhere to respective format constraint
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 1, #02-24 d/2024-12-01`
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney`
 
-### Remark a person : `remark`
+### Adding a remark to a person : `remark`
 
 Add a remark for a person from MedLogger.
 
@@ -116,11 +118,11 @@ Examples:
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person : `editperson`
 
 Edits an existing person in the Med Logger.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [d/DATE] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -164,6 +166,22 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the Med Logger.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding a visit: `visit`
+
+Format: `visit n/NAME i/NRIC d/DATETIME r/REMARK`
+<box type="tip" seamless></box>
+
+**Tip:**
+* The NRIC and DATETIME must adhere to respective format constraint
+  </box>
+
+### Removing a visit: `deletevisit`
+Format: `deletevisit INDEX`
+* Deletes the visit at the specified `INDEX`.
+* The index refers to the index number shown in the displayed visit list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
 
 ### Clearing all entries : `clear`
 
