@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
@@ -114,9 +113,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addVisit(Visit visit) throws CommandException {
+    public void addVisit(Visit visit) {
         requireNonNull(visit);
         medLogger.addVisit(visit);
+    }
+
+    @Override
+    public void setVisit(Visit target, Visit editedVisit) {
+        requireAllNonNull(target, editedVisit);
+        medLogger.setVisit(target, editedVisit);
     }
 
     @Override

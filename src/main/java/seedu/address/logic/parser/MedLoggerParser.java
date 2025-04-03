@@ -16,6 +16,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteVisitCommand;
 import seedu.address.logic.commands.EditPersonCommand;
+import seedu.address.logic.commands.EditVisitCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -91,6 +92,9 @@ public class MedLoggerParser {
 
         case AddVisitCommand.COMMAND_WORD:
             return new AddVisitCommandParser().parse(arguments);
+
+        case EditVisitCommand.COMMAND_WORD:
+            return new EditVisitCommandParser().parse(arguments);
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
