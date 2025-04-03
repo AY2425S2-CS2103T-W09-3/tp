@@ -113,6 +113,17 @@ public interface Model {
      */
     void updateFilteredVisitList(Predicate<Visit> predicate);
 
+    /**
+     * Updates the filter of the filtered person list up to the first n entries.
+     * @param n number of entries to show
+     */
     void updateSubFilteredPersonList(int n);
+
+    /**
+     * Updates the filter of the filtered visit list up to the first n entries.
+     * @param n number of entries to show
+     */
+    void updateSubFilteredVisitList(int n);
+    
     int size();
 }

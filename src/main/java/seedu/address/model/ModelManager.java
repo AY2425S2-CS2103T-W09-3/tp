@@ -176,6 +176,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateSubFilteredVisitList(int n) {
+        List<Visit> limitedList = filteredVisits.getSource().stream()
+                .limit(n)
+                .collect(Collectors.toList());
+
+        filteredVisits.setPredicate(limitedList::contains);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
