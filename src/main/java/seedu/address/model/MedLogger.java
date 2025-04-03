@@ -111,7 +111,7 @@ public class MedLogger implements ReadOnlyMedLogger {
     public void setVisit(Visit target, Visit editedVisit) {
         requireNonNull(editedVisit);
         visits.setVisit(target, editedVisit);
-        //todo
+        dictionary.setVisit(target, editedVisit);
     }
 
     //// person-level operations
