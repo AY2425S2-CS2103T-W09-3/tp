@@ -15,7 +15,7 @@ import seedu.address.model.person.Visit;
  * Deletes a visit identified using it's displayed index from the Med Logger.
  */
 public class DeleteVisitCommand extends Command {
-    public final static String COMMAND_WORD = "deletevisit";
+    public static final String COMMAND_WORD = "deletevisit";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the visit identified by the index number used in the displayed visit list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
