@@ -19,6 +19,7 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListVisitsCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -88,6 +89,9 @@ public class MedLoggerParser {
 
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
+
+        case ListVisitsCommand.COMMAND_WORD:
+            return new ListVisitsCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
