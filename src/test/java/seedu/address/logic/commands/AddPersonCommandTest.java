@@ -184,6 +184,16 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public ObservableList<Visit> getFilteredVisitList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredVisitList(Predicate<Visit> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int size() {
             throw new AssertionError("This method should not be called.");
         }

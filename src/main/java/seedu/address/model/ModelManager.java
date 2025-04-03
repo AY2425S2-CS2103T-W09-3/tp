@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final MedLogger medLogger;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Visit> filteredVisits;
 
 
     /**
@@ -41,6 +42,7 @@ public class ModelManager implements Model {
         this.medLogger = new MedLogger(medLogger);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.medLogger.getPersonList());
+        filteredVisits = new FilteredList<>(this.medLogger.getVisitList());
     }
 
     public ModelManager() {
@@ -147,9 +149,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Visit> getFilteredVisitList() {
+        return filteredVisits;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredVisitList(Predicate<Visit> predicate) {
+        requireNonNull(predicate);
+        filteredVisits.setPredicate(predicate);
     }
 
     @Override
@@ -176,7 +189,9 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return medLogger.equals(otherModelManager.medLogger)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredVisits.equals(otherModelManager.filteredVisits);
+
     }
 
     @Override
