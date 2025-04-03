@@ -9,9 +9,9 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Visit {
     // Visit details: who, when, why
-    public final Person person;
-    public final DateTime dateTime;
-    public final Remark remark;
+    private final Person person;
+    private final DateTime dateTime;
+    private final Remark remark;
 
     /**
      * Every parameter must present and be non-null.
@@ -40,6 +40,10 @@ public class Visit {
 
     public DateTime getDateTime() {
         return this.dateTime;
+    }
+
+    public Visit withPerson(Person person) {
+        return new Visit(person, dateTime, remark);
     }
 
     /**

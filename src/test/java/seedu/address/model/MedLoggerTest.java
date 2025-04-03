@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonVisitDictionary;
 import seedu.address.model.person.Visit;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -97,6 +98,7 @@ public class MedLoggerTest {
     private static class MedLoggerStub implements ReadOnlyMedLogger {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Visit> visits = FXCollections.observableArrayList();
+        private final PersonVisitDictionary dictionary = new PersonVisitDictionary();
 
         MedLoggerStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -111,6 +113,10 @@ public class MedLoggerTest {
         public ObservableList<Visit> getVisitList() {
             return visits;
         }
-    }
 
+        @Override
+        public PersonVisitDictionary getDictionary() {
+            return dictionary;
+        }
+    }
 }

@@ -9,6 +9,8 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicateVisitException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.exceptions.VisitNotFoundException;
 
 /**
  * A list of visits that enforces uniqueness between its elements and does not allow nulls.
@@ -43,6 +45,37 @@ public class UniqueVisitList implements Iterable<Visit> {
             throw new DuplicateVisitException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Replaces the visit {@code target} in the list with {@code editedVisit}.
+     * {@code target} must exist in the list.
+     * The {@code editedVisit} must not be the same as another existing visit in the list.
+     */
+    public void setVisit(Visit target, Visit editedVisit) {
+        requireAllNonNull(target, editedVisit);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new VisitNotFoundException();
+        }
+
+        if (!target.equals(editedVisit) && contains(editedVisit)) {
+            throw new DuplicateVisitException();
+        }
+
+        internalList.set(index, editedVisit);
+    }
+
+    /**
+     * Removes the equivalent visit from the list.
+     * The viist must exist in the list.
+     */
+    public void remove(Visit toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new PersonNotFoundException();
+        }
     }
 
     /**
