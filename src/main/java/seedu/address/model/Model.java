@@ -136,5 +136,7 @@ public interface Model {
      */
     void updateSubFilteredVisitList(int n);
 
+    ObservableList<Visit> getSortedVisitList();
+
     int size();
 }

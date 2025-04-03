@@ -78,6 +78,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Visit> getSortedVisitList() {
+        return model.getSortedVisitList();
+    }
+
+    @Override
     public Path getMedLoggerFilePath() {
         return model.getMedLoggerFilePath();
     }
