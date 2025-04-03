@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonVisitDictionary;
 import seedu.address.model.person.Visit;
 
 /**
@@ -19,4 +20,9 @@ public interface ReadOnlyMedLogger {
      * Returns an unmodifiable view of the visit list.
      */
     ObservableList<Visit> getVisitList();
+
+    /**
+     * Returns the dictionary.
+     */
+    PersonVisitDictionary getDictionary();
 }

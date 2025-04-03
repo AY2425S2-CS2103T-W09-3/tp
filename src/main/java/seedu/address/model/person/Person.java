@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -27,7 +26,6 @@ public class Person {
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-    private final ArrayList<Visit> visits = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -68,14 +66,6 @@ public class Person {
         return remark;
     }
 
-    public void addVisit(Visit visit) {
-        this.visits.add(visit);
-    }
-
-    public void removeVisit(Visit visit) {
-        this.visits.remove(visit);
-    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -95,13 +85,6 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getNric().equals(getNric());
-    }
-
-    /**
-     *  Method to debug, will be removed in future iterations.
-     */
-    public void showVisits() {
-        System.out.println(this.visits);
     }
 
     /**

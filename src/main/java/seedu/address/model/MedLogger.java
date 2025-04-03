@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonVisitDictionary;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.UniqueVisitList;
 import seedu.address.model.person.Visit;
@@ -23,6 +25,7 @@ public class MedLogger implements ReadOnlyMedLogger {
             + "this visit in the person list";
     private final UniquePersonList persons;
     private final UniqueVisitList visits;
+    private final PersonVisitDictionary dictionary;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -34,6 +37,7 @@ public class MedLogger implements ReadOnlyMedLogger {
     {
         persons = new UniquePersonList();
         visits = new UniqueVisitList();
+        dictionary = new PersonVisitDictionary();
     }
 
     public MedLogger() {}
@@ -65,12 +69,20 @@ public class MedLogger implements ReadOnlyMedLogger {
     }
 
     /**
+     * Replaces the contents of the dictionary with {@code dictionary}.
+     */
+    public void setDictionary(PersonVisitDictionary dictionary) {
+        this.dictionary.setDictionary(dictionary.getDictionary());
+    }
+
+    /**
      * Resets the existing data of this {@code MedLogger} with {@code newData}.
      */
     public void resetData(ReadOnlyMedLogger newData) {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
         setVisits(newData.getVisitList());
+        setDictionary(newData.getDictionary());
     }
 
     /**
@@ -88,8 +100,18 @@ public class MedLogger implements ReadOnlyMedLogger {
     public void addVisit(Visit visit) {
         requireNonNull(visit);
         this.visits.add(visit);
-        visit.person.addVisit(visit);
-        visit.person.showVisits();
+        this.dictionary.addVisit(visit);
+    }
+
+    /**
+     * Replaces the given visit {@code target} in the list with {@code editedVisit}.
+     * {@code target} must exist in the Med Logger.
+     * The {@code editedVisit} must not be the same as another existing visit in the Med Logger.
+     */
+    public void setVisit(Visit target, Visit editedVisit) {
+        requireNonNull(editedVisit);
+        visits.setVisit(target, editedVisit);
+        //todo
     }
 
     //// person-level operations
@@ -108,6 +130,7 @@ public class MedLogger implements ReadOnlyMedLogger {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        dictionary.addPerson(p);
     }
 
     /**
@@ -116,8 +139,12 @@ public class MedLogger implements ReadOnlyMedLogger {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the Med Logger.
      */
     public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+        requireAllNonNull(target, editedPerson);
         persons.setPerson(target, editedPerson);
+        for (Visit visit : dictionary.getVisitsForPerson(target)) {
+            visits.setVisit(visit, visit.withPerson(editedPerson));
+        }
+        dictionary.setPerson(target, editedPerson);
     }
 
     /**
@@ -126,6 +153,10 @@ public class MedLogger implements ReadOnlyMedLogger {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        for (Visit visit : dictionary.getVisitsForPerson(key)) {
+            visits.remove(visit);
+        }
+        dictionary.removePerson(key);
     }
 
     //// util methods
@@ -146,6 +177,11 @@ public class MedLogger implements ReadOnlyMedLogger {
     @Override
     public ObservableList<Visit> getVisitList() {
         return visits.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public PersonVisitDictionary getDictionary() {
+        return dictionary;
     }
 
     @Override
