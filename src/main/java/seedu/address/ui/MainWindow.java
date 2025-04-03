@@ -115,6 +115,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel.setPersonSelectionCallback(selectedPerson -> {
+            logic.updateFilteredVisitList(visit ->
+                visit.getNric().equals(selectedPerson.getNric()));
+        });
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         visitListPanel = new VisitListPanel(logic.getSortedVisitList());
