@@ -4,15 +4,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.DateTime;
+import seedu.address.model.person.Diagnosis;
+import seedu.address.model.person.FollowUp;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Symptom;
 import seedu.address.model.person.Visit;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Visit}.
  */
 class JsonAdaptedVisit {
 
@@ -22,25 +25,42 @@ class JsonAdaptedVisit {
     private final String dateTime;
     private final String remark;
 
+    private final String symptom;
+    private final String diagnosis;
+    private final String medication;
+    private final String followUp;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedVisit} with the given visit details.
      */
     @JsonCreator
-    public JsonAdaptedVisit(@JsonProperty("NRIC") String nric, @JsonProperty("dateTime") String dateTime,
-                            @JsonProperty("remark") String remark) {
+    public JsonAdaptedVisit(@JsonProperty("NRIC") String nric,
+                            @JsonProperty("dateTime") String dateTime,
+                            @JsonProperty("remark") String remark,
+                            @JsonProperty("symptom") String symptom,
+                            @JsonProperty("diagnosis") String diagnosis,
+                            @JsonProperty("medication") String medication,
+                            @JsonProperty("followUp") String followUp) {
         this.nric = nric;
         this.dateTime = dateTime;
         this.remark = remark;
+        this.symptom = symptom;
+        this.diagnosis = diagnosis;
+        this.medication = medication;
+        this.followUp = followUp;
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Visit} into this class for Jackson use.
      */
     public JsonAdaptedVisit(Visit source) {
         nric = source.getNric().value;
         dateTime = source.getDateTime().value;
         remark = source.getRemark().value;
+        symptom = source.getSymptom().value;
+        diagnosis = source.getDiagnosis().value;
+        medication = source.getMedication().value;
+        followUp = source.getFollowUp().value;
     }
 
     public Nric getNric() throws IllegalValueException {
@@ -54,25 +74,34 @@ class JsonAdaptedVisit {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted visit object into the model's {@code Visit} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted visit.
      */
     public Visit toModelType(Person person) throws IllegalValueException {
+        // Handle dateTime
+        final DateTime modelDateTime;
         if (dateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!DateTime.isValidDate(dateTime)) {
+            modelDateTime = DateTime.now();
+        } else if (!DateTime.isValidDate(dateTime)) {
             throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
+        } else {
+            modelDateTime = new DateTime(dateTime);
         }
-        final DateTime modelDateTime = new DateTime(dateTime);
 
+        // Handle remark
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
 
-        return new Visit(person, modelDateTime, modelRemark);
-    }
+        // Handle optional fields with fallback
+        final Symptom modelSymptom = new Symptom(symptom != null ? symptom : "N/A");
+        final Diagnosis modelDiagnosis = new Diagnosis(diagnosis != null ? diagnosis : "N/A");
+        final Medication modelMedication = new Medication(medication != null ? medication : "N/A");
+        final FollowUp modelFollowUp = new FollowUp(followUp != null ? followUp : "N/A");
 
+        return new Visit(person, modelDateTime, modelRemark,
+                modelSymptom, modelDiagnosis, modelMedication, modelFollowUp);
+    }
 }

@@ -8,6 +8,11 @@ import static java.util.Objects.requireNonNull;
 public class FollowUp {
     public final String value;
 
+    /**
+     * Constructs a {@code FollowUp}.
+     *
+     * @param value Some follow-up information.
+     */
     public FollowUp(String value) {
         requireNonNull(value);
         this.value = value;

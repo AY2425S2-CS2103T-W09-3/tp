@@ -67,7 +67,7 @@ public class AddVisitCommandParser implements Parser<AddVisitCommand> {
             dateTime = new DateTime(dateInput);
         } else {
             dateTime = DateTime.now(); // Use current time if not specified
-        }        
+        }
 
         // Optional visit fields
         Symptom symptom = new Symptom(argMultimap.getValue(PREFIX_SYMPTOM).orElse("N/A"));

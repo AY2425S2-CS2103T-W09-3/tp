@@ -2,11 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
-
 import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Represents a Visit of a particular Person.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Visit {
+    // Visit details: who, when, why, how
     private final Person person;
     private final DateTime dateTime;
     private final Remark remark;
@@ -15,6 +18,12 @@ public class Visit {
     private final Medication medication;
     private final FollowUp followUp;
 
+    /**
+     * Every parameter must present and be non-null.
+     * @param person
+     * @param dateTime
+     * @param remark
+     */
     public Visit(Person person, DateTime dateTime, Remark remark,
                  Symptom symptom, Diagnosis diagnosis,
                  Medication medication, FollowUp followUp) {
@@ -66,8 +75,12 @@ public class Visit {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) return true;
-        if (!(other instanceof Visit)) return false;
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Visit)) {
+            return false;
+        }
         Visit o = (Visit) other;
         return person.equals(o.person)
                 && dateTime.equals(o.dateTime)

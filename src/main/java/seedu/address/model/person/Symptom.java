@@ -8,6 +8,10 @@ import static java.util.Objects.requireNonNull;
 public class Symptom {
     public final String value;
 
+    /**
+     * Constructs a {@code Symptom}.
+     * @param value some symptom.
+     */
     public Symptom(String value) {
         requireNonNull(value);
         this.value = value;

@@ -8,6 +8,11 @@ import static java.util.Objects.requireNonNull;
 public class Medication {
     public final String value;
 
+    /**
+     * Constructs a {@code Medication}.
+     *
+     * @param value Some medication.
+     */
     public Medication(String value) {
         requireNonNull(value);
         this.value = value;

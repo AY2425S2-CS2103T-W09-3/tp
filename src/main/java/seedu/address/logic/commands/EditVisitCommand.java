@@ -17,9 +17,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.DateTime;
+import seedu.address.model.person.Diagnosis;
+import seedu.address.model.person.FollowUp;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Symptom;
 import seedu.address.model.person.Visit;
 
 
@@ -98,14 +102,19 @@ public class EditVisitCommand extends Command {
      * edited with {@code editVisitDescriptor}.
      */
     private static Visit createEditedVisit(Person person, Visit visitToEdit,
-                                           EditVisitDescriptor editVisitDescriptor) {
-        assert visitToEdit != null;
+            EditVisitDescriptor editVisitDescriptor) {
 
+        assert visitToEdit != null;
         DateTime updatedDateTime = editVisitDescriptor.getDateTime().orElse(visitToEdit.getDateTime());
         Remark updatedRemark = editVisitDescriptor.getRemark().orElse(visitToEdit.getRemark());
-
-        return new Visit(person, updatedDateTime, updatedRemark);
+        Symptom updatedSymptom = editVisitDescriptor.getSymptom().orElse(visitToEdit.getSymptom());
+        Diagnosis updatedDiagnosis = editVisitDescriptor.getDiagnosis().orElse(visitToEdit.getDiagnosis());
+        Medication updatedMedication = editVisitDescriptor.getMedication().orElse(visitToEdit.getMedication());
+        FollowUp updatedFollowUp = editVisitDescriptor.getFollowUp().orElse(visitToEdit.getFollowUp());
+        return new Visit(person, updatedDateTime, updatedRemark, updatedSymptom,
+                updatedDiagnosis, updatedMedication, updatedFollowUp);
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -139,6 +148,10 @@ public class EditVisitCommand extends Command {
         private Nric nric;
         private DateTime dateTime;
         private Remark remark;
+        private Symptom symptom;
+        private Diagnosis diagnosis;
+        private Medication medication;
+        private FollowUp followUp;
 
         public EditVisitDescriptor() {}
 
@@ -155,7 +168,7 @@ public class EditVisitCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(nric, dateTime, remark);
+            return CollectionUtil.isAnyNonNull(nric, dateTime, remark, symptom, diagnosis, medication, followUp);
         }
 
         public void setNric(Nric nric) {
@@ -180,6 +193,35 @@ public class EditVisitCommand extends Command {
 
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
+        }
+
+        // Setters and Getters
+        public void setSymptom(Symptom symptom) {
+            this.symptom = symptom;
+        }
+        public Optional<Symptom> getSymptom() {
+            return Optional.ofNullable(symptom);
+        }
+
+        public void setDiagnosis(Diagnosis diagnosis) {
+            this.diagnosis = diagnosis;
+        }
+        public Optional<Diagnosis> getDiagnosis() {
+            return Optional.ofNullable(diagnosis);
+        }
+
+        public void setMedication(Medication medication) {
+            this.medication = medication;
+        }
+        public Optional<Medication> getMedication() {
+            return Optional.ofNullable(medication);
+        }
+
+        public void setFollowUp(FollowUp followUp) {
+            this.followUp = followUp;
+        }
+        public Optional<FollowUp> getFollowUp() {
+            return Optional.ofNullable(followUp);
         }
 
         @Override
