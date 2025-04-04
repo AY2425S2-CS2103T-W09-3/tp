@@ -32,6 +32,11 @@ public class ResultDisplay extends UiPart<Region> {
         );
     }
 
+    /**
+     * Sets the result display to the colour mode.
+     *
+     * @param isDarkMode true if the application is in dark mode, false otherwise.
+     */
     public void handleToggleTheme(boolean isDarkMode) {
         this.isDarkMode = isDarkMode;
         // if (isDarkMode) {

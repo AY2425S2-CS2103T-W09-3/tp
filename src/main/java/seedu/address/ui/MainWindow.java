@@ -57,22 +57,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;;
 
-    @FXML
-    private void handleToggleTheme() {
-        Scene scene = getPrimaryStage().getScene();
-        ObservableList<String> stylesheets = scene.getStylesheets();
-        stylesheets.clear();
-
-        if (isDarkMode) {
-            // Remove stylesheet (back to default)
-        } else {
-            stylesheets.add(getClass().getResource("/view/DarkTheme.css").toExternalForm());
-        }
-
-        isDarkMode = !isDarkMode;
-        resultDisplay.handleToggleTheme(isDarkMode);
-    }
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -223,5 +207,21 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    @FXML
+    private void handleToggleTheme() {
+        Scene scene = getPrimaryStage().getScene();
+        ObservableList<String> stylesheets = scene.getStylesheets();
+        stylesheets.clear();
+
+        if (isDarkMode) {
+            // Remove stylesheet (back to default)
+        } else {
+            stylesheets.add(getClass().getResource("/view/DarkTheme.css").toExternalForm());
+        }
+
+        isDarkMode = !isDarkMode;
+        resultDisplay.handleToggleTheme(isDarkMode);
     }
 }
