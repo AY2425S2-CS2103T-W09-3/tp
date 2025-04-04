@@ -88,6 +88,22 @@ public class Person {
     }
 
     /**
+     * Returns a dummy Person with default placeholder values for all fields
+     * except name and nric.
+     */
+    public static Person createDummyPerson(Name name, Nric nric) {
+        return new Person(
+                name,
+                nric,
+                Phone.DUMMY_PHONE,
+                Email.DUMMY_EMAIL,
+                Address.DUMMY_ADDRESS,
+                new Remark(""),
+                new HashSet<>()
+        );
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
