@@ -24,8 +24,8 @@ public class ResultDisplay extends UiPart<Region> {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
         resultDisplay.setStyle(
-            feedbackToUser.startsWith("Invalid") || feedbackToUser.startsWith("Error")
-            ? "-fx-text-fill: red;"
+            feedbackToUser.startsWith("Invalid") || feedbackToUser.startsWith("Error") || feedbackToUser.startsWith("Unknown")
+            ? "-fx-text-fill: white;"
             : "-fx-text-fill: green;"
         );
     }
