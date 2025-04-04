@@ -35,6 +35,9 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
+          <Menu text="View">
+              <MenuItem text="Toggle Dark Mode" onAction="#handleToggleTheme"/>
+          </Menu>
         </MenuBar>
 
         <!-- <ToolBar VBox.vgrow="NEVER">

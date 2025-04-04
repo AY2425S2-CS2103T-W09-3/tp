@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 public class ResultDisplay extends UiPart<Region> {
 
     private static final String FXML = "ResultDisplay.fxml";
+    private boolean isDarkMode = true;
 
     @FXML
     private TextArea resultDisplay;
@@ -26,8 +27,17 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.setStyle(
             feedbackToUser.startsWith("Invalid") || feedbackToUser.startsWith("Error")
                     || feedbackToUser.startsWith("Unknown")
-                    ? "-fx-text-fill: white;"
+                    ? (this.isDarkMode ? "-fx-text-fill: white;" : "-fx-text-fill: black;")
                     : "-fx-text-fill: green;"
         );
+    }
+
+    public void handleToggleTheme(boolean isDarkMode) {
+        this.isDarkMode = isDarkMode;
+        // if (isDarkMode) {
+        //     resultDisplay.setStyle("-fx-background-color: #2b2b2b; -fx-text-fill: white;");
+        // } else {
+        //     resultDisplay.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+        // }
     }
 }

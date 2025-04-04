@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -35,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private VisitListPanel visitListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private boolean isDarkMode = false;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -53,6 +56,22 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;;
+
+    @FXML
+    private void handleToggleTheme() {
+        Scene scene = getPrimaryStage().getScene();
+        ObservableList<String> stylesheets = scene.getStylesheets();
+        stylesheets.clear();
+
+        if (isDarkMode) {
+            // Remove stylesheet (back to default)
+        } else {
+            stylesheets.add(getClass().getResource("/view/DarkTheme.css").toExternalForm());
+        }
+
+        isDarkMode = !isDarkMode;
+        resultDisplay.handleToggleTheme(isDarkMode);
+    }
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
