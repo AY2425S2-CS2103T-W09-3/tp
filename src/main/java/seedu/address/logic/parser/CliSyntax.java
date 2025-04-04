@@ -15,4 +15,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_LIMIT = new Prefix("l/");
+
+    /* For visits */
+    public static final Prefix PREFIX_SYMPTOM = new Prefix("sym/");
+    public static final Prefix PREFIX_DIAGNOSIS = new Prefix("diag/");
+    public static final Prefix PREFIX_MEDICATION = new Prefix("med/");
+    public static final Prefix PREFIX_FOLLOWUP = new Prefix("f/");
 }

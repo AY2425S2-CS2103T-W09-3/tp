@@ -2,8 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FOLLOWUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SYMPTOM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -17,9 +21,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.DateTime;
+import seedu.address.model.person.Diagnosis;
+import seedu.address.model.person.FollowUp;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Symptom;
 import seedu.address.model.person.Visit;
 
 
@@ -34,12 +42,20 @@ public class EditVisitCommand extends Command {
             + "by the index number used in the displayed visit list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NRIC + "Nric] "
+            + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_SYMPTOM + "SYMPTOM] "
+            + "[" + PREFIX_DIAGNOSIS + "DIAGNOSIS] "
+            + "[" + PREFIX_MEDICATION + "MEDICATION] "
+            + "[" + PREFIX_FOLLOWUP + "FOLLOWUP] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NRIC + "S1234567A "
-            + PREFIX_DATE + "2011-11-11 11:11";
+            + PREFIX_DATE + "2025-04-04 15:00 "
+            + PREFIX_REMARK + "Improved "
+            + PREFIX_SYMPTOM + "Fever "
+            + PREFIX_DIAGNOSIS + "Flu "
+            + PREFIX_MEDICATION + "Paracetamol "
+            + PREFIX_FOLLOWUP + "1 week";
 
     public static final String MESSAGE_EDIT_VISIT_SUCCESS = "Edited Visit: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -98,14 +114,19 @@ public class EditVisitCommand extends Command {
      * edited with {@code editVisitDescriptor}.
      */
     private static Visit createEditedVisit(Person person, Visit visitToEdit,
-                                           EditVisitDescriptor editVisitDescriptor) {
-        assert visitToEdit != null;
+            EditVisitDescriptor editVisitDescriptor) {
 
+        assert visitToEdit != null;
         DateTime updatedDateTime = editVisitDescriptor.getDateTime().orElse(visitToEdit.getDateTime());
         Remark updatedRemark = editVisitDescriptor.getRemark().orElse(visitToEdit.getRemark());
-
-        return new Visit(person, updatedDateTime, updatedRemark);
+        Symptom updatedSymptom = editVisitDescriptor.getSymptom().orElse(visitToEdit.getSymptom());
+        Diagnosis updatedDiagnosis = editVisitDescriptor.getDiagnosis().orElse(visitToEdit.getDiagnosis());
+        Medication updatedMedication = editVisitDescriptor.getMedication().orElse(visitToEdit.getMedication());
+        FollowUp updatedFollowUp = editVisitDescriptor.getFollowUp().orElse(visitToEdit.getFollowUp());
+        return new Visit(person, updatedDateTime, updatedRemark, updatedSymptom,
+                updatedDiagnosis, updatedMedication, updatedFollowUp);
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -139,6 +160,10 @@ public class EditVisitCommand extends Command {
         private Nric nric;
         private DateTime dateTime;
         private Remark remark;
+        private Symptom symptom;
+        private Diagnosis diagnosis;
+        private Medication medication;
+        private FollowUp followUp;
 
         public EditVisitDescriptor() {}
 
@@ -155,7 +180,7 @@ public class EditVisitCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(nric, dateTime, remark);
+            return CollectionUtil.isAnyNonNull(nric, dateTime, remark, symptom, diagnosis, medication, followUp);
         }
 
         public void setNric(Nric nric) {
@@ -180,6 +205,35 @@ public class EditVisitCommand extends Command {
 
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
+        }
+
+        // Setters and Getters
+        public void setSymptom(Symptom symptom) {
+            this.symptom = symptom;
+        }
+        public Optional<Symptom> getSymptom() {
+            return Optional.ofNullable(symptom);
+        }
+
+        public void setDiagnosis(Diagnosis diagnosis) {
+            this.diagnosis = diagnosis;
+        }
+        public Optional<Diagnosis> getDiagnosis() {
+            return Optional.ofNullable(diagnosis);
+        }
+
+        public void setMedication(Medication medication) {
+            this.medication = medication;
+        }
+        public Optional<Medication> getMedication() {
+            return Optional.ofNullable(medication);
+        }
+
+        public void setFollowUp(FollowUp followUp) {
+            this.followUp = followUp;
+        }
+        public Optional<FollowUp> getFollowUp() {
+            return Optional.ofNullable(followUp);
         }
 
         @Override
