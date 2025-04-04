@@ -8,8 +8,30 @@ pageNav: 3
 
 MedLogger is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete contact management tasks **faster** than traditional GUI apps.
 
-Table of Contents
-{:toc}
+## Table of Contents
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Viewing help : `help`](#viewing-help--help)
+  - [Adding a person: `add`](#adding-a-person-add)
+  - [Remark a person : `remark`](#remark-a-person--remark)
+  - [Listing all persons : `list`](#listing-all-persons--list)
+  - [Editing a person : `edit`](#editing-a-person--edit)
+  - [Locating persons by name: `find`](#locating-persons-by-name-find)
+  - [Deleting a person : `delete`](#deleting-a-person--delete)
+  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Exporting the data : `export`](#exporting-the-data--export)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+  - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+  - [Adding a visit: `visit`](#adding-a-visit-visit)
+  - [Listing visits: `listvisits`](#listing-visits-listvisits)
+  - [Sorting visits: `sortvisits`](#sorting-visits-sortvisits)
+  - [Editing a visit: `editvisit`](#editing-a-visit-editvisit)
+  - [Clearing visits: `clearvisits`](#clearing-visits-clearvisits)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -188,6 +210,79 @@ Format: `deletevisit INDEX`
 Clears all entries from the Med Logger.
 
 Format: `clear`
+
+### Adding a visit: `visit`
+
+Adds a new visit for a patient.
+
+Format: `visit n/NAME i/NRIC [d/DATE_TIME] r/REMARK`
+
+- `DATE_TIME` is optional. If not provided, the current system date and time will be used.
+- The patient must already exist in the system (matched via NRIC).
+
+Examples:
+* `visit n/John Doe i/S1234567A r/Headache`
+* `visit n/John Doe i/S1234567A d/2024-12-31 11:11 r/Flu symptoms`
+
+---
+
+### Listing visits: `listvisits`
+
+Lists visits stored in the system.
+
+Format: 
+* `listvisits` — lists all visits
+* `listvisits i/NRIC` — lists visits of a specific patient
+* `listvisits l/LIMIT` — lists up to LIMIT visits
+* `listvisits i/NRIC l/LIMIT` — lists up to LIMIT visits of a specific patient
+
+Examples:
+* `listvisits`
+* `listvisits i/S1234567A`
+* `listvisits l/3`
+* `listvisits i/S1234567A l/5`
+
+---
+
+### Sorting visits: `sortvisits`
+
+Sorts the currently displayed visits by visit time.
+
+Format:
+* `sortvisits` — sorts in ascending order
+* `sortvisits desc` — sorts in descending order
+
+Examples:
+* `sortvisits`
+* `sortvisits desc`
+
+---
+
+### Editing a visit: `editvisit`
+
+Edits an existing visit in the currently displayed visit list.
+
+Format: `editvisit INDEX [i/NRIC] [d/DATE_TIME] [r/REMARK]`
+
+- The `INDEX` refers to the index shown in the currently displayed visit list.
+- At least one of NRIC, DATE_TIME, or REMARK must be provided.
+
+Examples:
+* `editvisit 1 d/2025-01-01 09:00`
+* `editvisit 2 r/Updated diagnosis`
+* `editvisit 3 i/S1234567A d/2024-12-01 10:00 r/Fever`
+
+---
+
+### Clearing visits: `clearvisits`
+
+Clears the visit panel.
+
+Format: `clearvisits`
+
+Example:
+* `clearvisits` — removes all visits from the panel display (does not delete visit records)
+
 
 ### Exiting the program : `exit`
 

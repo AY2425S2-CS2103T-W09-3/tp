@@ -71,16 +71,17 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts such as `CommandBox`, `ResultDisplay`, `PersonListPanel`, `VisitListPanel`, and `StatusBarFooter`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures common behavior for JavaFX UI components.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts is defined in corresponding `.fxml` files located in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml).
 
-The `UI` component,
+The `UI` component:
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* listens for changes to the `Model` so that the UI can update automatically with the modified data.
+* displays both a list of persons (`PersonListPanel`) and a list of visits (`VisitListPanel`), bound to the filtered and sorted lists provided by the `Model`.
+* depends on classes in the `Model` component, as it displays `Person` and `Visit` objects stored in the `Model`.
+
 
 ### Logic component
 
@@ -120,12 +121,12 @@ How the parsing works:
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
-
 The `Model` component,
 
-* stores the Med Logger data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores the Med Logger data i.e., all `Person` and `Visit` objects (which are contained in `UniquePersonList` and `UniqueVisitList` respectively).
+* stores the currently 'selected' `Person` and `Visit` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>` and `ObservableList<Visit>` that can be observed e.g. the UI can be bound to these lists so that the UI automatically updates when the data changes.
+* stores a `SortedList<Visit>` that wraps around the filtered visit list to enable dynamic sorting based on user commands, such as sorting visits by date in ascending or descending order.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
@@ -263,6 +264,43 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### SortVisits feature
+![SortVisitsCommand Sequence Diagram](images/DG_sortvisits.png)
+<puml src="diagrams/SortVisitsDiagram.puml" width="500" />
+
+#### Implementation
+
+The `SortVisitsCommand` allows users to sort the current visit list based on the visit date and time. It supports both ascending and descending order.
+
+This command uses a comparator to sort the list of visits by comparing the `DateTime` field. Internally, it calls the `model.sortFilteredVisitList(comparator)` method, which performs the sorting and updates the predicate of the `FilteredList` to reflect the new sorted order.
+
+Due to the immutability of JavaFX’s `FilteredList`, direct sorting is not allowed. Instead, the list is copied and sorted separately, and then the model updates the predicate so that the UI reflects the sorted order.
+
+The command uses the following logic:
+- If `isDescending` is `false`, the comparator sorts in natural ascending order.
+- If `isDescending` is `true`, the comparator is reversed.
+
+The visit panel (`VisitListPanel`) will reflect the sorted order immediately as it is bound to the filtered list.
+
+### ListVisits Feature
+
+The `listvisits` command displays a list of visit records currently stored in the MedLogger. Users can optionally limit the number of visits displayed using the `l/` prefix or filter by NRIC using `n/`.
+
+#### Implementation
+
+The implementation follows a standard command-parsing-execution pipeline:
+
+![ListVisitsCommand Sequence Diagram](images/DG_listvisits.png)
+<puml src="diagrams/ListVisitsDiagram.puml" width="500" />
+
+1. User inputs the `listvisits` command.
+2. The `MedLoggerParser` routes the command to the `ListVisitsCommandParser`, which optionally parses prefixes like `l/` (limit) and `n/` (NRIC).
+3. A `ListVisitsCommand` is constructed with the parsed arguments and executed.
+4. It updates the filtered visit list in `ModelManager` using a custom predicate.
+5. The UI observes the updated list and reflects the changes immediately.
+
+This design reuses the filtered list mechanism also used for persons, allowing seamless display updates via JavaFX binding.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -444,3 +482,71 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Visiting a patient
+
+1. Adding a visit to a person
+
+   1. Prerequisites: Person must exist in the contact list with valid NRIC.
+
+   1. Test case: `visit n/John Doe i/S1234567A r/Headache d/2025-04-04 10:00`  
+      Expected: Visit is added. Confirmation message is shown.
+
+   1. Test case: `visit n/John Doe i/S1234567A r/Back pain`  
+      Expected: Visit is added with current date and time. Confirmation message is shown.
+
+   1. Test case: `visit n/Someone i/S0000000X r/Cough`  
+      Expected: Error message shown — person does not exist.
+
+---
+
+### Listing visits
+
+1. Listing all visits
+
+   1. Test case: `listvisits`  
+      Expected: All visits are shown in the visit panel.
+
+   1. Test case: `listvisits l/3`  
+      Expected: Top 3 visits are shown.
+
+   1. Test case: `listvisits n/S1234567A`  
+      Expected: All visits related to that NRIC are shown.
+
+   1. Test case: `listvisits n/S1234567A l/2`  
+      Expected: 2 most recent visits of the patient are shown.
+
+---
+
+### Sorting visits
+
+1. Sorting visits by date
+
+   1. Test case: `sortvisits`  
+      Expected: Visit list sorted in ascending date-time order.
+
+   1. Test case: `sortvisits desc`  
+      Expected: Visit list sorted in descending date-time order.
+
+---
+
+### Editing a visit
+
+1. Editing visit information
+
+   1. Prerequisites: `listvisits` must be used beforehand.
+
+   1. Test case: `editvisit 1 r/Updated remark`  
+      Expected: The remark of the first visit in the list is updated.
+
+   1. Test case: `editvisit 1 d/2025-04-10 14:00`  
+      Expected: Visit date is updated.
+
+---
+
+### Clearing visit panel
+
+1. Clearing the visit list panel
+
+   1. Test case: `clearvisits`  
+      Expected: Visit panel is cleared.
