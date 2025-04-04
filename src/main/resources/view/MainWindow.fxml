@@ -11,9 +11,12 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Button?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Med Logger" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Med Logger" minWidth="650" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/med_logger_32.png" />
   </icons>
@@ -34,6 +37,12 @@
           </Menu>
         </MenuBar>
 
+        <!-- <ToolBar VBox.vgrow="NEVER">
+            <Button text="Add Visit" onAction="#handleAddVisit"/>
+            <Button text="Sort Visits" onAction="#handleSortVisits"/>
+            <Button text="Clear Visits" onAction="#handleClearVisits"/>
+        </ToolBar> -->
+
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
@@ -41,7 +50,7 @@
         </StackPane>
 
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+                   minHeight="150" prefHeight="100" maxHeight="300">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
@@ -60,10 +69,16 @@
             </padding>
 
             <!-- Person list on the left -->
-            <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Persons" styleClass="section-header"/>
+                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
 
             <!-- Visit list on the right -->
-            <StackPane fx:id="visitListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="Visits" styleClass="section-header"/>
+                <StackPane fx:id="visitListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
         </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

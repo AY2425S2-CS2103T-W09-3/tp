@@ -23,6 +23,10 @@ public class ResultDisplay extends UiPart<Region> {
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
+        resultDisplay.setStyle(
+            feedbackToUser.startsWith("Invalid") || feedbackToUser.startsWith("Error")
+            ? "-fx-text-fill: red;"
+            : "-fx-text-fill: green;"
+        );
     }
-
 }
