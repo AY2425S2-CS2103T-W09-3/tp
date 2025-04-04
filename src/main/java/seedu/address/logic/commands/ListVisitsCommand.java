@@ -76,7 +76,7 @@ public class ListVisitsCommand extends Command {
                     !visit.getDateTime().toLocalDateTime().toLocalDate().isAfter(toDate));
             }
         }
-        
+
         model.updateFilteredVisitList(predicate);
 
         // Apply limit if provided

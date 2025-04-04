@@ -26,7 +26,8 @@ public class ListVisitsCommandParser {
      * @throws ParseException If the input does not conform to the expected format.
      */
     public ListVisitsCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_LIMIT, PREFIX_FROM, PREFIX_TO, PREFIX_TODAY);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_LIMIT,
+                PREFIX_FROM, PREFIX_TO, PREFIX_TODAY);
 
         Nric nric = null;
         Integer limit = null;
