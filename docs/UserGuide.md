@@ -344,4 +344,11 @@ Action     | Format, Examples
 **Edit patient**   | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find patient**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List patients**   | `list` or `list l/LIMIT`
+**Add visit**   | `visit n/NAME i/NRIC [d/DATE_TIME] r/REMARK`
+**List visits**    | `listvisits` or `listvisits l/LIMIT`
+**Sort visits**    | `sortvisits` or `sortvisits desc`
+**Edit visit**     | `editvisit INDEX [i/NRIC] [d/DATE_TIME] [r/REMARK]`
+**Clear visits**   | `clearvisits`
+**Export**      | `export csv` or `export json`
 **Help**   | `help`
+**Exit**   | `exit`
