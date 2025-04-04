@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -20,6 +21,8 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
+    private Consumer<Person> personSelectionCallback;
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
@@ -27,6 +30,14 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+
+        personListView.getSelectionModel().selectedItemProperty().addListener((
+                observable, oldValue, newValue) -> {
+                if (newValue != null && personSelectionCallback != null) {
+                    personSelectionCallback.accept(newValue);
+                }
+            }
+        );
     }
 
     /**
@@ -44,6 +55,10 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
+    }
+
+    public void setPersonSelectionCallback(Consumer<Person> callback) {
+        this.personSelectionCallback = callback;
     }
 
 }

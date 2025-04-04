@@ -1,8 +1,11 @@
 package seedu.address.logic;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -80,6 +83,12 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Visit> getSortedVisitList() {
         return model.getSortedVisitList();
+    }
+
+    @Override
+    public void updateFilteredVisitList(Predicate<Visit> predicate) {
+        requireNonNull(predicate);
+        model.updateFilteredVisitList(predicate);
     }
 
     @Override

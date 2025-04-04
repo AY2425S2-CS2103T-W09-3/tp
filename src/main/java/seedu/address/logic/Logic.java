@@ -55,6 +55,12 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
+     * Updates the filtered list of persons to filter by the given {@code predicate}.
+     * @param predicate The predicate to filter the list of persons.
+     */
+    void updateFilteredVisitList(java.util.function.Predicate<Visit> predicate);
+
+    /**
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
