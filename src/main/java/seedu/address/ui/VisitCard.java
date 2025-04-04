@@ -27,6 +27,14 @@ public class VisitCard extends UiPart<Region> {
     private Label time;
     @FXML
     private Label remark;
+    @FXML
+    private Label symptom;
+    @FXML
+    private Label diagnosis;
+    @FXML
+    private Label medication;
+    @FXML
+    private Label followUp;
 
     /**
      * Creates a {@code VisitCard} with the given {@code Visit} and index to display.
@@ -39,9 +47,11 @@ public class VisitCard extends UiPart<Region> {
         name.setText(visit.getPerson().getName().fullName);
         nric.setText("NRIC: " + visit.getPerson().getNric().value);
         time.setText("Visit Time: " + visit.getDateTime().toString());
-        remark.setText(visit.getRemark().value.isEmpty()
-                ? ""
-                : "Remark: " + visit.getRemark().value);
+
+        remark.setText(visit.getRemark().value.isEmpty() ? "" : "Remark: " + visit.getRemark().value);
+        symptom.setText("Symptom: " + visit.getSymptom().value);
+        diagnosis.setText("Diagnosis: " + visit.getDiagnosis().value);
+        medication.setText("Medication: " + visit.getMedication().value);
+        followUp.setText("Follow-up: " + visit.getFollowUp().value);
     }
 }
-
