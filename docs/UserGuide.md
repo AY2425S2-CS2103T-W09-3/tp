@@ -6,18 +6,18 @@ pageNav: 3
 
 # MedLogger User Guide 🏥
 
-MedLogger is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete contact management tasks **faster** than traditional GUI apps.
+MedLogger is a **desktop app for managing patient and visits, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete management tasks **faster** than traditional GUI apps.
 
 ## Table of Contents
 - [Quick Start](#quick-start)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
-  - [Adding a person: `add`](#adding-a-person-add)
-  - [Remark a person : `remark`](#remark-a-person--remark)
-  - [Listing all persons : `list`](#listing-all-persons--list)
-  - [Editing a person : `edit`](#editing-a-person--edit)
-  - [Locating persons by name: `find`](#locating-persons-by-name-find)
-  - [Deleting a person : `delete`](#deleting-a-person--delete)
+  - [Adding a patient: `person`](#adding-a-person-add)
+  - [Remark a patient : `remark`](#remark-a-person--remark)
+  - [Listing all patients : `list`](#listing-all-persons--list)
+  - [Editing a patient : `editperson`](#editing-a-person--edit)
+  - [Locating patients by name: `find`](#locating-persons-by-name-find)
+  - [Deleting a patient : `delete`](#deleting-a-person--delete)
   - [Clearing all entries : `clear`](#clearing-all-entries--clear)
   - [Exiting the program : `exit`](#exiting-the-program--exit)
   - [Exporting the data : `export`](#exporting-the-data--export)
@@ -56,13 +56,13 @@ MedLogger is a **desktop app for managing contacts, optimized for use via a Comm
 4. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all patients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney` : Adds a contact named `John Doe` to the MedLogger.
+   * `person n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney` : Adds a patient named `John Doe` to the MedLogger.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd patient shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all patients and visits.
 
    * `exit` : Exits the app.
 
@@ -103,24 +103,24 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a patient: `person`
 
-Adds a person to the Med Logger.
+Adds a patient to the Med Logger.
 
-Format: `add n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `person n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless></box>
 
 **Tip:** 
-* A person can have any number of tags (including 0)
+* A patient can have any number of tags (including 0)
 * The NRIC, phone number, email must adhere to respective format constraint
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 1, #02-24 d/2024-12-01`
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney`
+* `person n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 1, #02-24 d/2024-12-01`
+* `person n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney`
 
-### Adding a remark to a person : `remark`
+### Adding a remark to a patient : `remark`
 
 Add a remark for a person from MedLogger.
 
@@ -133,33 +133,33 @@ Format: `remark INDEX r/REMARK`
 Examples:
 * `remark 1 r/important`.
 
-### Listing all persons : `list`
+### Listing all patients : `list`
 
-* `list`: Shows a list of all persons in the Med Logger.
-* `list l/LIMIT`: Show a list of n `LIMIT` persons in the Med Loggers. 
+* `list`: Shows a list of all patients in the Med Logger.
+* `list l/LIMIT`: Show a list of n `LIMIT` patients in the Med Loggers. 
 
-Format: `list`
+Format: `list [l/LIMIT]`
 
-### Editing a person : `editperson`
+### Editing a patient : `editperson`
 
-Edits an existing person in the Med Logger.
+Edits an existing patient in the Med Logger.
 
-Format: `edit INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `editperson INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `editperson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+*  `editperson 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -167,7 +167,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -175,19 +175,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a patient : `delete`
 
-Deletes the specified person from the Med Logger.
+Deletes the specified patient from the Med Logger.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the patient at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the Med Logger.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd patient in the Med Logger.
+* `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 ### Adding a visit: `visit`
 
@@ -337,11 +337,18 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/2024-12-31 t/friend t/colleague`
+**Add patient**    | `person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE [t/TAG]…​` <br> e.g., `person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/2024-12-31 t/friend t/colleague`
 **Remark**   | `remark INDEX r/REMARK`<br> e.g., `remark 1 r/important`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list` or `list l/LIMIT`
+**Delete patient** | `delete INDEX`<br> e.g., `delete 3`
+**Edit patient**   | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find patient**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List patients**   | `list` or `list l/LIMIT`
+**Add visit**   | `visit n/NAME i/NRIC [d/DATE_TIME] r/REMARK`
+**List visits**    | `listvisits` or `listvisits l/LIMIT`
+**Sort visits**    | `sortvisits` or `sortvisits desc`
+**Edit visit**     | `editvisit INDEX [i/NRIC] [d/DATE_TIME] [r/REMARK]`
+**Clear visits**   | `clearvisits`
+**Export**      | `export csv` or `export json`
 **Help**   | `help`
+**Exit**   | `exit`
