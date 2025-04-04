@@ -1,8 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TODAY;
+
+import java.time.LocalDate;
 
 import seedu.address.logic.commands.ListVisitsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,10 +26,13 @@ public class ListVisitsCommandParser {
      * @throws ParseException If the input does not conform to the expected format.
      */
     public ListVisitsCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_LIMIT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_LIMIT,
+                PREFIX_FROM, PREFIX_TO, PREFIX_TODAY);
 
         Nric nric = null;
         Integer limit = null;
+        LocalDate from = null;
+        LocalDate to = null;
 
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
@@ -39,6 +47,19 @@ public class ListVisitsCommandParser {
             }
         }
 
-        return new ListVisitsCommand(nric, limit);
+        if (argMultimap.getValue(PREFIX_FROM).isPresent()) {
+            from = LocalDate.parse(argMultimap.getValue(PREFIX_FROM).get());
+        }
+        if (argMultimap.getValue(PREFIX_TO).isPresent()) {
+            to = LocalDate.parse(argMultimap.getValue(PREFIX_TO).get());
+        }
+
+        boolean isToday = argMultimap.getValue(PREFIX_TODAY).isPresent();
+
+        if ((from != null || to != null) && isToday) {
+            throw new ParseException("Cannot use both 'today/' and 'from/… to/…' together.");
+        }
+
+        return new ListVisitsCommand(nric, limit, from, to, isToday);
     }
 }
