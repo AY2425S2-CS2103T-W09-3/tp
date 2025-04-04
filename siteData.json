@@ -55,6 +55,8 @@
         "addvisit-feature": "AddVisit feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
+        "sortvisits-feature": "SortVisits feature",
+        "listvisits-feature": "ListVisits Feature",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -65,7 +67,12 @@
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
-        "saving-data": "Saving data"
+        "saving-data": "Saving data",
+        "visiting-a-patient": "Visiting a patient",
+        "listing-visits": "Listing visits",
+        "sorting-visits": "Sorting visits",
+        "editing-a-visit": "Editing a visit",
+        "clearing-visit-panel": "Clearing visit panel"
       },
       "headingKeywords": {}
     },
@@ -110,6 +117,7 @@
       "title": "User Guide",
       "headings": {
         "medlogger-user-guide": "MedLogger User Guide 🏥",
+        "table-of-contents": "Table of Contents",
         "quick-start": "Quick Start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
@@ -122,6 +130,11 @@
         "adding-a-visit-visit": "Adding a visit: visit",
         "removing-a-visit-deletevisit": "Removing a visit: deletevisit",
         "clearing-all-entries-clear": "Clearing all entries : clear",
+        "adding-a-visit-visit-2": "Adding a visit: visit",
+        "listing-visits-listvisits": "Listing visits: listvisits",
+        "sorting-visits-sortvisits": "Sorting visits: sortvisits",
+        "editing-a-visit-editvisit": "Editing a visit: editvisit",
+        "clearing-visits-clearvisits": "Clearing visits: clearvisits",
         "exiting-the-program-exit": "Exiting the program : exit",
         "exporting-the-data-export": "Exporting the data : export",
         "saving-the-data": "Saving the data",
