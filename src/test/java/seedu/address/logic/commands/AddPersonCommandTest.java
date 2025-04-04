@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -27,6 +28,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class AddPersonCommandTest {
 
@@ -210,6 +212,16 @@ public class AddPersonCommandTest {
 
         @Override
         public int size() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredVisitList(Comparator<Visit> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Visit> getSortedVisitList() {
             throw new AssertionError("This method should not be called.");
         }
     }

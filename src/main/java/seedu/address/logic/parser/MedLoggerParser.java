@@ -24,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListVisitsCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.SortVisitsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -104,6 +105,9 @@ public class MedLoggerParser {
 
         case ClearVisitsCommand.COMMAND_WORD:
             return new ClearVisitsCommand();
+
+        case SortVisitsCommand.COMMAND_WORD:
+            return new SortVisitsCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

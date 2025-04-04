@@ -40,6 +40,11 @@ public interface Logic {
     ObservableList<Visit> getFilteredVisitList();
 
     /**
+     * Returns an unmodifiable view of the sorted list of visits
+     */
+    ObservableList<Visit> getSortedVisitList();
+
+    /**
      * Returns the user prefs' Med Logger file path.
      */
     Path getMedLoggerFilePath();

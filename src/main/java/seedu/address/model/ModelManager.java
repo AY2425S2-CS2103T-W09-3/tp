@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Nric;
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Visit> filteredVisits;
+    private final SortedList<Visit> sortedVisits;
 
 
     /**
@@ -42,6 +45,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.medLogger.getPersonList());
         filteredVisits = new FilteredList<>(this.medLogger.getVisitList());
+        sortedVisits = new SortedList<>(filteredVisits);
     }
 
     public ModelManager() {
@@ -185,6 +189,18 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(limitedList::contains);
     }
 
+    /**
+     * Sorts the filtered visit list based on the provided comparator.
+     * To force the filtered list to update, we create a new list and set the predicate to
+     *
+     * @param comparator The comparator to sort the visits.
+     */
+    @Override
+    public void sortFilteredVisitList(Comparator<Visit> comparator) {
+        sortedVisits.setComparator(comparator);
+    }
+
+
     @Override
     public void updateSubFilteredVisitList(int n) {
         List<Visit> limitedList = filteredVisits.getSource().stream()
@@ -211,6 +227,11 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && filteredVisits.equals(otherModelManager.filteredVisits);
 
+    }
+
+    @Override
+    public ObservableList<Visit> getSortedVisitList() {
+        return sortedVisits;
     }
 
     @Override

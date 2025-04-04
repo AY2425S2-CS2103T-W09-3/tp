@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -121,6 +122,8 @@ public interface Model {
      */
     void updateFilteredVisitList(Predicate<Visit> predicate);
 
+    void sortFilteredVisitList(Comparator<Visit> comparator);
+
     /**
      * Updates the filter of the filtered person list up to the first n entries.
      * @param n number of entries to show
@@ -132,6 +135,8 @@ public interface Model {
      * @param n number of entries to show
      */
     void updateSubFilteredVisitList(int n);
+
+    ObservableList<Visit> getSortedVisitList();
 
     int size();
 }
