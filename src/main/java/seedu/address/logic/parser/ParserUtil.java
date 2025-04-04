@@ -11,11 +11,14 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateTime;
+import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Symptom;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -189,4 +192,39 @@ public class ParserUtil {
         return words[0];
     }
 
+    /**
+     * Parses a {@code String symptom} into a {@code Symptom}.
+     * Similar to Remark.
+     *
+     * @param symptom The symptom to be parsed.
+     */
+    public static Symptom parseSymptom(String symptom) {
+        requireNonNull(symptom);
+        String trimmed = symptom.trim();
+        return new Symptom(trimmed);
+    }
+
+    /**
+     * Parses a {@code String diagnosis} into a {@code Diagnosis}.
+     * Similar to Remark.
+     *
+     * @param diagnosis The diagnosis to be parsed.
+     */
+    public static Diagnosis parseDiagnosis(String diagnosis) {
+        requireNonNull(diagnosis);
+        String trimmed = diagnosis.trim();
+        return new Diagnosis(trimmed);
+    }
+
+    /**
+     * Parses a {@code String medication} into a {@code Medication}.
+     * Similar to Remark.
+     *
+     * @param medication The medication to be parsed.
+     */
+    public static Medication parseMedication(String medication) {
+        requireNonNull(medication);
+        String trimmed = medication.trim();
+        return new Medication(trimmed);
+    }
 }
