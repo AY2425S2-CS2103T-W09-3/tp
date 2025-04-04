@@ -18,6 +18,10 @@ public class Medication {
         this.value = value;
     }
 
+    public String toLowerCase() {
+        return value.toLowerCase();
+    }
+
     @Override
     public String toString() {
         return value;

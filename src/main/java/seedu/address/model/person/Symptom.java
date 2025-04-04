@@ -17,6 +17,10 @@ public class Symptom {
         this.value = value;
     }
 
+    public String toLowerCase() {
+        return value.toLowerCase();
+    }
+
     @Override
     public String toString() {
         return value;

@@ -6,7 +6,10 @@ import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.Diagnosis;
+import seedu.address.model.person.Medication;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.Symptom;
 import seedu.address.model.person.Visit;
 
 /**
@@ -23,6 +26,10 @@ public class ListVisitsCommand extends Command {
     private final LocalDate fromDate;
     private final LocalDate toDate;
     private final boolean isToday;
+    private final Symptom symptom;
+    private final Diagnosis diagnosis;
+    private final Medication medication;
+
 
     /**
      * Creates a ListVisitsCommand to list all visits.
@@ -34,6 +41,9 @@ public class ListVisitsCommand extends Command {
         this.fromDate = null;
         this.toDate = null;
         this.isToday = false;
+        this.symptom = null;
+        this.diagnosis = null;
+        this.medication = null;
     }
 
     /**
@@ -44,12 +54,16 @@ public class ListVisitsCommand extends Command {
      * @param nric the NRIC of the person whose visits to list
      * @param limit the maximum number of visits to list
      */
-    public ListVisitsCommand(Nric nric, Integer limit, LocalDate fromDate, LocalDate toDate, boolean isToday) {
+    public ListVisitsCommand(Nric nric, Integer limit, LocalDate fromDate, LocalDate toDate,
+            boolean isToday, Symptom symptom, Diagnosis diagnosis, Medication medication) {
         this.nric = nric;
         this.limit = limit;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.isToday = isToday;
+        this.symptom = symptom;
+        this.diagnosis = diagnosis;
+        this.medication = medication;
     }
 
     @Override
@@ -60,6 +74,21 @@ public class ListVisitsCommand extends Command {
 
         if (nric != null) {
             predicate = predicate.and(visit -> visit.getNric().equals(nric));
+        }
+
+        if (symptom != null) {
+            predicate = predicate.and(visit ->
+                visit.getSymptom().value.toLowerCase().contains(symptom.toLowerCase()));
+        }
+
+        if (diagnosis != null) {
+            predicate = predicate.and(visit ->
+                visit.getDiagnosis().value.toLowerCase().contains(diagnosis.toLowerCase()));
+        }
+
+        if (medication != null) {
+            predicate = predicate.and(visit ->
+                visit.getMedication().value.toLowerCase().contains(medication.toLowerCase()));
         }
 
         if (isToday) {
