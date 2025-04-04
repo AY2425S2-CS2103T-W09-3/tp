@@ -44,14 +44,14 @@ public class AddVisitCommandParser implements Parser<AddVisitCommand> {
                 PREFIX_SYMPTOM, PREFIX_DIAGNOSIS, PREFIX_MEDICATION, PREFIX_FOLLOWUP
         );
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC, PREFIX_REMARK)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVisitCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
         // Optional date
         DateTime dateTime;
@@ -66,10 +66,10 @@ public class AddVisitCommandParser implements Parser<AddVisitCommand> {
         }
 
         // Optional visit fields
-        Symptom symptom = new Symptom(argMultimap.getValue(PREFIX_SYMPTOM).orElse("N/A"));
-        Diagnosis diagnosis = new Diagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).orElse("N/A"));
-        Medication medication = new Medication(argMultimap.getValue(PREFIX_MEDICATION).orElse("N/A"));
-        FollowUp followUp = new FollowUp(argMultimap.getValue(PREFIX_FOLLOWUP).orElse("N/A"));
+        Symptom symptom = new Symptom(argMultimap.getValue(PREFIX_SYMPTOM).orElse(""));
+        Diagnosis diagnosis = new Diagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).orElse(""));
+        Medication medication = new Medication(argMultimap.getValue(PREFIX_MEDICATION).orElse(""));
+        FollowUp followUp = new FollowUp(argMultimap.getValue(PREFIX_FOLLOWUP).orElse(""));
 
         Person dummyPerson = Person.createDummyPerson(name, nric);
 
