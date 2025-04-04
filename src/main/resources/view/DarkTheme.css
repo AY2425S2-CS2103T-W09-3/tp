@@ -350,3 +350,9 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.section-header {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
