@@ -30,6 +30,11 @@ public class ListCommandParser {
 
         try {
             limit = Integer.parseInt(argMultimap.getValue(PREFIX_LIMIT).orElse(""));
+            if (limit < 0) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE
+                    + "\n" + ListCommand.MESSAGE_LIMIT_CONSTRAINTS)
+                );
+            }
         } catch (NumberFormatException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ive);
         }

@@ -16,6 +16,8 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = "list l/LIMIT";
 
+    public static final String MESSAGE_LIMIT_CONSTRAINTS = "Limit must be non-negative integer";
+
     private Integer limit;
 
     public ListCommand() {};
