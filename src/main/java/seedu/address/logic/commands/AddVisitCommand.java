@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FOLLOWUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYMPTOM;
@@ -26,7 +25,6 @@ public class AddVisitCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a visit to MedLogger.\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
             + PREFIX_NRIC + "NRIC "
             + "[" + PREFIX_DATE + "DATE_TIME] "
             + PREFIX_REMARK + "REMARK "
@@ -35,7 +33,6 @@ public class AddVisitCommand extends Command {
             + PREFIX_MEDICATION + "MEDICATION "
             + PREFIX_FOLLOWUP + "FOLLOWUP\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
             + PREFIX_NRIC + "S1234567A "
             + PREFIX_REMARK + "Headache "
             + PREFIX_SYMPTOM + "Headache "

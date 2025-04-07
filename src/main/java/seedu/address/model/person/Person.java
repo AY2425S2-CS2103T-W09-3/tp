@@ -91,9 +91,9 @@ public class Person {
      * Returns a dummy Person with default placeholder values for all fields
      * except name and nric.
      */
-    public static Person createDummyPerson(Name name, Nric nric) {
+    public static Person createDummyPerson(Nric nric) {
         return new Person(
-                name,
+                Name.DUMMY_NAME,
                 nric,
                 Phone.DUMMY_PHONE,
                 Email.DUMMY_EMAIL,
