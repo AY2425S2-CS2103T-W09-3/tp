@@ -12,7 +12,7 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Singapore Phone numbers should contain eight digits with first digit being 6, 8 or 9. ";
-    public static final String VALIDATION_REGEX = "^[689]\\d{7}$";;
+    public static final String VALIDATION_REGEX = "^[689]\\d{7}$";
     public static final Phone DUMMY_PHONE = new Phone("98765432");
     public final String value;
 

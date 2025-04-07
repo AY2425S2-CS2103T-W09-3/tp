@@ -3,7 +3,7 @@
   "persons" : [ {
     "name" : "Alice Pauline",
     "NRIC" : "S1234567A",
-    "phone" : "94351253",
+    "phone" : "88888888",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "remark" : "",
@@ -11,7 +11,7 @@
   }, {
     "name" : "Benson Meier",
     "NRIC" : "S1234567B",
-    "phone" : "98765432",
+    "phone" : "99999999",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "remark" : "",
@@ -35,7 +35,7 @@
   }, {
     "name" : "Elle Meyer",
     "NRIC" : "S1234567E",
-    "phone" : "9482224",
+    "phone" : "94822224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "remark" : "",
@@ -43,7 +43,7 @@
   }, {
     "name" : "Fiona Kunz",
     "NRIC" : "S1234567F",
-    "phone" : "9482427",
+    "phone" : "94822427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "remark" : "",
@@ -51,7 +51,7 @@
   }, {
     "name" : "George Best",
     "NRIC" : "S1234567G",
-    "phone" : "9482442",
+    "phone" : "94822442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "remark" : "",
