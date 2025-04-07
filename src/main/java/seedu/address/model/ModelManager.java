@@ -120,6 +120,7 @@ public class ModelManager implements Model {
     public void addVisit(Visit visit) {
         requireNonNull(visit);
         medLogger.addVisit(visit);
+        updateFilteredVisitList(PREDICATE_SHOW_ALL_VISITS);
     }
 
     @Override
