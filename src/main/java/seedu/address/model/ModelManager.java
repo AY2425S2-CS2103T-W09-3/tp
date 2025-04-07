@@ -95,6 +95,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearVisits() {
+        this.medLogger.clearVisits();
+    }
+
+    @Override
     public ReadOnlyMedLogger getMedLogger() {
         return medLogger;
     }

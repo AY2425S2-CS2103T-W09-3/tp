@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FOLLOWUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SYMPTOM;
@@ -18,7 +17,6 @@ import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.FollowUp;
 import seedu.address.model.person.Medication;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
@@ -40,16 +38,16 @@ public class AddVisitCommandParser implements Parser<AddVisitCommand> {
     public AddVisitCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args,
-                PREFIX_NAME, PREFIX_NRIC, PREFIX_DATE, PREFIX_REMARK,
+                PREFIX_NRIC, PREFIX_DATE, PREFIX_REMARK,
                 PREFIX_SYMPTOM, PREFIX_DIAGNOSIS, PREFIX_MEDICATION, PREFIX_FOLLOWUP
         );
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_NRIC)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVisitCommand.MESSAGE_USAGE));
         }
-
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_DATE,
+                PREFIX_REMARK, PREFIX_SYMPTOM, PREFIX_DIAGNOSIS, PREFIX_MEDICATION, PREFIX_FOLLOWUP);
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
@@ -71,7 +69,7 @@ public class AddVisitCommandParser implements Parser<AddVisitCommand> {
         Medication medication = new Medication(argMultimap.getValue(PREFIX_MEDICATION).orElse(""));
         FollowUp followUp = new FollowUp(argMultimap.getValue(PREFIX_FOLLOWUP).orElse(""));
 
-        Person dummyPerson = Person.createDummyPerson(name, nric);
+        Person dummyPerson = Person.createDummyPerson(nric);
 
         Visit visit = new Visit(dummyPerson, dateTime, remark, symptom, diagnosis, medication, followUp);
         return new AddVisitCommand(visit);

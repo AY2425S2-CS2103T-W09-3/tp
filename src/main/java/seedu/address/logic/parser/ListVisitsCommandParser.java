@@ -52,6 +52,9 @@ public class ListVisitsCommandParser {
         Symptom symptom = null;
         Medication medication = null;
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_LIMIT,
+                PREFIX_FROM, PREFIX_TO, PREFIX_TODAY, PREFIX_SYMPTOM,
+                PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
         if (argMultimap.getValue(PREFIX_NRIC).isPresent()) {
             nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         }

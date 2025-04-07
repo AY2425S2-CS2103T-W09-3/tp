@@ -54,6 +54,12 @@ public interface Model {
      */
     void setMedLogger(ReadOnlyMedLogger medLogger);
 
+    /**
+     * Clears visit data in Med logger
+     */
+    void clearVisits();
+
+
     /** Returns the MedLogger */
     ReadOnlyMedLogger getMedLogger();
 
@@ -138,6 +144,7 @@ public interface Model {
     void updateSubFilteredVisitList(int n);
 
     ObservableList<Visit> getSortedVisitList();
+
 
     int size();
 }
