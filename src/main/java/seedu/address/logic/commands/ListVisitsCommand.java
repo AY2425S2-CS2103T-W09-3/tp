@@ -19,7 +19,10 @@ public class ListVisitsCommand extends Command {
 
     public static final String COMMAND_WORD = "listvisits";
     public static final String MESSAGE_SUCCESS = "Listed all visits";
-    public static final String MESSAGE_USAGE = "listvisits [i/NRIC] [l/LIMIT]";
+    public static final String MESSAGE_USAGE = "listvisits: Lists visits with optional filters.\n"
+    + "Parameters: [i/NRIC] [l/LIMIT] [from/DATE] [to/DATE] [today/] "
+    + "[sym/SYMPTOM] [diag/DIAGNOSIS] [med/MEDICATION]\n"
+    + "Example: listvisits i/S1234567A from/2023-01-01 to/2023-12-31 diagnosis/flu";
 
     private final Nric nric;
     private final Integer limit;
