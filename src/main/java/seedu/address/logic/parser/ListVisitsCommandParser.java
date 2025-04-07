@@ -14,6 +14,7 @@ import java.time.LocalDate;
 
 import seedu.address.logic.commands.ListVisitsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.DateTime;
 import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Medication;
 import seedu.address.model.person.Nric;
@@ -36,6 +37,13 @@ public class ListVisitsCommandParser {
                 PREFIX_FROM, PREFIX_TO, PREFIX_TODAY, PREFIX_SYMPTOM,
                 PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC, PREFIX_LIMIT, PREFIX_FROM, PREFIX_TO,
+                PREFIX_TODAY, PREFIX_SYMPTOM, PREFIX_DIAGNOSIS, PREFIX_MEDICATION);
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListVisitsCommand.MESSAGE_USAGE));
+        }
         Nric nric = null;
         Integer limit = null;
         LocalDate from = null;
@@ -58,10 +66,19 @@ public class ListVisitsCommandParser {
         }
 
         if (argMultimap.getValue(PREFIX_FROM).isPresent()) {
-            from = LocalDate.parse(argMultimap.getValue(PREFIX_FROM).get());
+            String fromInput = argMultimap.getValue(PREFIX_FROM).get();
+            if (!DateTime.isValidDate(fromInput)) {
+                throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+            }
+            from = new DateTime(fromInput).toLocalDateTime().toLocalDate();
         }
+
         if (argMultimap.getValue(PREFIX_TO).isPresent()) {
-            to = LocalDate.parse(argMultimap.getValue(PREFIX_TO).get());
+            String toInput = argMultimap.getValue(PREFIX_TO).get();
+            if (!DateTime.isValidDate(toInput)) {
+                throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+            }
+            to = new DateTime(toInput).toLocalDateTime().toLocalDate();
         }
 
         boolean isToday = argMultimap.getValue(PREFIX_TODAY).isPresent();
