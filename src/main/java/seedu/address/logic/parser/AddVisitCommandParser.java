@@ -48,7 +48,8 @@ public class AddVisitCommandParser implements Parser<AddVisitCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddVisitCommand.MESSAGE_USAGE));
         }
-
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_DATE,
+                PREFIX_REMARK, PREFIX_SYMPTOM, PREFIX_DIAGNOSIS, PREFIX_MEDICATION, PREFIX_FOLLOWUP);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
