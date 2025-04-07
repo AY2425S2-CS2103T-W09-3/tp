@@ -15,7 +15,7 @@ public class ClearVisitsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredVisitList(visit -> false); // match nothing
+        model.clearVisits();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
