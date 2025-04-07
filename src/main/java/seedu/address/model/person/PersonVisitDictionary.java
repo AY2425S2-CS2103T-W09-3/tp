@@ -100,11 +100,12 @@ public class PersonVisitDictionary {
         if (!personToVisits.containsKey(target)) {
             throw new PersonNotFoundException();
         }
+        List<Visit> targetPersonVisits = personToVisits.get(target);
+        personToVisits.remove(target);
         addPerson(editedPerson);
-        for (Visit visit : personToVisits.get(target)) {
+        for (Visit visit : targetPersonVisits) {
             personToVisits.get(editedPerson).add(visit.withPerson(editedPerson));
         }
-        personToVisits.remove(target);
     }
 
     /**
