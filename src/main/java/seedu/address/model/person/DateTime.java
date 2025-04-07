@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,6 +16,7 @@ import java.time.format.ResolverStyle;
 public class DateTime {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format yyyy-mm-dd HH:mm and valid";
+    public static final String MESSAGE_CONSTRAINTS_DATE_ONLY = "Dates should be in the format yyyy-mm-dd and valid";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("uuuu-MM-dd HH:mm").withResolverStyle(ResolverStyle.STRICT);
     //uuuu must be used with strict style which is needed to detect all invalid dates
@@ -44,6 +46,24 @@ public class DateTime {
     public static boolean isValidDate(String date) {
         try {
             LocalDateTime.parse(date, FORMATTER);
+            return true;
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if a given string is a valid date in yyyy-mm-dd format only.
+     * @param date  A valid date in yyyy-mm-dd format.
+     * @return true if the date is valid.
+     */
+    public static boolean isValidDateOnly(String date) {
+        DateTimeFormatter dateOnlyFormatter = DateTimeFormatter
+                .ofPattern("uuuu-MM-dd")
+                .withResolverStyle(ResolverStyle.STRICT);
+        try {
+            LocalDate.parse(date, dateOnlyFormatter);
             return true;
         } catch (DateTimeParseException e) {
             System.out.println(e.getMessage());

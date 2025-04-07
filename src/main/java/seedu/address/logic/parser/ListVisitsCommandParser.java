@@ -67,18 +67,18 @@ public class ListVisitsCommandParser {
 
         if (argMultimap.getValue(PREFIX_FROM).isPresent()) {
             String fromInput = argMultimap.getValue(PREFIX_FROM).get();
-            if (!DateTime.isValidDate(fromInput)) {
-                throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+            if (!DateTime.isValidDateOnly(fromInput)) {
+                throw new ParseException(DateTime.MESSAGE_CONSTRAINTS_DATE_ONLY);
             }
-            from = new DateTime(fromInput).toLocalDateTime().toLocalDate();
+            from = LocalDate.parse(fromInput);
         }
 
         if (argMultimap.getValue(PREFIX_TO).isPresent()) {
             String toInput = argMultimap.getValue(PREFIX_TO).get();
-            if (!DateTime.isValidDate(toInput)) {
-                throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
+            if (!DateTime.isValidDateOnly(toInput)) {
+                throw new ParseException(DateTime.MESSAGE_CONSTRAINTS_DATE_ONLY);
             }
-            to = new DateTime(toInput).toLocalDateTime().toLocalDate();
+            to = LocalDate.parse(toInput);
         }
 
         boolean isToday = argMultimap.getValue(PREFIX_TODAY).isPresent();
