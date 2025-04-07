@@ -25,6 +25,7 @@ public class ListCommandParser {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIMIT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LIMIT);
 
         int limit;
 
