@@ -89,6 +89,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        personMap.clear();
         personMap.putAll(replacement.personMap);
     }
 
@@ -102,6 +103,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.setAll(persons);
+        personMap.clear();
         for (Person person : persons) {
             personMap.put(person.getNric().value, person);
         }

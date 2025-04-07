@@ -26,6 +26,7 @@ public class PersonVisitDictionary {
      */
     public void setDictionary(Map<Person, List<Visit>> personToVisits) {
         requireNonNull(personToVisits);
+        this.personToVisits.clear();
         for (Map.Entry<Person, List<Visit>> entry : personToVisits.entrySet()) {
             this.personToVisits.put(entry.getKey(), new ArrayList<>(entry.getValue()));
         }
