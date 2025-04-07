@@ -123,6 +123,13 @@ public class MedLogger implements ReadOnlyMedLogger {
         dictionary.removeVisit(target);
     }
 
+    public void clearVisits() {
+        List<Visit> copy = List.copyOf(this.getVisitList());
+        for(Visit visit: copy) {
+            this.removeVisit(visit);
+        }
+    }
+
     //// person-level operations
 
     /**
