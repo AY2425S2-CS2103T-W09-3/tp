@@ -24,12 +24,15 @@ public class ResultDisplay extends UiPart<Region> {
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
-        resultDisplay.setStyle(
-            feedbackToUser.startsWith("Invalid") || feedbackToUser.startsWith("Error")
-                    || feedbackToUser.startsWith("Unknown")
-                    ? (this.isDarkMode ? "-fx-text-fill: white;" : "-fx-text-fill: black;")
-                    : "-fx-text-fill: green;"
-        );
+        resultDisplay.getStyleClass().removeAll("result-success", "result-error-light", "result-error-dark");
+        boolean isError = feedbackToUser.startsWith("Invalid")
+                || feedbackToUser.startsWith("Error")
+                || feedbackToUser.startsWith("Unknown");
+        if (isError) {
+            resultDisplay.getStyleClass().add(isDarkMode ? "result-error-dark" : "result-error-light");
+        } else {
+            resultDisplay.getStyleClass().add("result-success");
+        }
     }
 
     /**
@@ -39,6 +42,7 @@ public class ResultDisplay extends UiPart<Region> {
      */
     public void handleToggleTheme(boolean isDarkMode) {
         this.isDarkMode = isDarkMode;
+        setFeedbackToUser(resultDisplay.getText());
         // if (isDarkMode) {
         //     resultDisplay.setStyle("-fx-background-color: #2b2b2b; -fx-text-fill: white;");
         // } else {
