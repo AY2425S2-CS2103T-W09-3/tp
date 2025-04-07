@@ -26,6 +26,7 @@ public class PersonVisitDictionary {
      */
     public void setDictionary(Map<Person, List<Visit>> personToVisits) {
         requireNonNull(personToVisits);
+        this.personToVisits.clear();
         for (Map.Entry<Person, List<Visit>> entry : personToVisits.entrySet()) {
             this.personToVisits.put(entry.getKey(), new ArrayList<>(entry.getValue()));
         }
@@ -99,9 +100,10 @@ public class PersonVisitDictionary {
         if (!personToVisits.containsKey(target)) {
             throw new PersonNotFoundException();
         }
+        List<Visit> targetPersonVisits = personToVisits.get(target);
         personToVisits.remove(target);
         addPerson(editedPerson);
-        for (Visit visit : personToVisits.get(editedPerson)) {
+        for (Visit visit : targetPersonVisits) {
             personToVisits.get(editedPerson).add(visit.withPerson(editedPerson));
         }
     }
