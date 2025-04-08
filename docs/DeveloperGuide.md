@@ -1,8 +1,8 @@
----
+--------------------------------------------------------------------------------------------------------------------
   layout: default.md
   title: "Developer Guide"
   pageNav: 3
----
+--------------------------------------------------------------------------------------------------------------------
 
 # MedLogger Developer Guide
 
@@ -83,7 +83,7 @@ The `UI` component:
 * depends on classes in the `Model` component, as it displays `Person` and `Visit` objects stored in the `Model`.
 
 
-### Logic component
+### `Logic` component
 
 **API** : [`Logic.java`](https://github.com/AY2425S2-CS2103T-W09-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -103,10 +103,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `MedLoggerParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -444,16 +444,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy it into an empty folder.
 
-   1. Double-click the jar file. Expected: The GUI displays a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. Expected: The GUI displays a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location are retained.
 
-1. _{ more test cases …​ }_
+3. _{more test cases …​ }_
 
 ### Deleting a person
 
@@ -461,16 +461,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -478,7 +478,7 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Visiting a patient
 
@@ -486,13 +486,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Person must exist in the contact list with valid NRIC.
 
-   1. Test case: `visit n/John Doe i/S1234567A r/Headache d/2025-04-04 10:00`  
+   2. Test case: `visit n/John Doe i/S1234567D r/Headache d/2025-04-04 10:00`  
       Expected: Visit is added. Confirmation message is shown.
 
-   1. Test case: `visit n/John Doe i/S1234567A r/Back pain`  
+   3. Test case: `visit n/John Doe i/S1234567D r/Back pain`  
       Expected: Visit is added with current date and time. Confirmation message is shown.
 
-   1. Test case: `visit n/Someone i/S0000000X r/Cough`  
+   4. Test case: `visit n/Someone i/S0002103B r/Cough`  
       Expected: Error message shown — person does not exist.
 
 ---
@@ -504,13 +504,13 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `listvisits`  
       Expected: All visits are shown in the visit panel.
 
-   1. Test case: `listvisits l/3`  
+   2. Test case: `listvisits l/3`  
       Expected: Top 3 visits are shown.
 
-   1. Test case: `listvisits n/S1234567A`  
+   3. Test case: `listvisits n/S1234567D`  
       Expected: All visits related to that NRIC are shown.
 
-   1. Test case: `listvisits n/S1234567A l/2`  
+   4. Test case: `listvisits n/S1234567D l/2`  
       Expected: 2 most recent visits of the patient are shown.
 
 ---
@@ -522,7 +522,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `sortvisits`  
       Expected: Visit list sorted in ascending date-time order.
 
-   1. Test case: `sortvisits desc`  
+   2. Test case: `sortvisits desc`  
       Expected: Visit list sorted in descending date-time order.
 
 ---
@@ -533,10 +533,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: `listvisits` must be used beforehand.
 
-   1. Test case: `editvisit 1 r/Updated remark`  
+   2. Test case: `editvisit 1 r/Updated remark`  
       Expected: The remark of the first visit in the list is updated.
 
-   1. Test case: `editvisit 1 d/2025-04-10 14:00`  
+   3. Test case: `editvisit 1 d/2025-04-10 14:00`  
       Expected: Visit date is updated.
 
 ---

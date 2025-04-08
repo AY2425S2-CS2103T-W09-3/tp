@@ -215,8 +215,8 @@ Format: `visit i/NRIC [d/DATETIME] [r/REMARK] [diag/DIAGNOSIS] [med/MEDICATION] 
 * If no DATETIME is provided, the current time (i.e., the time of command input) will be used.
 
 Examples:
-* `visit i/S1234567A r/Allergy`
-* `visit i/S1234567A d/2024-12-31 11:11 diag/Flu symptoms`
+* `visit i/S1234567D r/Allergy`
+* `visit i/S1234567D d/2024-12-31 11:11 diag/Flu symptoms`
   ![visit command](images/visit%20command%20example.png)
 
 ---
@@ -243,7 +243,7 @@ Format: `editvisit INDEX [i/NRIC] [d/DATETIME] [r/REMARK] [diag/DIAGNOSIS] [med/
 Examples:
 * `editvisit 1 d/2025-01-01 09:00`
 * `editvisit 2 r/Updated diagnosis`
-* `editvisit 3 i/S1234567A d/2024-12-01 10:00 r/Fever`
+* `editvisit 3 i/S1234567D d/2024-12-01 10:00 r/Fever`
 ---
 
 ### Listing visits: `listvisits`
@@ -258,9 +258,9 @@ Format:
 
 Examples:
 * `listvisits`
-* `listvisits i/S1234567A`
+* `listvisits i/S1234567D`
 * `listvisits l/3`
-* `listvisits i/S1234567A l/5`
+* `listvisits i/S1234567D l/5`
 
 ---
 
@@ -342,7 +342,7 @@ Furthermore, certain edits can cause the MedLogger to behave in unexpected ways 
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add patient**    | `person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add patient**    | `person n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Remark**   | `remark INDEX r/REMARK`<br> e.g., `remark 1 r/important`
 **Clear**  | `clear`
 **Delete patient** | `delete INDEX`<br> e.g., `delete 3`
