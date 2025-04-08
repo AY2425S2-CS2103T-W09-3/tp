@@ -29,8 +29,8 @@ public class FileUtilTest {
         String json = """
             {
               "persons": [
-                {"name": "Alice", "phone": "123"},
-                {"name": "Bob", "phone": "456"}
+                {"name": "Alice", "phone": "98765432"},
+                {"name": "Bob", "phone": "87654321"}
               ]
             }
             """;
@@ -38,7 +38,7 @@ public class FileUtilTest {
         List<Map<String, String>> result = FileUtil.extractJsonObjects(json, "persons");
         assertEquals(2, result.size());
         assertEquals("Alice", result.get(0).get("name"));
-        assertEquals("456", result.get(1).get("phone"));
+        assertEquals("87654321", result.get(1).get("phone"));
     }
 
     @Test

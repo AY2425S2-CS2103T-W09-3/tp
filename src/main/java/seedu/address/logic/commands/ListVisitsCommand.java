@@ -18,7 +18,7 @@ import seedu.address.model.person.Visit;
 public class ListVisitsCommand extends Command {
 
     public static final String COMMAND_WORD = "listvisits";
-    public static final String MESSAGE_SUCCESS = "Listed all visits";
+    public static final String MESSAGE_SUCCESS_FORMAT = "Listed %d visit%s.";
     public static final String MESSAGE_USAGE = "listvisits: Lists visits with optional filters.\n"
             + "Parameters: [i/NRIC] [l/LIMIT] [from/DATE] [to/DATE] [today/] "
             + "[sym/SYMPTOM] [diag/DIAGNOSIS] [med/MEDICATION]\n"
@@ -117,6 +117,7 @@ public class ListVisitsCommand extends Command {
             return new CommandResult("Listed " + Math.min(limit, model.getFilteredVisitList().size()) + " visits");
         }
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        int size = model.getFilteredVisitList().size();
+        return new CommandResult(String.format(MESSAGE_SUCCESS_FORMAT, size, size == 1 ? "" : "s"));
     }
 }
