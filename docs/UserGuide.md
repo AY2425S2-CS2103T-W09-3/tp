@@ -40,7 +40,7 @@ MedLogger is a **desktop app for managing patients and visits, optimized for use
 - Ensure you have **Java 17** or above installed on your computer.  
 - **Mac users:** Follow the exact JDK installation steps mentioned [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. **Download** the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. **Download** the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-W09-3/tp/releases).
 2. **Move** the file to the folder you want as the _home folder_ for MedLogger.
 3. **Run MedLogger**:
     - Open a **command terminal**.
@@ -50,7 +50,7 @@ MedLogger is a **desktop app for managing patients and visits, optimized for use
       java -jar medlogger.jar
       ```
     - A GUI similar to the image below should appear in a few seconds:  
-      ![UI](images/persons.png)
+      ![UI](images/Persons.png)
     - The app will load with **sample data**.
 
 4. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
@@ -58,7 +58,7 @@ MedLogger is a **desktop app for managing patients and visits, optimized for use
 
    * `list` : Lists all patients.
 
-   * `person n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney` : Adds a patient named `John Doe` to the MedLogger.
+   * `person n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` : Adds a patient named `John Doe` to the MedLogger.
 
    * `delete 3` : Deletes the 3rd patient shown in the current list.
 
@@ -71,8 +71,6 @@ MedLogger is a **desktop app for managing patients and visits, optimized for use
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
-<box type="info" seamless></box>
 
 **Notes about the command format:**<br>
 
@@ -94,8 +92,9 @@ MedLogger is a **desktop app for managing patients and visits, optimized for use
   e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+
 ---
+
 ### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
@@ -112,16 +111,14 @@ Adds a patient to the MedLogger.
 
 Format: `person n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless></box>
-
 **Tip:** 
 * A patient can have any number of tags (including none)
-* The NRIC, phone number, email must adhere to respective format constraints
-</box>
+* The NRIC, phone number, email must adhere to respective format constraints. Specifically, NRIC must match the pattern of a valid Singapore NRIC. Phone number must be a valid Singapore phone number (8-digit). Email must be a valid email address
+* We identify a patient uniquely using their NRIC. That is, we allow different patients with the same name, but not with the same NRIC
 
 Examples:
-* `person n/John Doe i/A1234567S p/98765432 e/johnd@example.com a/311, Clementi Ave 1, #02-24 d/2024-12-01`
-* `person n/John Doe i/A1234567S p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney`
+* `person n/John Doe i/A1234567S p/98765432 e/johnd@example.com a/311, Clementi Ave 1, #02-24`
+* `person n/John Doe i/A1234567S p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
 ![person command](images/person%20command%20example.png)
 
 ---
@@ -136,7 +133,7 @@ Format: `remark INDEX r/REMARK`
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Example:
 * `remark 1 r/important`.
 ![remark command](images/remark%20command%20example.png)
 
@@ -148,6 +145,8 @@ Examples:
 * `list l/LIMIT`: Show a list of n `LIMIT` patients in the MedLoggers. 
 
 Format: `list [l/LIMIT]`
+Example:
+* `list l/4`.
 ![list command](images/list%20command%20example.png)
 
 ---
@@ -209,13 +208,11 @@ Examples:
 ### Adding a visit: `visit`
 
 Format: `visit i/NRIC [d/DATETIME] [r/REMARK] [diag/DIAGNOSIS] [med/MEDICATION] [f/FOLLOWUP]`
-<box type="tip" seamless></box>
 
 **Tip:**
-* The NRIC and DATETIME must adhere to respective format constraints
+* The NRIC and DATETIME must adhere to respective format constraints. Specifically, DATETIME must be in `yyyy-mm-dd hh:mm` format
 * The NRIC must be present in MedLogger (i.e., one and only one patient has the input NRIC). The visit will be automatically associated to that patient with the same NRIC.
 * If no DATETIME is provided, the current time (i.e., the time of command input) will be used.
-  </box>
 
 Examples:
 * `visit i/S1234567A r/Allergy`
@@ -290,12 +287,12 @@ Format: `clear`
 ---
 ### Clearing visits: `clearvisits`
 
-Clears the visit panel.
+Clears all visits.
 
 Format: `clearvisits`
 
 Example:
-* `clearvisits` — removes all visits from the panel display (does not delete visit records)
+* `clearvisits` — clears all visits
 
 ---
 ### Exiting the program : `exit`
@@ -320,16 +317,10 @@ MedLogger data is saved to the hard disk automatically after any command that ch
 
 MedLogger data is saved automatically as a JSON file `[JAR file location]/data/medlogger.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless></box>
 
 **Caution:**
 If your changes to the data file make its format invalid, MedLogger will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the MedLogger to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -351,7 +342,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add patient**    | `person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE [t/TAG]…​` <br> e.g., `person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/2024-12-31 t/friend t/colleague`
+**Add patient**    | `person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Remark**   | `remark INDEX r/REMARK`<br> e.g., `remark 1 r/important`
 **Clear**  | `clear`
 **Delete patient** | `delete INDEX`<br> e.g., `delete 3`
@@ -359,7 +350,7 @@ Action     | Format, Examples
 **Find patient**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List patients**   | `list` or `list l/LIMIT`
 **Add visit**   | `visit n/NAME i/NRIC [d/DATE_TIME] r/REMARK`
-**List visits**    | `listvisits` or `listvisits l/LIMIT`
+**List visits**    | `listvisits [i/NRIC] [l/LIMIT]`
 **Sort visits**    | `sortvisits` or `sortvisits desc`
 **Edit visit**     | `editvisit INDEX [i/NRIC] [d/DATE_TIME] [r/REMARK]`
 **Clear visits**   | `clearvisits`
