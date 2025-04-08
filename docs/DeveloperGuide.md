@@ -31,13 +31,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+Below is a quick overview of the main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/AY2425S2-CS2103T-W09-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S2-CS2103T-W09-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+* At app launch, it initializes the other components in the correct sequence, and connects them.
+* When shutting down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
@@ -97,7 +97,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues until the end of diagram.
 </box>
 
 How the `Logic` component works:
@@ -123,7 +123,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the Med Logger data i.e., all `Person` and `Visit` objects (which are contained in `UniquePersonList` and `UniqueVisitList` respectively).
+* stores the MedLogger data i.e., all `Person` and `Visit` objects (which are contained in `UniquePersonList` and `UniqueVisitList` respectively).
 * stores the currently 'selected' `Person` and `Visit` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>` and `ObservableList<Visit>` that can be observed e.g. the UI can be bound to these lists so that the UI automatically updates when the data changes.
 * stores a `SortedList<Visit>` that wraps around the filtered visit list to enable dynamic sorting based on user commands, such as sorting visits by date in ascending or descending order.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
@@ -145,7 +145,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both Med Logger data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both MedLogger data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `MedLoggerStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -163,10 +163,10 @@ This section describes some noteworthy details on how certain features are imple
 ![AddVisitCommand Sequence Diagram.png](images/AddVisitCommand%20Sequence%20Diagram.png)
 #### Implementation
 
-The current implementation of AddVisitCommand works as following: it will pass the visit to the model, and the model will then call
-the addVisit command of Medlogger, which check if that visit belongs to someone already exists in Medlogger. The check is done using the NRIC of the person of visit,
-if NRIC exists as key of hashmap, then the person already exists in Medlogger and NRIC is used to retrieve the person, then
-add the visit to Medlogger. Otherwise a CommandException is throw, and reject adding the visit. 
+The current implementation of AddVisitCommand works as follows: it will pass the visit to the model, and the model will then call
+the addVisit command of Medlogger, which checks if that visit belongs to someone already exists in Medlogger. The check is done using the NRIC of the person of visit,
+if the NRIC exists as a key in the HashMap, then the person already exists in Medlogger and NRIC is used to retrieve the person, then
+add the visit to Medlogger. Otherwise a CommandException is thrown, and reject adding the visit. 
 
 ### \[Proposed\] Undo/redo feature
 
@@ -174,33 +174,33 @@ add the visit to Medlogger. Otherwise a CommandException is throw, and reject ad
 
 The proposed undo/redo mechanism is facilitated by `VersionedMedLogger`. It extends `MedLogger` with an undo/redo history, stored internally as an `medLoggerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedMedLogger#commit()` — Saves the current Med Logger state in its history.
-* `VersionedMedLogger#undo()` — Restores the previous Med Logger state from its history.
-* `VersionedMedLogger#redo()` — Restores a previously undone Med Logger state from its history.
+* `VersionedMedLogger#commit()` — Saves the current MedLogger state in its history.
+* `VersionedMedLogger#undo()` — Restores the previous MedLogger state from its history.
+* `VersionedMedLogger#redo()` — Restores a previously undone MedLogger state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitMedLogger()`, `Model#undoMedLogger()` and `Model#redoMedLogger()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedMedLogger` will be initialized with the initial Med Logger state, and the `currentStatePointer` pointing to that single Med Logger state.
+Step 1. The user launches the application for the first time. The `VersionedMedLogger` will be initialized with the initial MedLogger state, and the `currentStatePointer` pointing to that single MedLogger state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the Med Logger. The `delete` command calls `Model#commitMedLogger()`, causing the modified state of the Med Logger after the `delete 5` command executes to be saved in the `MedLoggerStateList`, and the `currentStatePointer` is shifted to the newly inserted Med Logger state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the MedLogger. The `delete` command calls `Model#commitMedLogger()`, causing the modified state of the MedLogger after the `delete 5` command executes to be saved in the `MedLoggerStateList`, and the `currentStatePointer` is shifted to the newly inserted MedLogger state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitMedLogger()`, causing another modified Med Logger state to be saved into the `MedLoggerStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitMedLogger()`, causing another modified MedLogger state to be saved into the `MedLoggerStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitMedLogger()`, so the Med Logger state will not be saved into the `MedLoggerStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitMedLogger()`, so the MedLogger state will not be saved into the `MedLoggerStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoMedLogger()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Med Logger state, and restores the Med Logger to that state.
+Step 4. The user realizes that adding the person was a mistake and undoes that action by executing the `undo` command. The `undo` command will call `Model#undoMedLogger()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous MedLogger state, and restores the MedLogger to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -226,19 +226,19 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoMedLogger()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the Med Logger to that state.
+The `redo` command does the opposite — it calls `Model#redoMedLogger()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the MedLogger to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `MedLoggerStateList.size() - 1`, pointing to the latest Med Logger state, then there are no undone MedLogger states to restore. The `redo` command uses `Model#canRedoMedLogger()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `MedLoggerStateList.size() - 1`, pointing to the latest MedLogger state, then there are no undone MedLogger states to restore. The `redo` command uses `Model#canRedoMedLogger()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the Med Logger, such as `list`, will usually not call `Model#commitMedLogger()`, `Model#undoMedLogger()` or `Model#redoMedLogger()`. Thus, the `MedLoggerStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the MedLogger, such as `list`, will usually not call `Model#commitMedLogger()`, `Model#undoMedLogger()` or `Model#redoMedLogger()`. Thus, the `MedLoggerStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitMedLogger()`. Since the `currentStatePointer` is not pointing at the end of the `MedLoggerStateList`, all Med Logger states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitMedLogger()`. Since the `currentStatePointer` is not pointing at the end of the `MedLoggerStateList`, all MedLogger states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -248,16 +248,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo & redo are executed:**
 
-* **Alternative 1 (current choice):** Saves the entire Med Logger.
+* **Alternative 1 (current choice):** Saves the entire MedLogger.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+* **Alternative 2:** An individual command knows how to undo/redo by itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  * Cons: We must ensure that the implementation of each individual command is correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -372,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Add a symptom to a patient's visit**
 
 **MSS (Main Success Scenario)**  
-1. User requests to list visit records  
+1. User requests a list of visit records
 2. MedLogger displays a list of visit records  
 3. User selects a visit by index and inputs the symptom  
 4. MedLogger adds the symptom to the visit record  
@@ -443,22 +442,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy it into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file. Expected: The GUI displays a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+       Expected: The most recent window size and location are retained.
 
 1. _{ more test cases …​ }_
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are displayed
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -548,3 +547,48 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `clearvisits`  
       Expected: Visit panel is cleared.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+Team size: 5
+
+1. **Include visits data in CSV export.**  
+   *Flaw:* The current CSV export omits any information regarding visits.  
+   *Enhancement:* Modify the CSV export functionality so that it includes a dedicated column (or set of columns) for visit details (e.g. visit dates and remarks). Sample UI: When selecting CSV export, users will see additional visit information clearly aligned with the respective contacts.
+
+2. **Allow tags to include spaces and selected special characters.**  
+   *Flaw:* The current restriction only permits alphanumeric characters, limiting usability in scenarios where multi-word tags are needed.  
+   *Enhancement:* Update the tag parser so that it accepts spaces and a defined set of special characters (e.g., hyphens, underscores). Sample input: Instead of forcing “familymember”, users can enter “family member”.
+
+3. **Improve error messaging for export commands when data file is missing.**  
+   *Flaw:* If the MedLogger.json file is missing at startup, the app produces an unclear error when an export command is run.  
+   *Enhancement:* Refine the error message to clearly indicate that the expected MedLogger.json file was not found in the data folder, for example: “Error: MedLogger.json not detected in the data folder. Please ensure the file is present or trigger a state-changing command to auto-create it.”
+
+4. **Automatically wrap long remarks to prevent truncation.**  
+   *Flaw:* Long remarks currently get truncated in the UI unless the user manually stretches the window.  
+   *Enhancement:* Update the display logic so that text fields for remarks automatically wrap text regardless of window size. Sample output: A long remark will now appear as a multi-line text block, ensuring the full message is visible without resizing.
+
+5. **Clarify visit addition by emphasizing NRIC usage.**  
+   *Flaw:* The current add-visit flow can cause confusion between a patient’s name and NRIC, potentially leading to mistaken identity when adding visits.  
+   *Enhancement:* Revise the add-visit dialog and accompanying instructions to highlight that the NRIC uniquely identifies the patient. For example, add a helper tooltip stating, “Visit will be added to the patient identified by NRIC—even if the name does not match exactly.”
+
+6. **Refine list UI in dark mode to remove extra white spaces.**  
+   *Flaw:* The list command (e.g., “list l/2”) in dark mode currently shows abnormal white spaces which disrupt alignment.  
+   *Enhancement:* Tweak the layout engine for dark mode to eliminate unwanted white spaces, ensuring that list elements are evenly spaced and correctly aligned for better readability.
+
+7. **Enhance color contrast for response messages in dark mode.**  
+   *Flaw:* The green response messages for successful commands are hard to read against the dark mode background.  
+   *Enhancement:* Adjust the color scheme for confirmation messages when in dark mode (e.g., choosing a brighter or contrasting color) so that all feedback remains accessible and clearly visible.
+
+8. **Enforce consistent font sizes across light and dark modes.**  
+   *Flaw:* Font sizes differ between light and dark mode, affecting the overall UI consistency.  
+   *Enhancement:* Standardize the font scaling so that regardless of the theme selected, the typography (header, body text, labels, etc.) maintains a uniform size across the application.
+
+9. **Retain proper tag formatting when toggling dark mode.**  
+   *Flaw:* Toggling dark mode currently causes tags to lose their spacing, merging them together.  
+   *Enhancement:* Modify the UI refresh process to ensure that tag formatting (including spacing between tags) persists after a theme change. Sample UI: Tags remain separated by clear boundaries, avoiding confusion between individual tags.
+
+10. **Expand manual test case coverage and enhance documentation clarity.**  
+    *Flaw:* Limited predefined manual test cases and sparse use case documentation have led to additional effort during testing and a lack of clarity for new developers.  
+    *Enhancement:* Update testing documentation by adding a broader set of manual test cases covering core functionality, edge cases, and common user flows. Provide clear guidelines, templates, and examples for test scenario creation. Additionally, enrich use case descriptions with more detailed examples to aid onboarding new developers.
