@@ -50,7 +50,7 @@ MedLogger is a **desktop app for managing patients and visits, optimized for use
       java -jar medlogger.jar
       ```
     - A GUI similar to the image below should appear in a few seconds:  
-      ![UI](images/persons.png)
+      ![UI](images/Persons.png)
     - The app will load with **sample data**.
 
 4. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
