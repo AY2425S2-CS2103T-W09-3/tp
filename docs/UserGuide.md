@@ -9,29 +9,37 @@ pageNav: 3
 MedLogger is a **desktop app for managing patient and visits, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete management tasks **faster** than traditional GUI apps.
 
 ## Table of Contents
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [Viewing help : `help`](#viewing-help--help)
-  - [Adding a patient: `person`](#adding-a-person-add)
-  - [Remark a patient : `remark`](#remark-a-person--remark)
-  - [Listing all patients : `list`](#listing-all-persons--list)
-  - [Editing a patient : `editperson`](#editing-a-person--edit)
-  - [Locating patients by name: `find`](#locating-persons-by-name-find)
-  - [Deleting a patient : `delete`](#deleting-a-person--delete)
-  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-  - [Exiting the program : `exit`](#exiting-the-program--exit)
-  - [Exporting the data : `export`](#exporting-the-data--export)
-  - [Saving the data](#saving-the-data)
-  - [Editing the data file](#editing-the-data-file)
-  - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
-  - [Adding a visit: `visit`](#adding-a-visit-visit)
-  - [Listing visits: `listvisits`](#listing-visits-listvisits)
-  - [Sorting visits: `sortvisits`](#sorting-visits-sortvisits)
-  - [Editing a visit: `editvisit`](#editing-a-visit-editvisit)
-  - [Clearing visits: `clearvisits`](#clearing-visits-clearvisits)
-- [FAQ](#faq)
-- [Known issues](#known-issues)
-- [Command summary](#command-summary)
+- [MedLogger User Guide 🏥](#medlogger-user-guide-)
+  - [Table of Contents](#table-of-contents)
+  - [Quick Start](#quick-start)
+  - [Features](#features)
+  - [](#)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Adding a patient: `person`](#adding-a-patient-person)
+    - [Adding a remark to a patient : `remark`](#adding-a-remark-to-a-patient--remark)
+    - [Listing all patients : `list`](#listing-all-patients--list)
+    - [Editing a patient : `editperson`](#editing-a-patient--editperson)
+    - [Locating persons by name: `find`](#locating-persons-by-name-find)
+  - [](#-1)
+    - [Deleting a patient : `delete`](#deleting-a-patient--delete)
+  - [](#-2)
+    - [Adding a visit: `visit`](#adding-a-visit-visit)
+    - [Removing a visit: `deletevisit`](#removing-a-visit-deletevisit)
+    - [Editing a visit: `editvisit`](#editing-a-visit-editvisit)
+    - [Listing visits: `listvisits`](#listing-visits-listvisits)
+    - [Sorting visits: `sortvisits`](#sorting-visits-sortvisits)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Clearing visits: `clearvisits`](#clearing-visits-clearvisits)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Format: `exit`](#format-exit)
+    - [Exporting the data : `export`](#exporting-the-data--export)
+    - [Saving the data](#saving-the-data)
+  - [MedLogger data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.](#medlogger-data-are-saved-in-the-hard-disk-automatically-after-any-command-that-changes-the-data-there-is-no-need-to-save-manually)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+  - [FAQ](#faq)
+  - [Known issues](#known-issues)
+  - [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,7 +58,7 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
       java -jar medlogger.jar
       ```
     - A GUI similar to the image below should appear in a few seconds:  
-      ![UI](images/persons.png)
+      ![UI](images/Persons.png)
     - The app will load with **sample data**.
 
 4. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -58,15 +66,19 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
 
    * `list` : Lists all patients.
 
-   * `person n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney` : Adds a patient named `John Doe` to the MedLogger.
-
+   * `person n/John Doe i/S1234567A p/98765432 e/johnd@example.com a/123, Clementi Ave 2, #02-25` : Adds a patient named `John Doe` to the MedLogger.
+  
    * `delete 3` : Deletes the 3rd patient shown in the current list.
+  
+   * `visit i/S1234567A `: This adds a visit for the patient with NRIC `S1234567A`, using the current time and leaving all other fields empty.
+  
+   * `visit i/S1234567A d/2024-12-31 09:00 r/Fever diag/Influenza med/Tamiflu f/2025-01-15 `: You can include optional details like date/time, remarks, diagnosis, medication, and follow-up.
 
    * `clear` : Deletes all patients and visits.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+5. Refer to the [Features](#features) below for details of all commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -122,6 +134,7 @@ Format: `person n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `person n/John Doe i/A1234567S p/98765432 e/johnd@example.com a/311, Clementi Ave 1, #02-24 d/2024-12-01`
 * `person n/John Doe i/A1234567S p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney`
+  
 ![person command](images/person%20command%20example.png)
 
 ---
@@ -136,8 +149,9 @@ Format: `remark INDEX r/REMARK`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Example:
 * `remark 1 r/important`.
+
 ![remark command](images/remark%20command%20example.png)
 
 ---
@@ -147,7 +161,9 @@ Examples:
 * `list`: Shows a list of all patients in the Med Logger.
 * `list l/LIMIT`: Show a list of n `LIMIT` patients in the Med Loggers. 
 
-Format: `list [l/LIMIT]`
+Example:
+* `list [l/LIMIT]`
+  
 ![list command](images/list%20command%20example.png)
 
 ---
@@ -168,6 +184,7 @@ Format: `editperson INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/T
 Examples:
 *  `editperson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `editperson 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+
 ![editperson command](images/editperson%20command%20example.png)
 
 ---
@@ -188,7 +205,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+![result for 'find alex david'](images/findAlexDavidResult.png)
 ---
 ### Deleting a patient : `delete`
 
@@ -203,8 +221,9 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the Med Logger.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
-  ![before delete](images/delete%20command%20example%20before.png)
-  ![after delete](images/delete%20command%20example%20after.png)
+
+![before delete](images/delete%20command%20example%20before.png)
+![after delete](images/delete%20command%20example%20after.png)
 ---
 ### Adding a visit: `visit`
 
@@ -220,7 +239,8 @@ Format: `visit i/NRIC [d/DATETIME] [r/REMARK] [diag/DIAGNOSIS] [med/MEDICATION] 
 Examples:
 * `visit i/S1234567A r/Allergy`
 * `visit i/S1234567A d/2024-12-31 11:11 diag/Flu symptoms`
-  ![visit command](images/visit%20command%20example.png)
+
+![visit command](images/visit%20command%20example.png)
 
 ---
 
@@ -265,6 +285,8 @@ Examples:
 * `listvisits l/3`
 * `listvisits i/S1234567A l/5`
 
+> **Tip:** You can also **click on a patient card in the left panel** to automatically filter and view visits for that patient — no need to type their NRIC manually.
+
 ---
 
 ### Sorting visits: `sortvisits`
@@ -287,15 +309,15 @@ Clears all entries from the Med Logger.
 
 Format: `clear`
 
+> **Caution:** This command deletes **BOTH PATIENT AND VISIT** records. 
 ---
 ### Clearing visits: `clearvisits`
 
-Clears the visit panel.
+Deletes all visit records.
 
 Format: `clearvisits`
 
-Example:
-* `clearvisits` — removes all visits from the panel display (does not delete visit records)
+> **Caution:** This command not only removes **filtered** visits from the panel display. It **DELETES ALL** visit records as well. But patient data is not affected.
 
 ---
 ### Exiting the program : `exit`
@@ -344,6 +366,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **In Light mode**, the font size appears smaller than in dark mode for all UI elements (e.g., header bar, patient cards, visit list). This is a UI rendering inconsistency and may cause layout overflow or misalignment in some components. The team is aware and working on a fix.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -359,7 +382,7 @@ Action     | Format, Examples
 **Find patient**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List patients**   | `list` or `list l/LIMIT`
 **Add visit**   | `visit n/NAME i/NRIC [d/DATE_TIME] r/REMARK`
-**List visits**    | `listvisits` or `listvisits l/LIMIT`
+**List visits** | `listvisits [i/NRIC] [l/LIMIT] [from/DATE] [to/DATE] [today/] [sym/SYMPTOM] [diag/DIAGNOSIS] [med/MEDICATION]`
 **Sort visits**    | `sortvisits` or `sortvisits desc`
 **Edit visit**     | `editvisit INDEX [i/NRIC] [d/DATE_TIME] [r/REMARK]`
 **Clear visits**   | `clearvisits`
