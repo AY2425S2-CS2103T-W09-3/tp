@@ -356,3 +356,15 @@
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
+
+.result-success {
+    -fx-text-fill: green;
+}
+
+.result-error-dark {
+    -fx-text-fill: white;
+}
+
+.result-error-light {
+    -fx-text-fill: black;
+}
