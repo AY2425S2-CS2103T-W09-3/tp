@@ -50,7 +50,7 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
       java -jar medlogger.jar
       ```
     - A GUI similar to the image below should appear in a few seconds:  
-      ![UI](images/Ui.png)
+      ![UI](images/persons.png)
     - The app will load with **sample data**.
 
 4. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -77,13 +77,15 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `person n/NAME`, `NAME` is a parameter which can be used as `person n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g in `person n/NAME [t/TAG]` can be used as `person n/John Doe t/friend` or as `person n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.<br>
+  In particular, for items without `…`​ after them, the prefix for each item must appear at most once. <br>
+  e.g. `person n/John Doe` is legal, but `person n/John Doe n/Alice` is not.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -93,7 +95,7 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
-
+---
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -102,6 +104,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+---
 
 ### Adding a patient: `person`
 
@@ -117,8 +120,11 @@ Format: `person n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `person n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 1, #02-24 d/2024-12-01`
-* `person n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney`
+* `person n/John Doe i/A1234567S p/98765432 e/johnd@example.com a/311, Clementi Ave 1, #02-24 d/2024-12-01`
+* `person n/John Doe i/A1234567S p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/2024-12-31 t/friends t/owesMoney`
+![person command](images/person%20command%20example.png)
+
+---
 
 ### Adding a remark to a patient : `remark`
 
@@ -132,6 +138,9 @@ Format: `remark INDEX r/REMARK`
 
 Examples:
 * `remark 1 r/important`.
+![remark command](images/remark%20command%20example.png)
+
+---
 
 ### Listing all patients : `list`
 
@@ -139,6 +148,9 @@ Examples:
 * `list l/LIMIT`: Show a list of n `LIMIT` patients in the Med Loggers. 
 
 Format: `list [l/LIMIT]`
+![list command](images/list%20command%20example.png)
+
+---
 
 ### Editing a patient : `editperson`
 
@@ -156,6 +168,9 @@ Format: `editperson INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/T
 Examples:
 *  `editperson 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `editperson 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+![editperson command](images/editperson%20command%20example.png)
+
+---
 
 ### Locating persons by name: `find`
 
@@ -174,7 +189,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
+---
 ### Deleting a patient : `delete`
 
 Deletes the specified patient from the Med Logger.
@@ -188,15 +203,26 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the Med Logger.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
-
+  ![before delete](images/delete%20command%20example%20before.png)
+  ![after delete](images/delete%20command%20example%20after.png)
+---
 ### Adding a visit: `visit`
 
-Format: `visit n/NAME i/NRIC d/DATETIME r/REMARK`
+Format: `visit i/NRIC [d/DATETIME] [r/REMARK] [diag/DIAGNOSIS] [med/MEDICATION] [f/FOLLOWUP]`
 <box type="tip" seamless></box>
 
 **Tip:**
 * The NRIC and DATETIME must adhere to respective format constraint
+* The NRIC must be present in Med logger(i.e. one and only one patient have the input NRIC). The visit will be automatically associated to that person with the same NRIC.
+* if no DATETIME is provided, current time(i.e. time of command input will be used)
   </box>
+
+Examples:
+* `visit i/S1234567A r/Allergy`
+* `visit i/S1234567A d/2024-12-31 11:11 diag/Flu symptoms`
+  ![visit command](images/visit%20command%20example.png)
+
+---
 
 ### Removing a visit: `deletevisit`
 Format: `deletevisit INDEX`
@@ -204,26 +230,23 @@ Format: `deletevisit INDEX`
 * The index refers to the index number shown in the displayed visit list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+---
 
-### Clearing all entries : `clear`
+### Editing a visit: `editvisit`
 
-Clears all entries from the Med Logger.
+Edits a visit in current visit record.
 
-Format: `clear`
+Format: `editvisit INDEX [i/NRIC] [d/DATETIME] [r/REMARK] [diag/DIAGNOSIS] [med/MEDICATION] [f/FOLLOWUP]`
 
-### Adding a visit: `visit`
-
-Adds a new visit for a patient.
-
-Format: `visit n/NAME i/NRIC [d/DATE_TIME] r/REMARK`
-
-- `DATE_TIME` is optional. If not provided, the current system date and time will be used.
-- The patient must already exist in the system (matched via NRIC).
+- Edits the visit at the specified `INDEX`.
+- The index refers to the index number shown in the displayed visit list.
+- If NRIC is edited, the edited NRIC must belong to a patient already exist in the system.
+- At least one optional field must be present.
 
 Examples:
-* `visit n/John Doe i/S1234567A r/Headache`
-* `visit n/John Doe i/S1234567A d/2024-12-31 11:11 r/Flu symptoms`
-
+* `editvisit 1 d/2025-01-01 09:00`
+* `editvisit 2 r/Updated diagnosis`
+* `editvisit 3 i/S1234567A d/2024-12-01 10:00 r/Fever`
 ---
 
 ### Listing visits: `listvisits`
@@ -258,22 +281,13 @@ Examples:
 
 ---
 
-### Editing a visit: `editvisit`
+### Clearing all entries : `clear`
 
-Edits an existing visit in the currently displayed visit list.
+Clears all entries from the Med Logger.
 
-Format: `editvisit INDEX [i/NRIC] [d/DATE_TIME] [r/REMARK]`
-
-- The `INDEX` refers to the index shown in the currently displayed visit list.
-- At least one of NRIC, DATE_TIME, or REMARK must be provided.
-
-Examples:
-* `editvisit 1 d/2025-01-01 09:00`
-* `editvisit 2 r/Updated diagnosis`
-* `editvisit 3 i/S1234567A d/2024-12-01 10:00 r/Fever`
+Format: `clear`
 
 ---
-
 ### Clearing visits: `clearvisits`
 
 Clears the visit panel.
@@ -283,13 +297,13 @@ Format: `clearvisits`
 Example:
 * `clearvisits` — removes all visits from the panel display (does not delete visit records)
 
-
+---
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
-
+---
 ### Exporting the data : `export`
 
 Export the visits and persons data into either csv or json format. A save dialog will be prompted.
@@ -297,11 +311,11 @@ Export the visits and persons data into either csv or json format. A save dialog
 Format:
 * `export csv`
 * `export json`
-
+---
 ### Saving the data
 
 MedLogger data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
+---
 ### Editing the data file
 
 MedLogger data are saved automatically as a JSON file `[JAR file location]/data/medlogger.json`. Advanced users are welcome to update data directly by editing that data file.
