@@ -6,7 +6,7 @@ pageNav: 3
 
 # MedLogger User Guide 🏥
 
-MedLogger is a **desktop app for managing patient and visits, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete management tasks **faster** than traditional GUI apps.
+MedLogger is a **desktop app for managing patients and visits, optimized for use via a Command Line Interface (CLI)** while still benefiting from a Graphical User Interface (GUI). If you can type fast, MedLogger helps you complete management tasks **faster** than traditional GUI apps.
 
 ## Table of Contents
 - [MedLogger User Guide 🏥](#medlogger-user-guide-)
@@ -14,14 +14,14 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
   - [Quick Start](#quick-start)
   - [Features](#features)
   - [](#)
-    - [Viewing help : `help`](#viewing-help--help)
+    - [Viewing help: `help`](#viewing-help-help)
     - [Adding a patient: `person`](#adding-a-patient-person)
-    - [Adding a remark to a patient : `remark`](#adding-a-remark-to-a-patient--remark)
+    - [Adding a remark to a patient: `remark`](#adding-a-remark-to-a-patient-remark)
     - [Listing all patients : `list`](#listing-all-patients--list)
-    - [Editing a patient : `editperson`](#editing-a-patient--editperson)
-    - [Locating persons by name: `find`](#locating-persons-by-name-find)
+    - [Editing a patient: `editperson`](#editing-a-patient-editperson)
+    - [Locating patients by name: `find`](#locating-patients-by-name-find)
   - [](#-1)
-    - [Deleting a patient : `delete`](#deleting-a-patient--delete)
+    - [Deleting a patient: `delete`](#deleting-a-patient-delete)
   - [](#-2)
     - [Adding a visit: `visit`](#adding-a-visit-visit)
     - [Removing a visit: `deletevisit`](#removing-a-visit-deletevisit)
@@ -34,7 +34,7 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
   - [Format: `exit`](#format-exit)
     - [Exporting the data : `export`](#exporting-the-data--export)
     - [Saving the data](#saving-the-data)
-  - [MedLogger data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.](#medlogger-data-are-saved-in-the-hard-disk-automatically-after-any-command-that-changes-the-data-there-is-no-need-to-save-manually)
+  - [MedLogger data is saved to the hard disk automatically after any command that changes the data. There is no need to save manually.](#medlogger-data-is-saved-to-the-hard-disk-automatically-after-any-command-that-changes-the-data-there-is-no-need-to-save-manually)
     - [Editing the data file](#editing-the-data-file)
     - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
   - [FAQ](#faq)
@@ -61,7 +61,7 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
       ![UI](images/Persons.png)
     - The app will load with **sample data**.
 
-4. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+4. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all patients.
@@ -89,26 +89,26 @@ MedLogger is a **desktop app for managing patient and visits, optimized for use 
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `person n/NAME`, `NAME` is a parameter which can be used as `person n/John Doe`.
+  e.g., in `person n/NAME`, `NAME` is a parameter which can be used as `person n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g in `person n/NAME [t/TAG]` can be used as `person n/John Doe t/friend` or as `person n/John Doe`.
+  e.g., in `person n/NAME [t/TAG]` can be used as `person n/John Doe t/friend` or as `person n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.<br>
+  e.g., `[t/TAG]…​` can be used as ` ` (i.e., 0 times), `t/friend`, `t/friend t/family` etc.<br>
   In particular, for items without `…`​ after them, the prefix for each item must appear at most once. <br>
-  e.g. `person n/John Doe` is legal, but `person n/John Doe n/Alice` is not.
+  e.g., `person n/John Doe` is legal, but `person n/John Doe n/Alice` is not.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 ---
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -120,15 +120,15 @@ Format: `help`
 
 ### Adding a patient: `person`
 
-Adds a patient to the Med Logger.
+Adds a patient to the MedLogger.
 
 Format: `person n/NAME i/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless></box>
 
 **Tip:** 
-* A patient can have any number of tags (including 0)
-* The NRIC, phone number, email must adhere to respective format constraint
+* A patient can have any number of tags (including none)
+* The NRIC, phone number, email must adhere to respective format constraints
 </box>
 
 Examples:
@@ -139,14 +139,14 @@ Examples:
 
 ---
 
-### Adding a remark to a patient : `remark`
+### Adding a remark to a patient: `remark`
 
-Add a remark for a person from MedLogger.
+Add a remark for a patient from MedLogger.
 
 Format: `remark INDEX r/REMARK`
 
-* Add a remark for the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Add a remark for the patient at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
@@ -168,16 +168,16 @@ Example:
 
 ---
 
-### Editing a patient : `editperson`
+### Editing a patient: `editperson`
 
-Edits an existing patient in the Med Logger.
+Edits an existing patient in the MedLogger.
 
 Format: `editperson INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the patient will be removed, i.e., the addition of tags is not cumulative.
 * You can remove all the patient’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -189,18 +189,18 @@ Examples:
 
 ---
 
-### Locating persons by name: `find`
+### Locating patients by name: `find`
 
 Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g., `hans` will match `Hans`
+* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Patients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g., `Han` will not match `Hans`
+* Patients matching at least one keyword will be returned (i.e., `OR` search).
+  e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -208,18 +208,18 @@ Examples:
 
 ![result for 'find alex david'](images/findAlexDavidResult.png)
 ---
-### Deleting a patient : `delete`
+### Deleting a patient: `delete`
 
-Deletes the specified patient from the Med Logger.
+Deletes the specified patient from the MedLogger.
 
 Format: `delete INDEX`
 
 * Deletes the patient at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the Med Logger.
+* `list` followed by `delete 2` deletes the 2nd patient in the MedLogger.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 ![before delete](images/delete%20command%20example%20before.png)
@@ -231,9 +231,9 @@ Format: `visit i/NRIC [d/DATETIME] [r/REMARK] [diag/DIAGNOSIS] [med/MEDICATION] 
 <box type="tip" seamless></box>
 
 **Tip:**
-* The NRIC and DATETIME must adhere to respective format constraint
-* The NRIC must be present in Med logger(i.e. one and only one patient have the input NRIC). The visit will be automatically associated to that person with the same NRIC.
-* if no DATETIME is provided, current time(i.e. time of command input will be used)
+* The NRIC and DATETIME must adhere to respective format constraints
+* The NRIC must be present in MedLogger (i.e., one and only one patient has the input NRIC). The visit will be automatically associated to that patient with the same NRIC.
+* If no DATETIME is provided, the current time (i.e., the time of command input) will be used.
   </box>
 
 Examples:
@@ -254,13 +254,13 @@ Format: `deletevisit INDEX`
 
 ### Editing a visit: `editvisit`
 
-Edits a visit in current visit record.
+Edits a visit in the current visit record.
 
 Format: `editvisit INDEX [i/NRIC] [d/DATETIME] [r/REMARK] [diag/DIAGNOSIS] [med/MEDICATION] [f/FOLLOWUP]`
 
 - Edits the visit at the specified `INDEX`.
 - The index refers to the index number shown in the displayed visit list.
-- If NRIC is edited, the edited NRIC must belong to a patient already exist in the system.
+- If NRIC is edited, the edited NRIC must belong to a patient that already exists in the system.
 - At least one optional field must be present.
 
 Examples:
@@ -305,7 +305,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the Med Logger.
+Clears all entries from the MedLogger.
 
 Format: `clear`
 
@@ -328,7 +328,7 @@ Format: `exit`
 ---
 ### Exporting the data : `export`
 
-Export the visits and persons data into either csv or json format. A save dialog will be prompted.
+Export the visits and patients data into either csv or json format. A save dialog will be prompted.
 
 Format:
 * `export csv`
@@ -336,16 +336,16 @@ Format:
 ---
 ### Saving the data
 
-MedLogger data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MedLogger data is saved to the hard disk automatically after any command that changes the data. There is no need to save manually.
 ---
 ### Editing the data file
 
-MedLogger data are saved automatically as a JSON file `[JAR file location]/data/medlogger.json`. Advanced users are welcome to update data directly by editing that data file.
+MedLogger data is saved automatically as a JSON file `[JAR file location]/data/medlogger.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless></box>
 
 **Caution:**
-If your changes to the data file makes its format invalid, MedLogger will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file make its format invalid, MedLogger will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the MedLogger to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -357,8 +357,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedLogger home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MedLogger home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -378,7 +378,7 @@ Action     | Format, Examples
 **Remark**   | `remark INDEX r/REMARK`<br> e.g., `remark 1 r/important`
 **Clear**  | `clear`
 **Delete patient** | `delete INDEX`<br> e.g., `delete 3`
-**Edit patient**   | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit patient**   | `editperson INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DATE] [t/TAG]…​`<br> e.g.,`editperson 2 n/James Lee e/jameslee@example.com`
 **Find patient**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List patients**   | `list` or `list l/LIMIT`
 **Add visit**   | `visit n/NAME i/NRIC [d/DATE_TIME] r/REMARK`
