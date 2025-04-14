@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-This project is based on [addressbook-level-3 (AB3)](https://github.com/se-edu/addressbook-level3).
+This project is based on [addressbook-level-3 (AB3)](https://github.com/se-edu/addressbook-level3). Qiming used GitHub Copilot to assist with code auto-completion during development.
 
 --------------------------------------------------------------------------------------------------------------------
 
