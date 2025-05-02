@@ -15,6 +15,8 @@
 
 This project is based on [addressbook-level-3 (AB3)](https://github.com/se-edu/addressbook-level3). Qiming used GitHub Copilot to assist with code auto-completion during development.
 
+The remark feature is based on [Tutorial 2](https://nus-cs2103-ay2425s2.github.io/website/schedule/week6/project.html). Phong used this tutorial to implement remark command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
